@@ -1,0 +1,10 @@
+*.suo
+Chronos.Server/bin
+Chronos.Server/obj
+Chronos.Protocol/bin
+Chronos.Protocol/obj
+Chronos.ORM/bin
+Chronos.ORM/obj
+Chronos.Core/bin
+Chronos.Core/obj
+.vs/
