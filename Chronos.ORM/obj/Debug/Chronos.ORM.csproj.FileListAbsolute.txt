@@ -1,5 +1,0 @@
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.ORM\bin\Debug\PokeEmu.ORM.dll
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.ORM\bin\Debug\PokeEmu.ORM.pdb
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.ORM\obj\Debug\Chronos.ORM.csprojResolveAssemblyReference.cache
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.ORM\obj\Debug\PokeEmu.ORM.dll
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.ORM\obj\Debug\PokeEmu.ORM.pdb

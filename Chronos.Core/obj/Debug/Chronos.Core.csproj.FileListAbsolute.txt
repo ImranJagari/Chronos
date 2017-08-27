@@ -1,6 +1,0 @@
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\bin\Debug\Chronos.Core.dll
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\bin\Debug\Chronos.Core.pdb
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\obj\Debug\Chronos.Core.csprojResolveAssemblyReference.cache
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\obj\Debug\Chronos.Core.dll
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\obj\Debug\Chronos.Core.pdb
-C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Core\bin\Debug\NLog.dll
