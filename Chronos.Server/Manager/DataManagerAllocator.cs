@@ -2,6 +2,7 @@ using Chronos.Server.Initialization;
 using Chronos.Core.Extensions;
 using System;
 using System.Reflection;
+
 namespace Chronos.Server.Manager
 {
 	public static class DataManagerAllocator

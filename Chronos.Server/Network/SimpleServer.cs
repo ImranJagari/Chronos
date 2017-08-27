@@ -16,6 +16,7 @@ using Chronos.Protocol;
 using Chronos.Core.Attributes;
 using System.IO;
 using Chronos.Core.Xml.Config;
+using Chronos.Server.Handlers;
 
 namespace Chronos.Server.Network
 {
@@ -118,8 +119,8 @@ namespace Chronos.Server.Network
             ConsoleUtils.WriteMessageInfo("Loading protocol messages !");
             MessageReceiver.Initialize();
 
-            //ConsoleUtils.WriteMessageInfo("Loading handlers !");
-            //PacketManager.Initialize(Assembly.GetExecutingAssembly());
+            ConsoleUtils.WriteMessageInfo("Loading handlers !");
+            PacketManager.Initialize(Assembly.GetExecutingAssembly());
 
             ConsoleUtils.WriteMessageInfo("Loading Database !");
             DBAccessor = new DatabaseAccessor(DatabaseConfiguration);
@@ -134,6 +135,7 @@ namespace Chronos.Server.Network
             this.InitManager.AddAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             this.InitManager.Initialize(InitializationPass.Database);
             InitManager.InitializeAll();
+
         }
         private void BeginAcceptCallBack(IAsyncResult result)
         {
