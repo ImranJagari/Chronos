@@ -1,0 +1,36 @@
+﻿<Configuration>
+  <Chronos>
+    <Network>
+      <SimpleServer>
+        <!--Editable as Running : False-->
+        <Variable name="Host" serialized="false">127.0.0.1</Variable>
+        <!--Editable as Running : False-->
+        <Variable name="Port" serialized="false">9111</Variable>
+        <!--Editable as Running : False-->
+        <Variable name="DatabaseConfiguration" serialized="true">
+          <DatabaseConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <User>root</User>
+            <Password />
+            <DbName>chronos</DbName>
+            <Host>localhost</Host>
+            <ProviderName>MySql.Data.MySqlClient</ProviderName>
+          </DatabaseConfiguration>
+        </Variable>
+      </SimpleServer>
+      <VersionExtension>
+        <!--Editable as Running : True-->
+        <Variable name="Severity" serialized="true">
+          <VersionCheckingSeverity>Light</VersionCheckingSeverity>
+        </Variable>
+        <!--Editable as Running : True-->
+        <Variable name="ExpectedVersion" serialized="true">
+          <VersionExtended xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Major>2</Major>
+            <Minor>1</Minor>
+            <Build>386</Build>
+          </VersionExtended>
+        </Variable>
+      </VersionExtension>
+    </Network>
+  </Chronos>
+</Configuration>

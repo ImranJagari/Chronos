@@ -1,0 +1,8 @@
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\bin\Debug\Chronos.Protocol.dll
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\bin\Debug\Chronos.Protocol.pdb
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\bin\Debug\Chronos.Core.dll
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\bin\Debug\Chronos.Core.pdb
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\obj\Debug\Chronos.Protocol.csprojResolveAssemblyReference.cache
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\obj\Debug\Chronos.Protocol.dll
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\obj\Debug\Chronos.Protocol.pdb
+C:\Users\Phantom\Documents\Visual Studio 2017\Projects\Chonos\Chronos.Protocol\bin\Debug\NLog.dll

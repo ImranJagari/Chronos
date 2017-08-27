@@ -1,0 +1,5 @@
+C:\Users\andre\Desktop\AzarethEmulator\Stump.ORM\bin\Release\Stump.ORM.dll
+C:\Users\andre\Desktop\AzarethEmulator\Stump.ORM\bin\Release\Stump.ORM.pdb
+C:\Users\andre\Desktop\AzarethEmulator\Stump.ORM\obj\Release\Stump.ORM.csprojResolveAssemblyReference.cache
+C:\Users\andre\Desktop\AzarethEmulator\Stump.ORM\obj\Release\Stump.ORM.dll
+C:\Users\andre\Desktop\AzarethEmulator\Stump.ORM\obj\Release\Stump.ORM.pdb
