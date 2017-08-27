@@ -32,7 +32,7 @@ namespace Chronos.Server.Network
         public static string Host = "127.0.0.1";
 
         [Variable]
-        public static short Port = 445;
+        public static short Port = 443;
 
         [Variable]
         public static DatabaseConfiguration DatabaseConfiguration = new DatabaseConfiguration

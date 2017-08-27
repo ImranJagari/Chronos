@@ -7,8 +7,8 @@
     <ProjectGuid>{1FB5C587-0A9C-4DF8-8D20-61CED7692A47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PokeEmu.ORM</RootNamespace>
-    <AssemblyName>PokeEmu.ORM</AssemblyName>
+    <RootNamespace>Chronos.ORM</RootNamespace>
+    <AssemblyName>Chronos.ORM</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

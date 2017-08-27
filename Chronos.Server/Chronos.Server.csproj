@@ -51,7 +51,14 @@
     <Reference Include="FFEncryptionLibrary">
       <HintPath>..\Library\FFEncryptionLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="lua51">
+      <HintPath>..\..\..\Visual Studio 2017\Projects\Chonos\Library\lua51.dll</HintPath>
+    </Reference>
+    <Reference Include="LuaInterface">
+      <HintPath>..\..\..\Visual Studio 2017\Projects\Chonos\Library\LuaInterface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
