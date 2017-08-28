@@ -84,6 +84,7 @@
     <Compile Include="Game\Stats\IStatsOwner.cs" />
     <Compile Include="Game\Stats\StatsData.cs" />
     <Compile Include="Game\Stats\StatsField.cs" />
+    <Compile Include="Handlers\Approach\ApproachPingHandler.cs" />
     <Compile Include="Handlers\Characters\CharacterHandler.cs" />
     <Compile Include="Handlers\Connection\ConnectionCertifyHandler.cs" />
     <Compile Include="Handlers\PacketIdAttribute.cs" />
