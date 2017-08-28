@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using FFEncryptionLibrary;
 using Lua511;
 using LuaInterface;
+using System.IO;
 
 namespace Chronos.Server.Network
 {
@@ -56,7 +57,13 @@ namespace Chronos.Server.Network
         {
             Init();
             Start(socket);
-            Send(new SessionKeyMessage(keyPairEncryption.Seed));
+            //BinaryWriter _writer = new BinaryWriter(new MemoryStream(8));
+            //_writer.Write((uint)8);
+            //_writer.Write(keyPairEncryption.Seed);
+
+            //Byte[] _keyPacket = ((MemoryStream)_writer.BaseStream).GetBuffer();
+            //this.Socket.Send(_keyPacket, 0, _keyPacket.Length, SocketFlags.None);
+             Send(new SessionKeyMessage(keyPairEncryption.Seed), false);
         }
 
         #endregion
@@ -96,9 +103,13 @@ namespace Chronos.Server.Network
             BigEndianWriter writer = new BigEndianWriter();
             message.Pack(writer);
             byte[] data = writer.Data;
-
             if (encrypt)
+            {
+                writer.Seek(0);
+                writer.WriteUInt((uint)writer.Data.Length);
+                data = writer.Data;
                 this.keyPairEncryption.Encrypt(ref data, 0, writer.Data.Length);
+            }
 
             Send(data);
              Console.WriteLine(string.Format("[SND] {0} -> {1}", IP, message));
@@ -167,11 +178,9 @@ namespace Chronos.Server.Network
             if (this.currentMessage == null)
                 this.currentMessage = new MessagePart();
             long position = this.buffer.Position;
-            if (!this.currentMessage.Build(this.buffer, keyPairEncryption))
+            if (!this.currentMessage.Build(ref this.buffer, keyPairEncryption))
                 return;
             this.OnDataReceived(new DataReceivedEventArgs(this.currentMessage));
-            this.currentMessage = (MessagePart)null;
-            this.ThreatBuffer();
         }
 
         #endregion
@@ -238,14 +247,18 @@ namespace Chronos.Server.Network
                     }
                     byte[] data = new byte[bytesRead];
                     Array.Copy(receiveBuffer, data, bytesRead);
-                    buffer.Add(data, 0, data.Length);
+                    buffer = new BigEndianReader(data);
 
                     ThreatBuffer();
                     var messagePart = DataReceivedEventArgs.Data;
-                    // this.currentMessage = null;
-                    BigEndianReader Reader = new BigEndianReader(messagePart.Data);
-                    NetworkMessage message = MessageReceiver.BuildMessage((HeaderEnum)messagePart.MessageId, Reader);
-
+                    //// this.currentMessage = null;
+                    //BigEndianReader Reader = new BigEndianReader(messagePart.Data);
+                    NetworkMessage message = MessageReceiver.BuildMessage((HeaderEnum)messagePart.MessageId, buffer);
+                    if(message == null)
+                    {
+                        ConsoleUtils.WriteWarning(string.Format("[RCV] unknown packetId {0} -> {1}", this.IP, (HeaderEnum)messagePart.MessageId));
+                        return;
+                    }
                     Console.WriteLine(string.Format("[RCV] {0} -> {1}", this.IP, message));
                     PacketManager.ParseHandler(this, message);
 

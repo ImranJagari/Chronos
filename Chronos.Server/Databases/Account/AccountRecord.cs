@@ -20,6 +20,6 @@ namespace Chronos.Server.Databases.Account
     }
     public class AccountRecordRelator
     {
-        public static string FetchQueryWithUsername = "SELECT * FROM accounts WHERE Username={0}";
+        public static string FetchQueryWithUsername = "SELECT * FROM accounts WHERE Username = @0";
     }
 }

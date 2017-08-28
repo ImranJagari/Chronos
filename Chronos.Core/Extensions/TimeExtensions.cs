@@ -15,5 +15,12 @@ namespace Chronos.Core.Extensions
         {
             return (int)(date - _baseDateTime.ToLocalTime()).TotalSeconds;
         }
+
+        public static DateTime GetDateTimeFromTimeStamp(this DateTime dateTime, Int32 timeStamp)
+        {
+            dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            dateTime = dateTime.AddSeconds(timeStamp).ToLocalTime();
+            return dateTime;
+        }
     }
 }

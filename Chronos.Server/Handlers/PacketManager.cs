@@ -13,7 +13,7 @@ namespace Chronos.Server.Handlers
 {
     public class PacketManager
     {
-        public static Dictionary<HeaderEnum, Action<SimpleClient, NetworkMessage>> MethodHandlers = new Dictionary<HeaderEnum, Action<SimpleClient, NetworkMessage>>();
+        public static Dictionary<HeaderEnum, Action<object, SimpleClient, NetworkMessage>> MethodHandlers = new Dictionary<HeaderEnum, Action<object, SimpleClient, NetworkMessage>>();
         public static void Initialize(Assembly asm)
         {
             var methods = asm.GetTypes()
@@ -22,19 +22,20 @@ namespace Chronos.Server.Handlers
                       .ToArray();
             foreach (var method in methods)
             {
-                MethodHandlers.Add((HeaderEnum)method.CustomAttributes.ToArray()[0].ConstructorArguments[0].Value, DynamicExtension.CreateDelegate(method, typeof(SimpleClient), typeof(NetworkMessage)) as Action<SimpleClient, NetworkMessage>);
+                var action =  DynamicExtension.CreateDelegate(method, typeof(SimpleClient), typeof(NetworkMessage)) as Action<object, SimpleClient, NetworkMessage>;
+                MethodHandlers.Add((HeaderEnum)method.CustomAttributes.ToArray()[0].ConstructorArguments[0].Value, action);
             }
         }
         public static void ParseHandler(SimpleClient client, NetworkMessage message)
         {
             try
             {
-                Action<SimpleClient, NetworkMessage> methodToInvok;
+                Action<object, SimpleClient, NetworkMessage> methodToInvok;
                 if (message != null)
                 {
                     if (MethodHandlers.TryGetValue((HeaderEnum)message.MessageId, out methodToInvok))
                     {
-                        methodToInvok.Invoke(client, message);
+                        methodToInvok.Invoke(null, client, message);
                     }
                     else
                     {

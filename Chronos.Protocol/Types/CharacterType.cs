@@ -116,6 +116,10 @@ namespace Chronos.Protocol.Types
             }
             for (int i = 0; i < 5; i++)
             {
+                if(closetItems[i] == null)
+                {
+                    closetItems[i] = new ClosetItemType(-1);
+                }
                 closetItems[i].Serialize(writer);
             }
 

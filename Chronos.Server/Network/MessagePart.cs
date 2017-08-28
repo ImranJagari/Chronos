@@ -47,22 +47,29 @@ namespace Chronos.Server.Network
             }
         }
 
-        public bool Build(BigEndianReader reader, KeyPair keyPairDecryption)
+        public bool Build(ref BigEndianReader reader, KeyPair keyPairDecryption)
         {
-            if(reader.Data.Length < 4)
+            if(reader.Data.Length < 1)
             {
                 return false;
             }
 
             byte[] data = reader.Data;
             keyPairDecryption.Decrypt(ref data, 0, reader.Data.Length);
-            CompleteData = data;
-            reader = new BigEndianReader(data);
 
+            CompleteData = data;
+
+            reader = new BigEndianReader(data);
             Length = reader.ReadUInt();
             Header = reader.ReadUShort();
-
-            Data = reader.Data;
+            Data = new byte[reader.BytesAvailable];
+            int j = 0;
+            for(long i = reader.Position; i < Data.Length; i++)
+            {
+                Data[j] = reader.Data[i];
+                j++;
+            }
+            //reader.Data.CopyTo(Data, sizeof(uint) + sizeof(ushort) - 1);
             return true;
         }
     }

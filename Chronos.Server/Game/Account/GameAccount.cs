@@ -1,5 +1,6 @@
 ﻿using Chronos.Server.Databases.Account;
 using Chronos.Server.Game.Actors.Characters;
+using Chronos.Server.Manager.Characters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,20 @@ namespace Chronos.Server.Game.Account
         {
             Record = record;
             Characters = new List<Character>();
+            LoadRecord();
         }
         public List<Character> Characters;
+        public int Id
+        {
+            get
+            {
+                return Record.Id;
+            }
+            set
+            {
+                Record.Id = value;
+            }
+        }
         public string HDSN
         {
             get
@@ -39,6 +52,10 @@ namespace Chronos.Server.Game.Account
             {
                 Record.IP_Key = value;
             }
+        }
+        public void LoadRecord()
+        {
+            CharacterManager.Instance.GetCharactersByAccountId(Id);
         }
     }
 }

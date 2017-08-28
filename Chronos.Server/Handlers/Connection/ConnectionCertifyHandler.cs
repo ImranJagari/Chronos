@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chronos.Server.Handlers.Characters;
+using Chronos.Core.Extensions;
 
 namespace Chronos.Server.Handlers.Connection
 {
@@ -19,10 +21,11 @@ namespace Chronos.Server.Handlers.Connection
             GameAccount account;
             if(!CredentialsManager.Instance.CheckAccountValidity(out account, message.username, message.password))
             {
-                SendCertifyResultMessage(client, ErrorEnum.ERR_CERT_BAD_PASSWORD, ErrorEnum.ERR_CERT_BAD_PASSWORD);
+                SendCertifyResultMessage(client, ErrorEnum.ERR_CERT_BAD_PASSWORD, (ErrorEnum)(((int)ErrorEnum.CERT_CHARGE_CERTIFY_FAILED) << 16));
                 client.Disconnect();
                 return;
             }
+
             if(!message.realVersion.GetVersionFromCompacted().IsUpToDate())
             {
                 SendCertifyResultMessage(client, ErrorEnum.ERR_CERT_VERSION, ErrorEnum.ERR_VERSION_TOO_LOW);
@@ -36,11 +39,19 @@ namespace Chronos.Server.Handlers.Connection
                 return;
 
             }
-            account.IP_Key = Encoding.UTF8.GetString(message.ip_key);
+            account.IP_Key = message.ip_key.ToString();
             account.HDSN = message.hdsn;
             client.Account = account;
 
             SendCertifyResultMessage(client);
+            CharacterHandler.SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0,
+                (byte)client.Account.Characters.Count, 0, 0, client.Account.Characters.ToArray(),
+                client.Account.Characters.Count(x => x.DeletedDate != null), 0, 0, 0);
+
+            foreach(var character in client.Account.Characters)
+            {
+                CharacterHandler.SendCharacterSlotMessage(client, character, client.Account.Characters.Count(x => x.DeletedDate != null));
+            }
         }
         public static void SendCertifyResultMessage(IPacketInterceptor client)
         {

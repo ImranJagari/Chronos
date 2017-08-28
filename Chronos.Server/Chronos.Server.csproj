@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D1735652-10F0-4500-A791-87A6835F2AED}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Chronos</RootNamespace>
-    <AssemblyName>Chronos</AssemblyName>
+    <RootNamespace>Chronos.Server</RootNamespace>
+    <AssemblyName>Chronos.Server</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,7 +53,7 @@
   <ItemGroup>
     <Reference Include="FFEncryptionLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Visual Studio 2017\Projects\Chonos\Library\FFEncryptionLibrary.dll</HintPath>
+      <HintPath>..\Library\FFEncryptionLibrary.dll</HintPath>
     </Reference>
     <Reference Include="lua51">
       <HintPath>..\..\..\Visual Studio 2017\Projects\Chonos\Library\lua51.dll</HintPath>
@@ -94,6 +94,7 @@
     <Compile Include="Initialization\InitializationPass.cs" />
     <Compile Include="Manager\Account\AccountManager.cs" />
     <Compile Include="Manager\Account\CredentialsManager.cs" />
+    <Compile Include="Manager\Characters\CharacterManager.cs" />
     <Compile Include="Manager\DatabaseManager.cs" />
     <Compile Include="Manager\DataManagerAllocator.cs" />
     <Compile Include="Manager\Items\ItemManager.cs" />

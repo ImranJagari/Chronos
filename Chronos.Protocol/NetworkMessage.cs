@@ -1,4 +1,5 @@
 ﻿using Chronos.Core.IO;
+using Chronos.Protocol.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,15 @@ namespace Chronos.Protocol.Messages
         public abstract void Deserialize(IDataReader reader);
         public void Pack(IDataWriter writer)
         {
+            if ((HeaderEnum)MessageId == HeaderEnum.SESSION_KEY)
+            {
+                writer.WriteUInt(MessageId);
+            }
+            else
+            {
+                writer.WriteInt(0);
+                writer.WriteShort((short)MessageId);
+            }
             Serialize(writer);
         }
         public void Unpack(IDataReader reader)

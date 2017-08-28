@@ -11,7 +11,7 @@ namespace Chronos.Server.Manager.Account
     {
         public AccountRecord GetAccountByUsername(string username)
         {
-            return Database.Fetch<AccountRecord>(string.Format(AccountRecordRelator.FetchQueryWithUsername, username)).FirstOrDefault();
+            return Database.Fetch<AccountRecord>(AccountRecordRelator.FetchQueryWithUsername, username).FirstOrDefault();
         }
     }
 }

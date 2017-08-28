@@ -31,5 +31,10 @@ namespace Chronos.Server.Databases.Characters
         public int HairColor { get; set; }
         public int HeadMesh { get; set; }
         public DateTime BlockTime { get; set; }
+        public DateTime DeletedDate { get; set; }
+    }
+    public class CharacterRecordRelator
+    {
+        public const string FetchQueryByAccountId = "SELECT * FROM characters WHERE AccountId = @0";
     }
 }

@@ -47,37 +47,37 @@ namespace Chronos.Core.IO
 
         public short ReadShort()
         {
-            return BitConverter.ToInt16(ReadBigEndianBytes(2), 0);
+            return m_reader.ReadInt16();
         }
 
         public int ReadInt()
         {
-            return BitConverter.ToInt32(ReadBigEndianBytes(4), 0);
+            return m_reader.ReadInt32();
         }
 
         public long ReadLong()
         {
-            return BitConverter.ToInt64(ReadBigEndianBytes(8), 0);
+            return m_reader.ReadInt64();
         }
 
         public float ReadFloat()
         {
-            return BitConverter.ToSingle(ReadBigEndianBytes(4), 0);
+            return m_reader.ReadSingle();
         }
 
         public ushort ReadUShort()
         {
-            return BitConverter.ToUInt16(ReadBigEndianBytes(2), 0);
+            return m_reader.ReadUInt16();
         }
 
         public uint ReadUInt()
         {
-            return BitConverter.ToUInt32(ReadBigEndianBytes(4), 0);
+            return m_reader.ReadUInt32();
         }
 
         public ulong ReadULong()
         {
-            return BitConverter.ToUInt64(ReadBigEndianBytes(8), 0);
+            return m_reader.ReadUInt64();
         }
 
         public byte ReadByte()
@@ -107,14 +107,12 @@ namespace Chronos.Core.IO
 
         public double ReadDouble()
         {
-            return BitConverter.ToDouble(ReadBigEndianBytes(8), 0);
+            return m_reader.ReadDouble();
         }
 
         public string ReadUTF()
         {
-            var n = ReadUShort();
-            var bytes = ReadBytes(n);
-            return Encoding.UTF8.GetString(bytes);
+            return new String(m_reader.ReadChars(count: m_reader.ReadUInt16()));
         }
 
         public string ReadUTFBytes(ushort len)

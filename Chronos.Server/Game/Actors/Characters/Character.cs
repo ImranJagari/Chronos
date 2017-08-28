@@ -16,12 +16,11 @@ namespace Chronos.Server.Game.Actors.Characters
     {
         public CharacterRecord Record { get; }
 
-        public Character(SimpleClient client, CharacterRecord record)
+        public Character(CharacterRecord record)
         {
             Record = record;
-            Client = client;
         }
-        public SimpleClient Client { get; }
+        public SimpleClient Client { get; set; }
         public int Id
         {
             get { return Record.Id; }
@@ -95,7 +94,11 @@ namespace Chronos.Server.Game.Actors.Characters
             get { return Record.BlockTime; }
             set { Record.BlockTime = value; }
         }
-
+        public DateTime DeletedDate
+        {
+            get { return Record.DeletedDate; }
+            set { Record.DeletedDate = value; }
+        }
         public StatsFields Stats { get; private set; }
         public Inventory Inventory { get; private set; }
         public void LoadRecord()
@@ -106,11 +109,11 @@ namespace Chronos.Server.Game.Actors.Characters
             Inventory = new Inventory();
             Inventory.LoadData(Id);
         }
-        public CharacterType GetNetwork()// Todo : Block time and IsBlocked
+        public CharacterType GetNetwork()// Todo : Block time and IsBlocked + ClosetItems
         {
             return new CharacterType(this.Client.Account.Characters.IndexOf(this), Name, Id, SceneId, Sex ? (byte)1 : (byte)0,
                 new PositionType(X, Y, Z), Level, Job, Stats[DefineEnum.STR].Total, Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
-                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, 10, Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), new ClosetItemType[0]);
+                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, 10, Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), new ClosetItemType[5]);
         }
     }
 }

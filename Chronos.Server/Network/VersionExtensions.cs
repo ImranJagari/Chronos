@@ -79,11 +79,14 @@ namespace Chronos.Server.Network
         /// <returns></returns>
         public static Version GetVersionFromCompacted(this uint version)
         {
-            return new Version((int)version >> 24, (int)version >> 16, (int)(version & 255u));
+            return new Version(((int)version >> 24) & 0xFF, ((int)version >> 16) & 0xFF, ((int)version >> 0) & 0xFFFF);
         }
         public static UInt32 GetCompactedVersion()
         {
-             return (UInt32)(((byte)ExpectedVersion.Major) << 24 | ((byte)ExpectedVersion.Minor) << 16 | (ushort)ExpectedVersion.Build); 
+            byte major = Convert.ToByte(ExpectedVersion.Major);
+            byte minor = Convert.ToByte(ExpectedVersion.Minor);
+            ushort build = Convert.ToUInt16(ExpectedVersion.Build);
+             return (UInt32)(major << 24 | minor << 16 | build) * 2; 
         }
     }
 }

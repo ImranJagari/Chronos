@@ -15,7 +15,7 @@ namespace Chronos.Server.Manager.Account
         public bool CheckAccountValidity(out GameAccount account, string username, string password)
         {
             AccountRecord record = AccountManager.Instance.GetAccountByUsername(username);
-            if(record == null || record.Password != password.GetSha512Hash())
+            if(record == null || record.Password != password)
             {
                 account = null;
                 return false;

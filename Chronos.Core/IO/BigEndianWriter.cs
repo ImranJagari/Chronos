@@ -66,32 +66,32 @@ namespace Chronos.Core.IO
 
         public void WriteShort(short @short)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@short));
+            m_writer.Write(@short);
         }
 
         public void WriteInt(int @int)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@int));
+            m_writer.Write(@int);
         }
 
         public void WriteLong(long @long)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@long));
+            m_writer.Write(@long);
         }
 
         public void WriteUShort(ushort @ushort)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@ushort));
+            m_writer.Write(@ushort);
         }
 
         public void WriteUInt(uint @uint)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@uint));
+            m_writer.Write(@uint);
         }
 
         public void WriteULong(ulong @ulong)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@ulong));
+            m_writer.Write(@ulong);
         }
 
         public void WriteByte(byte @byte)
@@ -111,29 +111,22 @@ namespace Chronos.Core.IO
 
         public void WriteBoolean(bool @bool)
         {
-            if (@bool)
-            {
-                this.m_writer.Write((byte)1);
-            }
-            else
-            {
-                this.m_writer.Write((byte)0);
-            }
+            m_writer.Write(@bool);
         }
 
         public void WriteChar(char @char)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@char));
+            m_writer.Write(@char);
         }
 
         public void WriteDouble(double @double)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(@double));
+            m_writer.Write(@double);
         }
 
         public void WriteSingle(float single)
         {
-            this.WriteBigEndianBytes(BitConverter.GetBytes(single));
+            m_writer.Write(single);
         }
 
         public void WriteUTF(string str)
@@ -141,10 +134,8 @@ namespace Chronos.Core.IO
             byte[] bytes = Encoding.UTF8.GetBytes(str);
             ushort num = (ushort)bytes.Length;
             this.WriteUShort(num);
-            for (int i = 0; i < (int)num; i++)
-            {
-                this.m_writer.Write(bytes[i]);
-            }
+            if (num > 0)
+                m_writer.Write(bytes);
         }
 
         public void WriteUTFBytes(string str)
