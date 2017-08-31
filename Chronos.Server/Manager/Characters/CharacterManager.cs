@@ -4,6 +4,7 @@ using Chronos.Server.Databases.Breeds;
 using Chronos.Server.Databases.Characters;
 using Chronos.Server.Databases.Items;
 using Chronos.Server.Game.Actors.Characters;
+using Chronos.Server.Handlers.Characters;
 using Chronos.Server.Manager.Breeds;
 using Chronos.Server.Network;
 using System;
@@ -102,6 +103,33 @@ namespace Chronos.Server.Manager.Characters
             client.Account.LoadRecord();
 
             return ErrorEnum.ERR_SUCCESS;
+        }
+        public void DeleteCharacter(SimpleClient client, int characterIdToDelete)
+        {
+            int index = client.Account.Characters.FindIndex(x => x.Id == characterIdToDelete);
+            if (index < 0)
+            {
+                CharacterHandler.SendDeleteCharacterResultMessage(client, ErrorEnum.ERR_SUCCESS, characterIdToDelete, 2);
+                return;
+            }
+            if (client.Account.Characters[index].IsBlocked)
+            {
+                CharacterHandler.SendDeleteCharacterResultMessage(client, ErrorEnum.ERR_PLAYER_NOT_EXIST, characterIdToDelete, 1);
+                return;
+
+            }
+
+            client.Account.Characters[index].DeletedDate = DateTime.Now;
+
+            try
+            {
+                Database.Update(client.Account.Characters[index].Record);
+                CharacterHandler.SendDeleteCharacterResultMessage(client, ErrorEnum.ERR_SUCCESS, characterIdToDelete, 2);
+            }
+            catch
+            {
+                CharacterHandler.SendDeleteCharacterResultMessage(client, ErrorEnum.ERR_PLAYER_NOT_EXIST, characterIdToDelete, 0);
+            }
         }
     }
 }

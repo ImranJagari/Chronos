@@ -88,6 +88,7 @@
     <Compile Include="Handlers\Approach\ApproachPingHandler.cs" />
     <Compile Include="Handlers\Approach\ApproachTicksHandler.cs" />
     <Compile Include="Handlers\Characters\CharacterCreateHandler.cs" />
+    <Compile Include="Handlers\Characters\CharacterDeleteHandler.cs" />
     <Compile Include="Handlers\Characters\CharacterListHandler.cs" />
     <Compile Include="Handlers\Connection\ConnectionCertifyHandler.cs" />
     <Compile Include="Handlers\PacketIdAttribute.cs" />

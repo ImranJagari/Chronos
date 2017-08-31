@@ -57,6 +57,9 @@
     <Compile Include="Messages\CharacterSlotMessage.cs" />
     <Compile Include="Messages\CreateCharacterMessage.cs" />
     <Compile Include="Messages\CreateCharacterResultMessage.cs" />
+    <Compile Include="Messages\DeleteCharacterMessage.cs" />
+    <Compile Include="Messages\DeleteCharacterResultMessage.cs" />
+    <Compile Include="Messages\JoinMessage.cs" />
     <Compile Include="Messages\LoginMessage.cs" />
     <Compile Include="Messages\PingMessage.cs" />
     <Compile Include="Messages\QueryTickCountMessage.cs" />
