@@ -9,12 +9,16 @@ using System.Text;
 
 namespace Chronos.Server.Handlers.Approach
 {
-    public partial class ApproachPingHandler
+    public partial class ApproachHandler
     {
         [HeaderPacket(HeaderEnum.PING)]
         public static void HandlePingMessage(SimpleClient client, PingMessage message)
         {
-            client.Send(new LoginMessage(message.unknown));
+            SendLoginMessage(client, message.unknown);
+        }
+        public static void SendLoginMessage(IPacketInterceptor client, uint unknown)
+        {
+            client.Send(new LoginMessage(unknown));
         }
     }
 }

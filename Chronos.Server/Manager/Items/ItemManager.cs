@@ -16,7 +16,8 @@ namespace Chronos.Server.Manager.Items
         }
         public Dictionary<int, ClosetItem> GetClosetItemsByOwnerId(int ownerId)
         {
-            return Database.Fetch<ClosetItemRecord>(string.Format(ClosetItemRecordRelator.FetchQueryByOwnerId, ownerId)).Select(x => new ClosetItem(x)).ToDictionary(x => x.ClosetItemId);
+            int id = 0;
+            return Database.Fetch<ClosetItemRecord>(string.Format(ClosetItemRecordRelator.FetchQueryByOwnerId, ownerId)).Select(x => new ClosetItem(x)).ToDictionary(x => id++);
         }
     }
 }

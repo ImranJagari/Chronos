@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Databases\Account\AccountRecord.cs" />
+    <Compile Include="Databases\Breeds\BreedRecord.cs" />
     <Compile Include="Databases\Characters\CharacterRecord.cs" />
     <Compile Include="Databases\Items\ClosetItemRecord.cs" />
     <Compile Include="Databases\Items\ItemRecord.cs" />
@@ -85,7 +86,9 @@
     <Compile Include="Game\Stats\StatsData.cs" />
     <Compile Include="Game\Stats\StatsField.cs" />
     <Compile Include="Handlers\Approach\ApproachPingHandler.cs" />
-    <Compile Include="Handlers\Characters\CharacterHandler.cs" />
+    <Compile Include="Handlers\Approach\ApproachTicksHandler.cs" />
+    <Compile Include="Handlers\Characters\CharacterCreateHandler.cs" />
+    <Compile Include="Handlers\Characters\CharacterListHandler.cs" />
     <Compile Include="Handlers\Connection\ConnectionCertifyHandler.cs" />
     <Compile Include="Handlers\PacketIdAttribute.cs" />
     <Compile Include="Handlers\PacketManager.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Initialization\InitializationPass.cs" />
     <Compile Include="Manager\Account\AccountManager.cs" />
     <Compile Include="Manager\Account\CredentialsManager.cs" />
+    <Compile Include="Manager\Breeds\BreedManager.cs" />
     <Compile Include="Manager\Characters\CharacterManager.cs" />
     <Compile Include="Manager\DatabaseManager.cs" />
     <Compile Include="Manager\DataManagerAllocator.cs" />
@@ -137,5 +141,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

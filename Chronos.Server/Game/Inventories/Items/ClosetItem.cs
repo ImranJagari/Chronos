@@ -1,4 +1,5 @@
-﻿using Chronos.Server.Databases.Items;
+﻿using Chronos.Protocol.Types;
+using Chronos.Server.Databases.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace Chronos.Server.Game.Inventories.Items
         {
             get { return Record.ClosetItemId; }
             set { Record.ClosetItemId = value; }
+        }
+        public ClosetItemType GetNetwork()
+        {
+            return new ClosetItemType(ClosetItemId);
         }
     }
 }

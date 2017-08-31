@@ -55,8 +55,12 @@
     <Compile Include="Messages\CertifyResultMessage.cs" />
     <Compile Include="Messages\CharactersListMessage.cs" />
     <Compile Include="Messages\CharacterSlotMessage.cs" />
+    <Compile Include="Messages\CreateCharacterMessage.cs" />
+    <Compile Include="Messages\CreateCharacterResultMessage.cs" />
     <Compile Include="Messages\LoginMessage.cs" />
     <Compile Include="Messages\PingMessage.cs" />
+    <Compile Include="Messages\QueryTickCountMessage.cs" />
+    <Compile Include="Messages\TickCountMessage.cs" />
     <Compile Include="NetworkMessage.cs" />
     <Compile Include="Messages\SessionKeyMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

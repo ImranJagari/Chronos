@@ -39,7 +39,7 @@ namespace Chronos.Server.Handlers
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("Receive unknown Packet : id = {0} -> {1}", message.MessageId, message));
+                        Console.WriteLine(string.Format("Received non handled Packet : id = {0} -> {1}", message.MessageId, message));
                     }
                 }
                 else

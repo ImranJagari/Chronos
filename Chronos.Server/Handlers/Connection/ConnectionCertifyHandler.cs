@@ -42,15 +42,16 @@ namespace Chronos.Server.Handlers.Connection
             account.IP_Key = message.ip_key.ToString();
             account.HDSN = message.hdsn;
             client.Account = account;
+            client.Account.Characters.ForEach(x => x.Client = client);
 
             SendCertifyResultMessage(client);
             CharacterHandler.SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0,
                 (byte)client.Account.Characters.Count, 0, 0, client.Account.Characters.ToArray(),
-                client.Account.Characters.Count(x => x.DeletedDate != null), 0, 0, 0);
+                client.Account.Characters.Count(x => x.DeletedDate.HasValue), 0, 0, 0);
 
             foreach(var character in client.Account.Characters)
             {
-                CharacterHandler.SendCharacterSlotMessage(client, character, client.Account.Characters.Count(x => x.DeletedDate != null));
+                CharacterHandler.SendCharacterSlotMessage(client, character, client.Account.Characters.Count(x => x.DeletedDate.HasValue));
             }
         }
         public static void SendCertifyResultMessage(IPacketInterceptor client)

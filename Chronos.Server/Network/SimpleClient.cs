@@ -16,6 +16,7 @@ using FFEncryptionLibrary;
 using Lua511;
 using LuaInterface;
 using System.IO;
+using Chronos.Server.Game.Actors.Characters;
 
 namespace Chronos.Server.Network
 {
@@ -34,6 +35,7 @@ namespace Chronos.Server.Network
         public Socket Socket;
         public bool Runing { get; private set; }
         public GameAccount Account { get; set; }
+        public Character Character { get; set; }
         public static int BufferSize
         {
             get
@@ -112,7 +114,7 @@ namespace Chronos.Server.Network
             }
 
             Send(data);
-             Console.WriteLine(string.Format("[SND] {0} -> {1}", IP, message));
+             Console.WriteLine(string.Format("[SND] {0} -> {1}", IP, message.ToString().Split('.').Last()));
             //base.Send();
         }
         public void Send(byte[] data)
@@ -254,19 +256,21 @@ namespace Chronos.Server.Network
                     //// this.currentMessage = null;
                     //BigEndianReader Reader = new BigEndianReader(messagePart.Data);
                     NetworkMessage message = MessageReceiver.BuildMessage((HeaderEnum)messagePart.MessageId, buffer);
-                    if(message == null)
+                    if (message == null)
                     {
-                        ConsoleUtils.WriteWarning(string.Format("[RCV] unknown packetId {0} -> {1}", this.IP, (HeaderEnum)messagePart.MessageId));
-                        return;
+                        ConsoleUtils.WriteWarning(string.Format("Received Unknown PacketId : {0} -> {1}", this.IP, (HeaderEnum)messagePart.MessageId));
                     }
-                    Console.WriteLine(string.Format("[RCV] {0} -> {1}", this.IP, message));
-                    PacketManager.ParseHandler(this, message);
-
+                    else
+                    {
+                        Console.WriteLine(string.Format("[RCV] {0} -> {1}", this.IP, message.ToString().Split('.').Last()));
+                        PacketManager.ParseHandler(this, message);
+                    }
                     client.BeginReceive(receiveBuffer, 0, bufferLength, SocketFlags.None, new AsyncCallback(ReceiveCallBack), client);
                 }
                 catch (System.Exception ex)
                 {
                     ConsoleUtils.WriteError(ex.ToString());
+                    this.Disconnect();
                 }
             }
             else

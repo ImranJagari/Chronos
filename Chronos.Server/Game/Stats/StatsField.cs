@@ -46,6 +46,10 @@ namespace Chronos.Server.Game.Stats
             Fields.Add(DefineEnum.DEX, new StatsData(Owner, DefineEnum.DEX, record.Dexterity));
             Fields.Add(DefineEnum.INT, new StatsData(Owner, DefineEnum.INT, record.Intelligence));
             Fields.Add(DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI));
+            Fields.Add(DefineEnum.HP, new StatsData(Owner, DefineEnum.HP, record.HP));
+            Fields.Add(DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int)record.Money));
+            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, 0));
+            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, record.EP));
         }
     }
 }

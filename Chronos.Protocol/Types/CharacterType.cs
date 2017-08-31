@@ -23,7 +23,7 @@ namespace Chronos.Protocol.Types
         public int intelligence;
         public int spi;// ????
         public int hair_mesh;
-        public int hair_color;
+        public uint hair_color;
         public int head_mesh;
         public int is_block;
         public int block_time;
@@ -32,7 +32,7 @@ namespace Chronos.Protocol.Types
         public ClosetItemType[] closetItems;
         public CharacterType() { }
         public CharacterType(int slot, string name, int id, int sceneId, byte sex, PositionType position, int level,
-            int job, int strenght, int stamina, int dexterity, int intelligence, int spi, int hair_mesh, int hair_color,
+            int job, int strenght, int stamina, int dexterity, int intelligence, int spi, int hair_mesh, uint hair_color,
             int head_mesh, int is_block, int block_time, int items_count, ItemType[] items, ClosetItemType[] closetItems)
         {
             this.slot = slot;
@@ -73,7 +73,7 @@ namespace Chronos.Protocol.Types
             intelligence = reader.ReadInt();
             spi = reader.ReadInt();
             hair_mesh = reader.ReadInt();
-            hair_color = reader.ReadInt();
+            hair_color = reader.ReadUInt();
             head_mesh = reader.ReadInt();
             is_block = reader.ReadInt();
             block_time = reader.ReadInt();
@@ -105,7 +105,7 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(intelligence);
             writer.WriteInt(spi);
             writer.WriteInt(hair_mesh);
-            writer.WriteInt(hair_color);
+            writer.WriteUInt(hair_color);
             writer.WriteInt(head_mesh);
             writer.WriteInt(is_block);
             writer.WriteInt(block_time);
@@ -118,7 +118,7 @@ namespace Chronos.Protocol.Types
             {
                 if(closetItems[i] == null)
                 {
-                    closetItems[i] = new ClosetItemType(-1);
+                    closetItems[i] = new ClosetItemType(0);
                 }
                 closetItems[i].Serialize(writer);
             }

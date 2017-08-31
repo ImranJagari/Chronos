@@ -15,26 +15,40 @@ namespace Chronos.Server.Databases.Characters
         public int Id { get; set; }
         public int AccountId { get; set; }
         public string Name { get; set; }
+        public string HD_MD5 { get; set; }
         public int SceneId { get; set; }
         public bool Sex { get; set; }
         public Single X { get; set; }
         public Single Y { get; set; }
         public Single Z { get; set; }
         public int Level { get; set; }
+        public ulong Experience { get; set; }
         public int Job { get; set; }
+        public uint Money { get; set; }
+        public int HP { get; set; }
+        public int DamageTaken { get; set; }
         public int Strenght { get; set; }
         public int Stamina { get; set; }
         public int Dexterity { get; set; }
         public int Intelligence { get; set; }
         public int SPI { get; set; }
+        public int EP { get; set; }
         public int HairMesh { get; set; }
-        public int HairColor { get; set; }
+        public uint HairColor { get; set; }
         public int HeadMesh { get; set; }
+        public int City_Code { get; set; }
+        public int Constellation { get; set; }
+        public byte Country { get; set; }
+        public string SN_Card { get; set; }
+        public int Card_Type { get; set; }
+        public string HD_SN { get; set; }
+        public string Bin_Account { get; set; }
         public DateTime BlockTime { get; set; }
-        public DateTime DeletedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
     public class CharacterRecordRelator
     {
         public const string FetchQueryByAccountId = "SELECT * FROM characters WHERE AccountId = @0";
+        public const string FetchQueryByName = "SELECT * FROM characters WHERE Name = @0";
     }
 }

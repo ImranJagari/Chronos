@@ -25,6 +25,15 @@ namespace Chronos.Server.Game.Inventories
         {
             Items = ItemManager.Instance.GetItemsByOwnerId(ownerId);
             ClosetItems = ItemManager.Instance.GetClosetItemsByOwnerId(ownerId);
+            while(ClosetItems.Count < 5)
+            {
+                ClosetItems.Add(ClosetItems.Count, new ClosetItem(new Databases.Items.ClosetItemRecord()
+                {
+                    ClosetItemId = 0,
+                    Equipped = false,
+                    OwnerId = ownerId
+                }));
+            }
         }
     }
 }

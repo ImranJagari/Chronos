@@ -55,7 +55,7 @@ namespace Chronos.Server.Game.Account
         }
         public void LoadRecord()
         {
-            CharacterManager.Instance.GetCharactersByAccountId(Id);
+            Characters = CharacterManager.Instance.GetCharactersByAccountId(Id);
         }
     }
 }
