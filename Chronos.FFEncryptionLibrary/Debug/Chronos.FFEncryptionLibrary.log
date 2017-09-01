@@ -1,2 +1,0 @@
-﻿  FFEncryptionLibrary.cpp
-C:\Program Files (x86)\Windows Kits\8.1\Include\um\winnt.h(31): fatal error C1083: Impossible d'ouvrir le fichier include : 'ctype.h' : No such file or directory

@@ -85,6 +85,7 @@
     <Compile Include="Game\Stats\IStatsOwner.cs" />
     <Compile Include="Game\Stats\StatsData.cs" />
     <Compile Include="Game\Stats\StatsField.cs" />
+    <Compile Include="Game\World\Map.cs" />
     <Compile Include="Handlers\Approach\ApproachPingHandler.cs" />
     <Compile Include="Handlers\Approach\ApproachTicksHandler.cs" />
     <Compile Include="Handlers\Characters\CharacterCreateHandler.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Handlers\Connection\ConnectionCertifyHandler.cs" />
     <Compile Include="Handlers\PacketIdAttribute.cs" />
     <Compile Include="Handlers\PacketManager.cs" />
+    <Compile Include="Handlers\Roleplay\ContextRoleplayJoinHandler.cs" />
     <Compile Include="Initialization\InitializationAttribute.cs" />
     <Compile Include="Initialization\InitializationManager.cs" />
     <Compile Include="Initialization\InitializationMethod.cs" />

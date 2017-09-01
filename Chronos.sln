@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Core", "Chronos.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.ORM", "Chronos.ORM\Chronos.ORM.csproj", "{1FB5C587-0A9C-4DF8-8D20-61CED7692A47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.WDFExtractor", "CFlyFFAddonsExtractor\Chronos.WDFExtractor.csproj", "{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{1FB5C587-0A9C-4DF8-8D20-61CED7692A47}.Release|x64.Build.0 = Release|Any CPU
 		{1FB5C587-0A9C-4DF8-8D20-61CED7692A47}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FB5C587-0A9C-4DF8-8D20-61CED7692A47}.Release|x86.Build.0 = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|x64.Build.0 = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Debug|x86.Build.0 = Debug|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|x64.ActiveCfg = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|x64.Build.0 = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|x86.ActiveCfg = Release|Any CPU
+		{ECDE8809-E6F1-4762-8D0D-3C833C0B8054}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

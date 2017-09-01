@@ -1,0 +1,14 @@
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\bin\Debug\Binaries\luadec.exe
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\bin\Debug\Chronos.WDFExtractor.exe
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\bin\Debug\Chronos.WDFExtractor.pdb
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.csprojResolveAssemblyReference.cache
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\MainWindow.baml
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\MainWindow.g.cs
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\App.g.cs
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor_Content.g.cs
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor_MarkupCompile.cache
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.g.resources
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.Properties.Resources.resources
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.csproj.GenerateResource.Cache
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.exe
+C:\Users\Phantom\Documents\Github\ChronosEmu\CFlyFFAddonsExtractor\obj\Debug\Chronos.WDFExtractor.pdb
