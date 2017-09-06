@@ -44,11 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\WorldEnum.cs" />
+    <Compile Include="Messages\Snapshots\SetValueObjectSnapshot.cs" />
+    <Compile Include="Types\AdventType.cs" />
+    <Compile Include="Enums\AuthorityEnum.cs" />
+    <Compile Include="Enums\CreditCardTypeEnum.cs" />
     <Compile Include="Enums\DefineEnum.cs" />
     <Compile Include="Enums\ErrorCodeEnum.cs" />
+    <Compile Include="Enums\FriendStateEnum.cs" />
     <Compile Include="Enums\HeaderEnum.cs" />
+    <Compile Include="Enums\HotKeyEnum.cs" />
+    <Compile Include="Enums\ObjectTypeEnum.cs" />
     <Compile Include="Enums\PartsEnum.cs" />
+    <Compile Include="Enums\PlayerFlagEnum.cs" />
+    <Compile Include="Enums\ShortcutEnum.cs" />
     <Compile Include="Enums\SnapshotTypeEnum.cs" />
+    <Compile Include="Enums\SpiritTatooType.cs" />
     <Compile Include="Enums\StateMessageEnum.cs" />
     <Compile Include="Enums\StateTypeEnum.cs" />
     <Compile Include="MessageReceiver.cs" />
@@ -66,6 +77,9 @@
     <Compile Include="Messages\PingMessage.cs" />
     <Compile Include="Messages\QueryTickCountMessage.cs" />
     <Compile Include="Messages\SnapshotMessage.cs" />
+    <Compile Include="Messages\Snapshots\AddObjectSnapshot.cs" />
+    <Compile Include="Messages\Snapshots\SetStateVerSnapshot.cs" />
+    <Compile Include="Messages\Snapshots\UpdateServerTimeSnapshot.cs" />
     <Compile Include="Messages\TickCountMessage.cs" />
     <Compile Include="NetworkMessage.cs" />
     <Compile Include="Messages\SessionKeyMessage.cs" />
@@ -73,8 +87,36 @@
     <Compile Include="Snapshot.cs" />
     <Compile Include="Types\CharacterType.cs" />
     <Compile Include="Types\ClosetItemType.cs" />
+    <Compile Include="Types\CreditCardType.cs" />
+    <Compile Include="Types\ExpeditionType.cs" />
+    <Compile Include="Types\FactionType.cs" />
+    <Compile Include="Types\FateClosetType.cs" />
+    <Compile Include="Types\FlagsDataType.cs" />
+    <Compile Include="Types\FriendListType.cs" />
+    <Compile Include="Types\FriendMemberType.cs" />
+    <Compile Include="Types\HotkeyType.cs" />
+    <Compile Include="Types\InventoryType.cs" />
+    <Compile Include="Types\ItemElementType.cs" />
     <Compile Include="Types\ItemType.cs" />
+    <Compile Include="Types\KingdomType.cs" />
+    <Compile Include="Types\LoverType.cs" />
+    <Compile Include="Types\MarriageType.cs" />
+    <Compile Include="Types\MasterFactionType.cs" />
+    <Compile Include="Types\MemorisedPositionType.cs" />
+    <Compile Include="Types\ObjectsType\CharacterObjectType.cs" />
+    <Compile Include="Types\MasterType.cs" />
+    <Compile Include="Types\ObjectsType\SpriteObjectType.cs" />
+    <Compile Include="Types\ObjectsType\ObjectType.cs" />
+    <Compile Include="Types\PetDomesticateStatsType.cs" />
+    <Compile Include="Types\PetDomesticateType.cs" />
     <Compile Include="Types\PositionType.cs" />
+    <Compile Include="Types\ProtegeType.cs" />
+    <Compile Include="Types\QuestInventoryType.cs" />
+    <Compile Include="Types\ShortcutType.cs" />
+    <Compile Include="Types\SkillType.cs" />
+    <Compile Include="Types\TaskbarType.cs" />
+    <Compile Include="Types\VesselType.cs" />
+    <Compile Include="Types\WingType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chronos.Core\Chronos.Core.csproj">
@@ -82,8 +124,6 @@
       <Name>Chronos.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Messages\Snapshots\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

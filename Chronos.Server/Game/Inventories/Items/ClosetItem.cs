@@ -29,5 +29,9 @@ namespace Chronos.Server.Game.Inventories.Items
         {
             return new ClosetItemType(ClosetItemId);
         }
+        public FateClosetType GetFateClosetType()
+        {
+            return new FateClosetType(ClosetItemId, Id, 1, Record.Equipped ? 1 : 0, new int[16]);
+        }
     }
 }

@@ -131,21 +131,26 @@ namespace Chronos.Core.IO
 
         public void WriteUTF(string str)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(str);
-            ushort num = (ushort)bytes.Length;
-            this.WriteUShort(num);
-            if (num > 0)
-                m_writer.Write(bytes);
+            m_writer.Write((UInt16)str.Length);
+            if (str.Length > 0)
+                m_writer.Write(Encoding.ASCII.GetBytes(str));
+            //byte[] bytes = Encoding.UTF8.GetBytes(str);
+            //ushort num = (ushort)bytes.Length;
+            //this.WriteUShort(num);
+            //if (num > 0)
+            //    m_writer.Write(bytes);
         }
 
         public void WriteUTFBytes(string str)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(str);
-            int num = bytes.Length;
-            for (int i = 0; i < num; i++)
-            {
-                this.m_writer.Write(bytes[i]);
-            }
+            if (str.Length > 0)
+                m_writer.Write(Encoding.ASCII.GetBytes(str));
+            //byte[] bytes = Encoding.UTF8.GetBytes(str);
+            //int num = bytes.Length;
+            //for (int i = 0; i < num; i++)
+            //{
+            //    this.m_writer.Write(bytes[i]);
+            //}
         }
 
         public void WriteBytes(byte[] data)

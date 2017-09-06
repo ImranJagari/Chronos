@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chronos.Server.Game.Account;
+using Chronos.Server.Game.World;
 
-namespace Chronos.Server.Game.Actors.Characters
+namespace Chronos.Server.Game.Actors.Context.Characters
 {
-    public class Character : IStatsOwner
+    public class Character : ContextActor
     {
         public CharacterRecord Record { get; }
 
@@ -22,10 +24,15 @@ namespace Chronos.Server.Game.Actors.Characters
             LoadRecord();
         }
         public SimpleClient Client { get; set; }
-        public int Id
+
+        public GameAccount Account => Client.Account;
+
+        public override ObjectTypeEnum ObjectType => ObjectTypeEnum.OT_PLAYER;
+
+        public override int Id
         {
             get { return Record.Id; }
-            set { Record.Id = value; }
+            protected set { Record.Id = value; }
         }
         public int AccountId
         {
@@ -37,30 +44,11 @@ namespace Chronos.Server.Game.Actors.Characters
             get { return Record.Name; }
             set { Record.Name = value; }
         }
-        public int SceneId
-        {
-            get { return Record.SceneId; }
-            set { Record.SceneId = value; }
-        }
+        
         public bool Sex
         {
             get { return Record.Sex; }
             set { Record.Sex = value; }
-        }
-        public Single X
-        {
-            get { return Record.X; }
-            set { Record.X = value; }
-        }
-        public Single Y
-        {
-            get { return Record.Y; }
-            set { Record.Y = value; }
-        }
-        public Single Z
-        {
-            get { return Record.Z; }
-            set { Record.Z = value; }
         }
         public int Level
         {
@@ -101,9 +89,26 @@ namespace Chronos.Server.Game.Actors.Characters
             set { Record.DeletedDate = value; }
         }
 
-        public StatsFields Stats { get; private set; }
+        public override StatsFields Stats { get; protected set; }
         public Inventory Inventory { get; private set; }
 
+        public void SaveNow()
+        {
+            Record.SceneId = Position.Map.SceneId;
+            Record.X = Position.X;
+            Record.Y = Position.Y;
+            Record.Z = Position.Z;
+            Record.Strenght = Stats.Fields[DefineEnum.STR].Base;
+            Record.Stamina = Stats.Fields[DefineEnum.STA].Base;
+            Record.Intelligence = Stats.Fields[DefineEnum.INT].Base;
+            Record.EP = Stats.Fields[DefineEnum.EP].Base;
+            Record.SPI = Stats.Fields[DefineEnum.SPI].Base;
+            Record.Money = (uint)Stats.Fields[DefineEnum.MONEY].Base;
+            Record.HP = Stats.Fields[DefineEnum.HP].Base;
+            Record.DamageTaken = Stats.Fields[DefineEnum.HP].Base - Stats[DefineEnum.HP].Total;
+
+            SimpleServer.Instance.DBAccessor.Database.Update(Record);
+        }
         public void LoadRecord()
         {
             Stats = new StatsFields(this);
@@ -111,12 +116,15 @@ namespace Chronos.Server.Game.Actors.Characters
 
             Inventory = new Inventory();
             Inventory.LoadData(Id);
+
+            Position = new ObjectPosition(new Map() { SceneId = Record.SceneId }, this.Record.X, Record.Y, Record.Z);
         }
         public CharacterType GetNetwork()// Todo : Block time and IsBlocked + ClosetItems
         {
-            return new CharacterType(this.Client.Account.Characters.Where(x => !x.DeletedDate.HasValue).ToList().IndexOf(this), Name, Id, SceneId, Sex ? (byte)1 : (byte)0,
-                new PositionType(X, Y, Z), Level, Job, Stats[DefineEnum.STR].Total, Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
-                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, Inventory.Items.Count, Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), Inventory.ClosetItems.Values.Select(x => x.GetNetwork()).ToArray());
+            return new CharacterType(this.Client.Account.Characters.Where(x => !x.DeletedDate.HasValue).ToList().IndexOf(this), Name, Id, Position.Map.SceneId, Sex ? (byte)1 : (byte)0,
+                new PositionType(Position.X, Position.Y, Position.Z), Level, Job, Stats[DefineEnum.STR].Total, Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
+                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, Inventory.Items.Count,
+                Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), Inventory.ClosetItems.Values.Select(x => x.GetNetwork()).ToArray());
         }
     }
 }

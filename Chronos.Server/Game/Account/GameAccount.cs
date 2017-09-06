@@ -1,11 +1,8 @@
-﻿using Chronos.Server.Databases.Account;
-using Chronos.Server.Game.Actors.Characters;
+﻿using Chronos.Protocol.Enums;
+using Chronos.Server.Databases.Account;
+using Chronos.Server.Game.Actors.Context.Characters;
 using Chronos.Server.Manager.Characters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chronos.Server.Game.Account
 {
@@ -51,6 +48,17 @@ namespace Chronos.Server.Game.Account
             set
             {
                 Record.IP_Key = value;
+            }
+        }
+        public AuthorityEnum Authority
+        {
+            get
+            {
+                return (AuthorityEnum)Record.Authority;
+            }
+            set
+            {
+                Record.Authority = (byte)value;
             }
         }
         public void LoadRecord()

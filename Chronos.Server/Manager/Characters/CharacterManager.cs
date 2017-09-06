@@ -3,15 +3,13 @@ using Chronos.Protocol.Messages;
 using Chronos.Server.Databases.Breeds;
 using Chronos.Server.Databases.Characters;
 using Chronos.Server.Databases.Items;
-using Chronos.Server.Game.Actors.Characters;
+using Chronos.Server.Game.Actors.Context.Characters;
 using Chronos.Server.Handlers.Characters;
 using Chronos.Server.Manager.Breeds;
 using Chronos.Server.Network;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Chronos.Server.Manager.Characters

@@ -14,6 +14,7 @@ namespace Chronos.Server.Databases.Account
         [PrimaryKey("Id")]
         public int Id { get; set; }
         public string Username { get; set; }
+        public byte Authority { get; set; }
         public string Password { get; set; }
         public string HDSN { get; set; }
         public string IP_Key { get; set; }

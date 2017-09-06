@@ -30,6 +30,9 @@ namespace Chronos.Server.Network
         private const string configFilePath = ".//config.xml";
 
         [Variable]
+        public static int ServerId = 27;
+
+        [Variable]
         public static string Host = "127.0.0.1";
 
         [Variable]

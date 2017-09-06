@@ -1,13 +1,17 @@
-﻿using Chronos.Protocol.Enums;
+﻿using Chronos.Core.Extensions;
+using Chronos.Protocol;
+using Chronos.Protocol.Enums;
 using Chronos.Protocol.Messages;
+using Chronos.Protocol.Messages.Snapshots;
 using Chronos.Protocol.Types;
-using Chronos.Server.Game.Actors.Characters;
+using Chronos.Protocol.Types.ObjectsType;
+using Chronos.Server.Game.Actors.Context.Characters;
+using Chronos.Server.Game.Stats;
 using Chronos.Server.Network;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Threading;
 
 namespace Chronos.Server.Handlers.Roleplay
 {
@@ -24,8 +28,43 @@ namespace Chronos.Server.Handlers.Roleplay
             }
             client.Character = character;
 
-            SendJoinRightMessage(client, message.characterId, character.SceneId, character.X, character.Y, character.Z, false, 0);//Send all players in the map
+            SendJoinRightMessage(client, message.characterId, character.Position.Map.SceneId, character.Position.X, character.Position.Y, character.Position.Z, false, 0);//Send all players in the map
 
+
+            SendSnapshotMessage(client, new Snapshot[] { new SetStateVerSnapshot(1) });
+            SendSnapshotMessage(client, new Snapshot[] { new UpdateServerTimeSnapshot(DateTime.Now.GetUnixTimeStamp()) });
+            //Thread.Sleep(5000);
+
+            SendSnapshotMessage(client, new Snapshot[] { new AddObjectSnapshot(new CharacterObjectType(ObjectTypeEnum.OT_PLAYER, (uint)client.Character.GetHashCode(), 12, (uint)0,
+                client.Character.Position.X, client.Character.Position.Y, client.Character.Position.Z, 0, 0, 100, client.Character.Name, client.Character.Stats.Fields.Count,
+                client.Character.Stats.Fields.Keys.Select(x => (ushort)x).ToArray(), client.Character.Stats.Fields.Values.Select(x => x.Total).ToArray(),
+                (byte)0, new byte[0], new int[0], new int[0], (uint)client.Character.Id, client.Character.Sex ? (byte)1 : (byte)0, client.Character.Job, (int)client.Account.Authority,
+                SimpleServer.ServerId, "", (short)client.Character.Record.Constellation, (short)0, (byte)client.Character.HairMesh,
+                client.Character.HairColor, (byte)client.Character.HeadMesh, (uint)0 /*Todo : option*/, 0, "", 0, 0, 0/*Todo : fame*/,
+                0, 0, 0, 0x5322AFDF, 0, 0, new ItemType[0], 0, new byte[0], new int[0], 7, new int[0], 0, 0, new int[0], new int[0],
+                new KingdomType((byte)0, (byte)0, 0, $"", (byte)0,0,0,0,0,0,0, $""),
+                new MasterType(client.Character.Name, "", "", 0,0,0), new MarriageType(0), 0, new int[0], 0, 0, false, true,
+                new FlagsDataType(0,1,139495485,0,0,new int[0],0, new int[0], 0,new int[0], new int[0],
+                new InventoryType(new short[0], 0, new ItemElementType[0], new short[0]),
+                new QuestInventoryType(new short[0], 0, new ItemElementType[0],new short[0]),0,
+                new TaskbarType(0, new ShortcutType[0],0, new ShortcutType[0],0,
+                new ShortcutType[0],0, new byte[0], 0), 0 , new SkillType[0],
+                0,false,
+                new FriendListType(FriendStateEnum.FRS_ONLINE, 0,0,new int[0], 0, new FriendMemberType[0],0, new FriendMemberType[0],0, new FriendMemberType[0]),
+                new FactionType(0,0,0,0,0,"", new ProtegeType[0]), 0,
+                new MemorisedPositionType[0], 0,0,0,0,0,0,0,
+                new CreditCardType(CreditCardTypeEnum.CREDIT_CRAD_NORMAL, 0,0,0,0,0,0,(uint)DateTime.Now.GetUnixTimeStamp(), 0,(uint)DateTime.Now.GetUnixTimeStamp(), 0,0,0),
+                0,0,0,0,0,StatsFields.StoneStrenghtBoost, StatsFields.StoneDexterityBoost, StatsFields.StoneStaminaBoost, StatsFields.StoneSPIBoost, StatsFields.StoneIntelligenceBoost,
+                0, new LoverType[0], client.Character.Inventory.ClosetItems.Count, 2, client.Character.Inventory.ClosetItems.Count,
+                client.Character.Inventory.ClosetItems.Values.Select(x => x.GetFateClosetType()).ToArray(),
+                new VesselType(1,0,0,0,0,new int[0], new WingType[0]),new HotkeyType(0,new HotkeyEnum[0], new HotkeyEnum[0]),
+                new SpiritTatooType(""), new AdventType(0,0,0,0,""),
+                new PetDomesticateType(0,0 , new PetDomesticateStatsType[0]), new ExpeditionType(1,0,0,0,"", 0),0,0,0))) });
+
+            //foreach(var stats in client.Character.Stats.Fields)
+            //{
+            //    SendSnapshotMessage(client, new Snapshot[] { new SetValueObjectSnapshot((uint)client.Character.GetHashCode(), (short)stats.Key, (int)stats.Value.Total) });
+            //}
         }
         public static void SendJoinRightMessage(IPacketInterceptor client, int characterId, int sceneId, float x, float y, float z, bool isFestival, uint festivalDay)
         {

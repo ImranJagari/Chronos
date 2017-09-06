@@ -1,12 +1,7 @@
-﻿using Chronos.Server.Game.Actors.Characters;
+﻿using Chronos.Protocol.Messages;
+using Chronos.Server.Game.Actors.Context.Characters;
 using Chronos.Server.Network;
-using Chronos.Protocol.Enums;
-using Chronos.Protocol.Messages;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chronos.Server.Handlers.Characters
 {

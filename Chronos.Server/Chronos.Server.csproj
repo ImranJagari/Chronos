@@ -77,15 +77,18 @@
     <Compile Include="Databases\Characters\CharacterRecord.cs" />
     <Compile Include="Databases\Items\ClosetItemRecord.cs" />
     <Compile Include="Databases\Items\ItemRecord.cs" />
-    <Compile Include="Game\Actors\Characters\Character.cs" />
+    <Compile Include="Game\Actors\Context\Characters\Character.cs" />
     <Compile Include="Game\Account\GameAccount.cs" />
+    <Compile Include="Game\Actors\Context\ContextActor.cs" />
     <Compile Include="Game\Inventories\Inventory.cs" />
     <Compile Include="Game\Inventories\Items\ClosetItem.cs" />
     <Compile Include="Game\Inventories\Items\PlayerItem.cs" />
+    <Compile Include="Game\Actors\WorldObject.cs" />
     <Compile Include="Game\Stats\IStatsOwner.cs" />
     <Compile Include="Game\Stats\StatsData.cs" />
     <Compile Include="Game\Stats\StatsField.cs" />
     <Compile Include="Game\World\Map.cs" />
+    <Compile Include="Game\World\ObjectPosition.cs" />
     <Compile Include="Handlers\Approach\ApproachPingHandler.cs" />
     <Compile Include="Handlers\Approach\ApproachTicksHandler.cs" />
     <Compile Include="Handlers\Characters\CharacterCreateHandler.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Handlers\PacketIdAttribute.cs" />
     <Compile Include="Handlers\PacketManager.cs" />
     <Compile Include="Handlers\Roleplay\ContextRoleplayJoinHandler.cs" />
+    <Compile Include="Handlers\Roleplay\ContextRoleplaySnapshotHandler.cs" />
     <Compile Include="Initialization\InitializationAttribute.cs" />
     <Compile Include="Initialization\InitializationManager.cs" />
     <Compile Include="Initialization\InitializationMethod.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Network\IPacketInterceptor.cs" />
     <Compile Include="Network\MessagePart.cs" />
     <Compile Include="Network\SimpleClient.cs" />
+    <Compile Include="Network\SimpleClientCollection.cs" />
     <Compile Include="Network\SimpleServer.cs" />
     <Compile Include="Network\VersionExtended.cs" />
     <Compile Include="Network\VersionExtensions.cs" />
