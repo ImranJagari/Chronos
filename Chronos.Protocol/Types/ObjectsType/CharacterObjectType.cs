@@ -158,7 +158,7 @@ namespace Chronos.Protocol.Types.ObjectsType
                 writer.WriteInt(title);
             }
             writer.WriteInt(title_flag);
-            writer.WriteInt(title_count2);
+            writer.WriteByte(title_count2);
             for (int i = 0; i < title_count2; i++)
             {
                 writer.WriteInt(titles2[i]);
@@ -175,7 +175,7 @@ namespace Chronos.Protocol.Types.ObjectsType
             writer.WriteInt(vessel_refine_lv);
             writer.WriteInt(vessel_equip_index);
             writer.WriteBoolean(vessel_is_equip);
-            writer.WriteBoolean(flag_data);
+            writer.WriteByte(flag_data ? (byte)1 : (byte)0);
             if (flag_data)
                 flagsData.Serialize(writer);
         }

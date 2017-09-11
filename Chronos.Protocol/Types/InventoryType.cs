@@ -28,17 +28,17 @@ namespace Chronos.Protocol.Types
         }
         public void Serialize(IDataWriter writer)
         {
-            writer.WriteShort(item_max);
-            writer.WriteShort(index_num);
+            writer.WriteByte((byte)item_max);
+            writer.WriteByte((byte)index_num);
             foreach(short itemId in itemIds)
             {
-                writer.WriteShort(itemId);
+                writer.WriteByte((byte)itemId);
             }
-            writer.WriteInt(itemElement_count);
+            writer.WriteByte((byte)itemElement_count);
             for(int i = 0; i < itemElement_count; i++)
             {
                 item_elements[i].Serialize(writer);
-                writer.WriteShort(objectIds[i]);
+                writer.WriteByte((byte)objectIds[i]);
             }
         }
     }
