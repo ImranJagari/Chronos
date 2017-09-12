@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Chronos.Server.Game.Inventories
 {
-    public class Inventory
+    public class Inventory 
     {
         public Dictionary<uint, PlayerItem> Items;
         public Dictionary<int, ClosetItem> ClosetItems;
