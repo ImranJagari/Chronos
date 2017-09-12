@@ -35,7 +35,7 @@ namespace Chronos.Server.Handlers.Roleplay
             SendSnapshotMessage(client, new Snapshot[] { new UpdateServerTimeSnapshot(DateTime.Now.GetUnixTimeStamp()) });
             //Thread.Sleep(5000);
 
-            SendSnapshotMessage(client, new Snapshot[] { new AddObjectSnapshot(new CharacterObjectType(ObjectTypeEnum.OT_PLAYER, (uint)client.Character.GetHashCode(), 12, (uint)0xFFFFFFFF,
+            SendSnapshotMessage(client, new Snapshot[] { new AddObjectSnapshot(new CharacterObjectType(ObjectTypeEnum.OT_CLIENT, (uint)client.Character.GetHashCode(), 12, (uint)0xFFFFFFFF,
                 client.Character.Position.X, client.Character.Position.Y, client.Character.Position.Z, 0, 0, 100, client.Character.Name, client.Character.Stats.Fields.Count,
                 client.Character.Stats.Fields.Keys.Select(x => (ushort)x).ToArray(), client.Character.Stats.Fields.Values.Select(x => x.Total).ToArray(),
                 (byte)0, new byte[0], new int[0], new int[0], (uint)client.Character.Id, client.Character.Sex ? (byte)1 : (byte)0, client.Character.Job, (int)client.Account.Authority,

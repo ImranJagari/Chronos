@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FFEncryptionLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="FFEncryptionLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\FFEncryptionLibrary.dll</HintPath>
     </Reference>
