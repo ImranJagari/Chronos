@@ -3,7 +3,7 @@
 
 Chronos is a C# open-source CFlyFF (Chinese FlyFF)
 
-We develop this emulator for fun and for learn more about C# and network apps.
+We develop this emulator for fun and for learn about the CFlyff structure.
 /!\ Please respect the credits !
 
 Credits for Chronos :
