@@ -132,8 +132,9 @@ namespace Chronos.Core.IO
         public void WriteUTF(string str)
         {
             m_writer.Write((UInt16)str.Length);
-            if (str.Length > 0)
+            //if (str.Length > 0)
                 m_writer.Write(Encoding.ASCII.GetBytes(str));
+            //m_writer.Write(str);
             //byte[] bytes = Encoding.UTF8.GetBytes(str);
             //ushort num = (ushort)bytes.Length;
             //this.WriteUShort(num);

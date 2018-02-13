@@ -19,7 +19,7 @@ namespace Chronos.Protocol.Types
 
         public InventoryType(short[] itemIds, int itemElement_count, ItemElementType[] item_elements, short[] objectIds)
         {
-            item_max = (short)DefineEnum.MAX_INVENTORY;
+            item_max = ((short)DefineEnum.MAX_INVENTORY + (short)DefineEnum.MAX_HUMAN_PARTS);
             index_num = (short)DefineEnum.MAX_INVENTORY;
             this.itemIds = itemIds;
             this.itemElement_count = itemElement_count;
@@ -28,17 +28,23 @@ namespace Chronos.Protocol.Types
         }
         public void Serialize(IDataWriter writer)
         {
-            writer.WriteByte((byte)item_max);
-            writer.WriteByte((byte)index_num);
-            foreach(short itemId in itemIds)
+            writer.WriteUShort((ushort)item_max);
+            writer.WriteUShort((ushort)index_num);
+            foreach (short itemId in itemIds)
             {
-                writer.WriteByte((byte)itemId);
+                writer.WriteUShort((ushort)itemId);
             }
-            writer.WriteByte((byte)itemElement_count);
+            //writer.WriteShort((byte)item_max);
+            //writer.WriteShort((byte)index_num);
+            //foreach(short itemId in itemIds)
+            //{
+            //    writer.WriteShort((byte)itemId);
+            //}
+            writer.WriteInt((byte)itemElement_count);
             for(int i = 0; i < itemElement_count; i++)
             {
                 item_elements[i].Serialize(writer);
-                writer.WriteByte((byte)objectIds[i]);
+                writer.WriteUShort((ushort)objectIds[i]);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Chronos.Protocol.Enums
     /// <summary>
     /// cFlyff State types
     /// </summary>
-    public enum StateType : ushort
+    public enum StateTypeEnum : ushort
     {
         STATE_NONE = 0,
         STATE_SIT = 1,

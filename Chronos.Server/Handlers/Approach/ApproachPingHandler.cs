@@ -14,7 +14,7 @@ namespace Chronos.Server.Handlers.Approach
         [HeaderPacket(HeaderEnum.PING)]
         public static void HandlePingMessage(SimpleClient client, PingMessage message)
         {
-            SendLoginMessage(client, message.unknown);
+            //SendLoginMessage(client, message.unknown);
         }
         public static void SendLoginMessage(IPacketInterceptor client, uint unknown)
         {

@@ -16,6 +16,7 @@ namespace Chronos.Protocol.Types
         public int current_limit;
         public int recharge;
         public int pay_recharge;
+        public int preferential;
         public int one_day_consume;
         public int total_consume;
         public uint last_consume_date;
@@ -25,7 +26,7 @@ namespace Chronos.Protocol.Types
         public int trade_point;
         public int recharged_reward;
 
-        public CreditCardType(CreditCardTypeEnum type, int limit, int current_limit, int recharge, int pay_recharge, int one_day_consume,
+        public CreditCardType(CreditCardTypeEnum type, int limit, int current_limit, int recharge, int pay_recharge, int preferential, int one_day_consume,
             int total_consume, uint last_consume_date, int one_day_trade, uint last_trade_date, int recharged_money, int trade_point, int recharged_reward)
         {
             this.type = type;
@@ -33,6 +34,7 @@ namespace Chronos.Protocol.Types
             this.current_limit = current_limit;
             this.recharge = recharge;
             this.pay_recharge = pay_recharge;
+            this.preferential = preferential;
             this.one_day_consume = one_day_consume;
             this.total_consume = total_consume;
             this.last_consume_date = last_consume_date;
@@ -48,6 +50,7 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(current_limit);
             writer.WriteInt(recharge);
             writer.WriteInt(pay_recharge);
+            writer.WriteInt(preferential);
             writer.WriteInt(one_day_consume);
             writer.WriteInt(total_consume);
             writer.WriteUInt(last_consume_date);

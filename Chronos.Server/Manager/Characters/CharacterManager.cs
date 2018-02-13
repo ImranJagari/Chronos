@@ -76,12 +76,16 @@ namespace Chronos.Server.Manager.Characters
                 BlockTime = DateTime.MinValue,
                 DeletedDate = null
             };
-            var closets = message.closets.Select(x => new ClosetItemRecord()
+            ClosetItemRecord[] closets = new ClosetItemRecord[5];
+            for(int i = 0; i < message.closets.Count(); i++)
             {
-                ClosetItemId = x.id,
-                Equipped = true,
-                OwnerId = record.Id
-            });
+                closets[i] = new ClosetItemRecord();
+                closets[i].ClosetItemId = message.closets[i].id;
+                closets[i].OwnerId = record.Id;
+                closets[i].Equipped = true;
+                closets[i].Slot = i + 1;
+
+            }
             try
             {
                 Database.Insert(record);

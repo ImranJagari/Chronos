@@ -63,7 +63,7 @@ namespace Chronos.Protocol.Types
         }
         public void Serialize(IDataWriter writer)
         {
-            writer.WriteByte((byte)objectId);
+            writer.WriteUShort((ushort)objectId);
             writer.WriteUInt(itemId);
             writer.WriteUInt(serial_number);
             writer.WriteX(item_num);
@@ -78,14 +78,14 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(bindEndTime);
             writer.WriteByte(stability);
             writer.WriteByte(quality);
-            writer.WriteSByte(ability_rate);
+            writer.WriteChar((char)ability_rate);
             writer.WriteX(useTime);
             writer.WriteX(buyTm);
             writer.WriteX(price);
             writer.WriteX(payyb);
             writer.WriteX(freeyb);
             writer.WriteInt(serverId);
-            writer.WriteByte((byte)attributes.Length);
+            writer.WriteUShort((ushort)attributes.Length);
             foreach (short attribute in attributes)
                 writer.WriteShort(attribute);
         }

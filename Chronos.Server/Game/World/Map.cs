@@ -1,5 +1,10 @@
-﻿using Chronos.Server.Game.Actors;
+﻿using Chronos.Protocol;
+using Chronos.Protocol.Messages.Snapshots;
+using Chronos.Protocol.Types;
+using Chronos.Server.Databases.Maps;
+using Chronos.Server.Game.Actors;
 using Chronos.Server.Game.Actors.Context.Characters;
+using Chronos.Server.Handlers.Roleplay;
 using Chronos.Server.Network;
 using System;
 using System.Collections.Generic;
@@ -11,17 +16,37 @@ namespace Chronos.Server.Game.World
 {
     public class Map
     {
+        public Map(MapRecord record)
+        {
+            Clients = new SimpleClientCollection();
+            Objects = new List<WorldObject>();
+            Record = record;
+        }
         public SimpleClientCollection Clients { get; }
         public List<WorldObject> Objects { get; set; }
-        public int SceneId { get; set; }
+        public MapRecord Record { get; }
+        public int SceneId
+        {
+            get
+            {
+                return Record.Id;
+            }
+        }
 
         public void Enter(WorldObject obj)
         {
-            if(obj is Character)
+            foreach (SimpleClient client in Clients)
+            {
+                ContextRoleplayHandler.SendSnapshotMessage(client, new Snapshot[] { new AddObjectSnapshot(obj.GetObjectType()) });
+            }
+
+            if (obj is Character)
             {
                 Clients.Add((obj as Character).Client);
             }
+
             Objects.Add(obj);
+            obj.Position.Map = this;
         }
         public void Leave(WorldObject obj)
         {
@@ -32,8 +57,17 @@ namespace Chronos.Server.Game.World
             {
                 Clients.Remove((obj as Character).Client);
             }
-            Objects.Add(obj);
 
+            Objects.Remove(obj);
+
+            foreach (SimpleClient client in Clients)
+            {
+                ContextRoleplayHandler.SendSnapshotMessage(client, new Snapshot[] { new RemoveObjectSnapshot((uint)obj.GetHashCode()) });
+            }
+        }
+        public List<SimpleClient> GetClientsNear(Character character)
+        {
+            return Clients.Where(x => x != character.Client /*&& character.Position.IsInRange(x.Character.Position, 50)*/).ToList();
         }
     }
 }

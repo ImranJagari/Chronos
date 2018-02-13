@@ -12,7 +12,12 @@ namespace Chronos.Server.Game.World
             Y = y;
             Z = z;
         }
-
+        public ObjectPosition(float x, float y, float z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
         public Map Map { get; set; }
         public float X { get; set; }
         public float Y { get; set; }

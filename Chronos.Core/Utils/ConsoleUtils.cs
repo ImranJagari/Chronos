@@ -27,7 +27,7 @@ namespace Chronos.Core.Utils
         }
         public static void WriteMessageInfo(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(message);
             Console.ResetColor();
 

@@ -1,5 +1,5 @@
+using Chronos.Core.Encryption;
 using Chronos.Core.IO;
-using FFEncryptionLibrary;
 using System;
 namespace Chronos.Server.Network
 {

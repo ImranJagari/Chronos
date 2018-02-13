@@ -141,7 +141,7 @@ namespace Chronos.Protocol.Types.ObjectsType
         public override void SerializeAlwaysChange(IDataWriter writer)
         {
             base.SerializeAlwaysChange(writer);
-            writer.WriteInt(items_count);
+            writer.WriteUInt((uint)items_count);
             foreach(ItemType item in items)
             {
                 item.Serialize(writer);
@@ -152,12 +152,12 @@ namespace Chronos.Protocol.Types.ObjectsType
                 writer.WriteByte(index[i]);
                 writer.WriteX(value[i]);
             }
-            writer.WriteInt(title_count);
+            writer.WriteUInt((uint)title_count);
             foreach(int title in titles)
             {
                 writer.WriteInt(title);
             }
-            writer.WriteInt(title_flag);
+            writer.WriteUInt((uint)title_flag);
             writer.WriteByte(title_count2);
             for (int i = 0; i < title_count2; i++)
             {
@@ -172,10 +172,10 @@ namespace Chronos.Protocol.Types.ObjectsType
             {
                 writer.WriteInt(index_show);
             }
-            writer.WriteInt(vessel_refine_lv);
-            writer.WriteInt(vessel_equip_index);
+            writer.WriteUInt((uint)vessel_refine_lv);
+            writer.WriteUInt((uint)vessel_equip_index);
             writer.WriteBoolean(vessel_is_equip);
-            writer.WriteByte(flag_data ? (byte)1 : (byte)0);
+            writer.WriteByte(flag_data ? (byte) 1 : (byte)0);
             if (flag_data)
                 flagsData.Serialize(writer);
         }

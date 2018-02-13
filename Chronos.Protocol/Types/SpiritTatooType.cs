@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Chronos.Protocol.Enums
+namespace Chronos.Protocol.Types
 {
     public class SpiritTatooType
     {

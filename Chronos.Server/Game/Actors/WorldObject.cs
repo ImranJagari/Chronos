@@ -1,4 +1,5 @@
 ﻿using Chronos.Protocol.Enums;
+using Chronos.Protocol.Types.ObjectsType;
 using Chronos.Server.Game.World;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Chronos.Server.Game.Actors
 {
     public abstract class WorldObject : IDisposable
     {
+        public const int DEFAULT_SCALE = 100;
         protected WorldObject()
         {
             CreationTime = DateTime.Now;
@@ -62,7 +64,10 @@ namespace Chronos.Server.Game.Actors
 
             return obj.CanBeSee(this);
         }
-
+        public virtual ObjectType GetObjectType(bool me = false)
+        {
+            return new ObjectType(ObjectType, (uint)Id, 11, 0xFFFFFFFF, Position.X, Position.Y, Position.Z, 0, 0, DEFAULT_SCALE);
+        }
         #region IDisposable Members
 
         public void Dispose()

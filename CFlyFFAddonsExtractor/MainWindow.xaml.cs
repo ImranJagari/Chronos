@@ -89,6 +89,9 @@ namespace CFlyFFAddonsExtractor
 
                 this.FilesText = File.ReadAllLines(this.DESTINATION_PATH.Text + "\\Configure.lua");
                 this.Files = (from line in FilesText where line.Contains("DoFile(") select new string(line.Substring(line.IndexOf("DoFile(\"", StringComparison.Ordinal) + 8).TakeWhile(c => c != '\"').ToArray())).Aggregate("", (current, filename) => current + filename + "\r\n").Split(new Char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+               this.Files = Files.Concat(from line in FilesText where line.Contains("LoadFile(")
+                             select line.Split('\"')[1]).ToArray();
+                this.Files = Files.Concat(new string[] { "project\\MotionList", "project\\WndRes", "project\\WndCfg", "project\\MtrlExCfg" }).ToArray();
                 this.FilesToExtract = 0;
                 foreach (String _file in Files)
                 {
@@ -126,7 +129,7 @@ namespace CFlyFFAddonsExtractor
 
             foreach (String _file in Files)
             {
-                if (_file.EndsWith(".lua") == false)
+                if (!_file.EndsWith(".lua"))
                 {
                     String _newFile = _file.Replace("\\\\", "\\");
 
@@ -153,6 +156,7 @@ namespace CFlyFFAddonsExtractor
                     /* Extracts and converts if need */
                     FileInfo _info = new FileInfo(_destinationPath + "\\" + _newFile);
                     _info.Directory.Create();
+
                     if ((package as WindsoulDataFile.WdfPackage).Extract(_newFile, _info.Directory.FullName) == true && _lua == true)
                     {
                         FFLua.Decoder.Decompile(_info.FullName, _info.FullName + ".lua");
@@ -168,6 +172,8 @@ namespace CFlyFFAddonsExtractor
                 }
             }
             (package as WindsoulDataFile.WdfPackage).Close();
+            MessageBox.Show("Wdf package extracted", "Wdf package error", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace MeteorNewGen
     {
         static void Main(string[] args)
         {
-            ConsoleUtils.ChangeTitle("Chronos 1.0.0");
+            ConsoleUtils.ChangeTitle("Chronos 1.1.0");
 
             SimpleServer.DrawAscii();
             SimpleServer server = new SimpleServer();

@@ -32,8 +32,8 @@ namespace Chronos.Protocol.Types
             writer.WriteUTF(master_function_name);
             writer.WriteUTF(function_name);
             writer.WriteInt(close_points_total_with_master);
-            writer.WriteInt(safety_immunity);
-            writer.WriteInt(lover_count);
+            writer.WriteUInt((uint)safety_immunity);
+            writer.WriteByte((byte)lover_count);
         }
     }
 }

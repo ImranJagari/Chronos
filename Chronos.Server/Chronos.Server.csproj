@@ -51,10 +51,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FFEncryptionLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\FFEncryptionLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="lua51">
       <HintPath>..\..\..\Visual Studio 2017\Projects\Chonos\Library\lua51.dll</HintPath>
     </Reference>
@@ -77,6 +73,7 @@
     <Compile Include="Databases\Characters\CharacterRecord.cs" />
     <Compile Include="Databases\Items\ClosetItemRecord.cs" />
     <Compile Include="Databases\Items\ItemRecord.cs" />
+    <Compile Include="Databases\Maps\MapRecord.cs" />
     <Compile Include="Game\Actors\Context\Characters\Character.cs" />
     <Compile Include="Game\Account\GameAccount.cs" />
     <Compile Include="Game\Actors\Context\ContextActor.cs" />
@@ -97,8 +94,12 @@
     <Compile Include="Handlers\Connection\ConnectionCertifyHandler.cs" />
     <Compile Include="Handlers\PacketIdAttribute.cs" />
     <Compile Include="Handlers\PacketManager.cs" />
+    <Compile Include="Handlers\Roleplay\ContextRoleplayEntitiesHandler.cs" />
     <Compile Include="Handlers\Roleplay\ContextRoleplayJoinHandler.cs" />
     <Compile Include="Handlers\Roleplay\ContextRoleplaySnapshotHandler.cs" />
+    <Compile Include="Handlers\StateIdAttribute.cs" />
+    <Compile Include="Handlers\States\StateMessageHandler.cs" />
+    <Compile Include="Handlers\States\StateMoveMessageHandler.cs" />
     <Compile Include="Initialization\InitializationAttribute.cs" />
     <Compile Include="Initialization\InitializationManager.cs" />
     <Compile Include="Initialization\InitializationMethod.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Manager\DatabaseManager.cs" />
     <Compile Include="Manager\DataManagerAllocator.cs" />
     <Compile Include="Manager\Items\ItemManager.cs" />
+    <Compile Include="Manager\Maps\WorldManager.cs" />
     <Compile Include="Network\IPacketInterceptor.cs" />
     <Compile Include="Network\MessagePart.cs" />
     <Compile Include="Network\SimpleClient.cs" />

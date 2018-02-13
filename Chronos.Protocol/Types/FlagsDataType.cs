@@ -124,6 +124,8 @@ namespace Chronos.Protocol.Types
             this.stone_attr_int = stone_attr_int;
             this.lover_count = lover_count;
             this.lovers = lovers;
+            this.closet_capacity = closet_capacity;
+            this.closet_level = closet_level;
             this.fate_count = fate_count;
             this.closets = closets;
             this.vessel = vessel;
@@ -139,11 +141,11 @@ namespace Chronos.Protocol.Types
         public void Serialize(IDataWriter writer)
         {
             writer.WriteInt((int)PlayerFlagEnum.flag_base);
-            writer.WriteByte(m_need_activate_game);
-            writer.WriteByte(m_game_flag);
+            writer.WriteChar((char)m_need_activate_game);
+            writer.WriteChar((char)m_game_flag);
             writer.WriteInt(m_last_logout_time);
-            writer.WriteInt(pet_id);
-            writer.WriteInt(title_list_count);
+            writer.WriteUInt((uint)pet_id);
+            writer.WriteInt((int)title_list_count);
             foreach (int title in titles)
                 writer.WriteInt(title);
             writer.WriteInt(title_renown_list_count);
@@ -162,12 +164,13 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(bank_capacity);
             taskbar.Serialize(writer);
             writer.WriteInt((int)PlayerFlagEnum.flag_taskbar);
-            writer.WriteInt(skillsCount);
+            writer.WriteUInt((uint)skillsCount);
             foreach (SkillType skill in skills)
                 skill.Serialize(writer);
             writer.WriteUInt(domesticate_skill_time);
             writer.WriteInt((int)PlayerFlagEnum.flag_skill);
-            writer.WriteBoolean(false);//Setted to false by default to avoid to do this system now -> variable => questChangeflag
+            writer.WriteByte(0);//Setted to false by default to avoid to do this system now -> variable => questChangeflag
+            //add here the questchangeSerialize
             writer.WriteInt((int)PlayerFlagEnum.flag_quest);
             friendList.Serialize(writer);
             writer.WriteInt((int)PlayerFlagEnum.flag_messenger);
@@ -176,13 +179,14 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(pos_count);
             foreach (MemorisedPositionType position in memorisedPositions)
                 position.Serialize(writer);
+            
             writer.WriteInt(duel_win);
             writer.WriteInt(duel_lost);
             writer.WriteInt(duel_total);
             writer.WriteInt(pk_win);
             writer.WriteInt(pk_total);
             writer.WriteInt(adv_stamina);
-            writer.WriteInt(auto_assign);
+            writer.WriteByte(auto_assign);
             creditCard.Serialize(writer);
             writer.WriteInt((int)PlayerFlagEnum.flag_credit);
             writer.WriteByte(vip_level_game);
@@ -199,6 +203,8 @@ namespace Chronos.Protocol.Types
             foreach (LoverType lover in lovers)
                 lover.Serialize(writer);
             writer.WriteInt((int)PlayerFlagEnum.flag_lover);
+            writer.WriteInt(closet_capacity);
+            writer.WriteInt(closet_level);
             writer.WriteInt(fate_count);
             foreach (FateClosetType closet in closets)
                 closet.Serialize(writer);

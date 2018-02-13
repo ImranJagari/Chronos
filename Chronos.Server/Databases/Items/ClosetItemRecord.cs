@@ -15,6 +15,7 @@ namespace Chronos.Server.Databases.Items
         public int Id { get; set; }
         public int OwnerId { get; set; }
         public int ClosetItemId { get; set; }
+        public int Slot { get; set; }
         public bool Equipped { get; set; }
         
     }

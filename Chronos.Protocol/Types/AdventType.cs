@@ -31,6 +31,7 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(exp);
             writer.WriteInt(round);
             writer.WriteInt(count);
+            writer.WriteInt(1); // IDK ?????
             writer.WriteUTF(badge);
         }
     }

@@ -2,6 +2,7 @@
 using Chronos.Core.Reflection;
 using Chronos.Protocol.Enums;
 using Chronos.Protocol.Messages;
+using Chronos.Protocol.Messages.StateMessages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace Chronos.Protocol
     {
         private static readonly Dictionary<HeaderEnum, Type> Messages = new Dictionary<HeaderEnum, Type>();
         private static readonly Dictionary<HeaderEnum, Func<NetworkMessage>> Constructors = new Dictionary<HeaderEnum, Func<NetworkMessage>>();
+
+        private static readonly Dictionary<StateTypeEnum, Type> StateMessages = new Dictionary<StateTypeEnum, Type>();
+        private static readonly Dictionary<StateTypeEnum, Func<StateDataMessage>> StateConstructors = new Dictionary<StateTypeEnum, Func<StateDataMessage>>();
 
         public static void Initialize()
         {
@@ -40,6 +44,27 @@ namespace Chronos.Protocol
                     Constructors.Add(num, constructor.CreateDelegate<Func<NetworkMessage>>());
                 }
             }
+            foreach (var type in assembly.GetTypes().Where(x => x.IsSubclassOf(typeof(StateDataMessage))))
+            {
+                var field = type.GetField("TypeId");
+                if (field != null)
+                {
+                    var num = (StateTypeEnum)field.GetValue(type);
+                    if (StateMessages.ContainsKey(num))
+                    {
+                        throw new AmbiguousMatchException(
+                            $"MessageReceiver() => {num} item is already in the dictionary, old type is : {StateMessages[num]}, new type is  {type}");
+                    }
+                    StateMessages.Add(num, type);
+                    var constructor = type.GetConstructor(Type.EmptyTypes);
+                    if (constructor == null)
+                    {
+                        throw new Exception($"'{type}' doesn't implemented a parameterless constructor");
+                    }
+                    StateConstructors.Add(num, constructor.CreateDelegate<Func<StateDataMessage>>());
+                }
+            }
+
         }
 
         public static NetworkMessage BuildMessage(HeaderEnum id, IDataReader reader)
@@ -49,6 +74,21 @@ namespace Chronos.Protocol
                 return null;
             }
             var message = Constructors[id]();
+            if (message == null)
+            {
+                return null;
+            }
+            message.Unpack(reader);
+            return message;
+        }
+
+        public static StateDataMessage BuildStateMessage(StateTypeEnum id, IDataReader reader)
+        {
+            if (!StateMessages.ContainsKey(id))
+            {
+                return null;
+            }
+            var message = StateConstructors[id]();
             if (message == null)
             {
                 return null;

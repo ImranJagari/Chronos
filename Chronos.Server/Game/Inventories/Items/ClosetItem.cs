@@ -25,13 +25,18 @@ namespace Chronos.Server.Game.Inventories.Items
             get { return Record.ClosetItemId; }
             set { Record.ClosetItemId = value; }
         }
+        public int Slot
+        {
+            get { return Record.Slot; }
+            set { Record.Slot = value; }
+        }
         public ClosetItemType GetNetwork()
         {
             return new ClosetItemType(ClosetItemId);
         }
         public FateClosetType GetFateClosetType()
         {
-            return new FateClosetType(ClosetItemId, Id, 1, Record.Equipped ? 1 : 0, new int[16]);
+            return new FateClosetType(Slot, ClosetItemId, 1, Record.Equipped ? 1 : 0, new int[16]);
         }
     }
 }

@@ -54,26 +54,31 @@ namespace Chronos.Server.Game.Stats
         {
             Fields = new Dictionary<DefineEnum, StatsData>();
 
-            Fields.Add(DefineEnum.STR, new StatsData(Owner, DefineEnum.STR, record.Strenght));
-            Fields.Add(DefineEnum.STA, new StatsData(Owner, DefineEnum.STA, record.Stamina));
-            Fields.Add(DefineEnum.DEX, new StatsData(Owner, DefineEnum.DEX, record.Dexterity));
-            Fields.Add(DefineEnum.INT, new StatsData(Owner, DefineEnum.INT, record.Intelligence));
-            Fields.Add(DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI));
             Fields.Add(DefineEnum.HP, new StatsData(Owner, DefineEnum.HP, record.HP));
             Fields.Add(DefineEnum.MP, new StatsData(Owner, DefineEnum.MP, 200));
-            Fields.Add(DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int)record.Money));
-            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int)record.Money));
-            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, record.EP));
             Fields.Add(DefineEnum.GP, new StatsData(Owner, DefineEnum.GP, 2));
             Fields.Add(DefineEnum.LV, new StatsData(Owner, DefineEnum.LV, record.Level));
-            Fields.Add(DefineEnum.MOVE_SPEED, new StatsData(Owner, DefineEnum.MOVE_SPEED, 6000));
-            Fields.Add(DefineEnum.FMP, new StatsData(Owner, DefineEnum.FMP, 290));
             Fields.Add(DefineEnum.VIT, new StatsData(Owner, DefineEnum.VIT, 290));
-            Fields.Add(DefineEnum.FHP, new StatsData(Owner, DefineEnum.FHP, 450));
             Fields.Add(DefineEnum.FLV, new StatsData(Owner, DefineEnum.FLV, 1));
-            Fields.Add(DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.FLV, 3000));
-            Fields.Add(DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.FLV, 800));
+            Fields.Add(DefineEnum.FHP, new StatsData(Owner, DefineEnum.FHP, 450));
+            Fields.Add(DefineEnum.FMP, new StatsData(Owner, DefineEnum.FMP, 290));
 
+            Fields.Add(DefineEnum.MOVE_SPEED, new StatsData(Owner, DefineEnum.MOVE_SPEED, 6000));
+
+            Fields.Add(DefineEnum.STR, new StatsData(Owner, DefineEnum.STR, record.Strenght));
+            Fields.Add(DefineEnum.STA, new StatsData(Owner, DefineEnum.STA, record.Stamina));
+            Fields.Add(DefineEnum.INT, new StatsData(Owner, DefineEnum.INT, record.Intelligence));
+            Fields.Add(DefineEnum.DEX, new StatsData(Owner, DefineEnum.DEX, record.Dexterity));
+            Fields.Add(DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI));
+
+            Fields.Add(DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int)record.Money));
+            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int)3000));
+
+            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, record.EP));
+            Fields.Add(DefineEnum.EP2, new StatsData(Owner, DefineEnum.EP2, 5000));
+
+            Fields.Add(DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.MAXHP, record.HP));
+            Fields.Add(DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200));
 
         }
     }

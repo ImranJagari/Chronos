@@ -1,4 +1,5 @@
-﻿using Chronos.Core.IO;
+﻿using Chronos.Core.Encryption;
+using Chronos.Core.IO;
 using Chronos.Core.Utils;
 using Chronos.Protocol;
 using Chronos.Protocol.Enums;
@@ -6,7 +7,6 @@ using Chronos.Protocol.Messages;
 using Chronos.Server.Game.Account;
 using Chronos.Server.Game.Actors.Context.Characters;
 using Chronos.Server.Handlers;
-using FFEncryptionLibrary;
 using System;
 using System.Linq;
 using System.Net;
@@ -41,7 +41,7 @@ namespace Chronos.Server.Network
         {
             get
             {
-                return ((IPEndPoint)this.Socket.RemoteEndPoint).Address.ToString();
+                return ((IPEndPoint)this.Socket.RemoteEndPoint)?.Address?.ToString();
             }
         }
 
@@ -105,6 +105,11 @@ namespace Chronos.Server.Network
                 writer.WriteUInt((uint)writer.Data.Length);
                 data = writer.Data;
                 this.keyPairEncryption.Encrypt(ref data, 0, writer.Data.Length);
+            }
+            else
+            {
+                writer.Seek(0);
+                writer.WriteUInt((uint)writer.Data.Length);
             }
 
             Send(data);
@@ -209,6 +214,7 @@ namespace Chronos.Server.Network
                 client.EndDisconnect(asyncResult);
                 OnDisconnected(new DisconnectedEventArgs(Socket));
 
+                this.Character?.LogOut();
                 SimpleServer.RemoveClient(this);
 
                 Dispose();

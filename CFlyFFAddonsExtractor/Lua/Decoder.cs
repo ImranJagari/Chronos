@@ -60,7 +60,7 @@ namespace FFLua
         /// <param name="outputFile"></param>
         private static void ExecuteLuadecProcess(String outputFile)
         {
-            ProcessStartInfo _info = new ProcessStartInfo("Binaries\\luadec.exe", "\"" + outputFile + "\"") { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false, CreateNoWindow = true };
+            ProcessStartInfo _info = new ProcessStartInfo("luadec.exe", "\"" + outputFile + "\"") { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false, CreateNoWindow = true };
             Process _luaProcess = Process.Start(_info);
             String _std = _luaProcess.StandardOutput.ReadToEnd();
             String _error = _luaProcess.StandardError.ReadToEnd();

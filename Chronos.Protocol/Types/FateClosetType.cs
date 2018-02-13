@@ -1,4 +1,5 @@
-﻿using Chronos.Core.IO;
+﻿using Chronos.Core.Extensions;
+using Chronos.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,10 +26,12 @@ namespace Chronos.Protocol.Types
         }
         public void Serialize(IDataWriter writer)
         {
+            
             writer.WriteInt(closet_index);
             writer.WriteInt(index);
             writer.WriteInt(level);
             writer.WriteInt(equipped);
+            //writer.WriteInt(/*DateTime.Now.GetUnixTimeStamp()*/0);
             foreach (int param in closet_params)
                 writer.WriteInt(param);
         }

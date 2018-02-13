@@ -45,7 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WorldEnum.cs" />
+    <Compile Include="Messages\Snapshots\MoveObjectSnapshot.cs" />
+    <Compile Include="Messages\Snapshots\RemoveObjectSnapshot.cs" />
     <Compile Include="Messages\Snapshots\SetValueObjectSnapshot.cs" />
+    <Compile Include="Messages\StateMessage.cs" />
+    <Compile Include="Messages\StateMessages\StateDataMessage.cs" />
+    <Compile Include="Messages\StateMessages\StateMoveToMessage.cs" />
     <Compile Include="Types\AdventType.cs" />
     <Compile Include="Enums\AuthorityEnum.cs" />
     <Compile Include="Enums\CreditCardTypeEnum.cs" />
@@ -59,7 +64,7 @@
     <Compile Include="Enums\PlayerFlagEnum.cs" />
     <Compile Include="Enums\ShortcutEnum.cs" />
     <Compile Include="Enums\SnapshotTypeEnum.cs" />
-    <Compile Include="Enums\SpiritTatooType.cs" />
+    <Compile Include="Types\SpiritTatooType.cs" />
     <Compile Include="Enums\StateMessageEnum.cs" />
     <Compile Include="Enums\StateTypeEnum.cs" />
     <Compile Include="MessageReceiver.cs" />
