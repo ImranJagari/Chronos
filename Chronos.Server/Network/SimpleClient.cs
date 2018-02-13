@@ -178,7 +178,6 @@ namespace Chronos.Server.Network
         {
             if (this.currentMessage == null)
                 this.currentMessage = new MessagePart();
-            long position = this.buffer.Position;
             if (!this.currentMessage.Build(ref this.buffer, keyPairEncryption))
                 return;
             this.OnDataReceived(new DataReceivedEventArgs(this.currentMessage));
