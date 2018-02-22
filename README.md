@@ -26,3 +26,6 @@ Client link version 2.1.408 : https://mega.nz/#!bRZURTzL!725ioT6ukKvQMVCxjRMk9qi
 
 
 I'll post install tutorial later :)
+
+
+Discord : https://discord.gg/67gqw9g
