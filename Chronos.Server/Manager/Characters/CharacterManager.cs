@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Chronos.Core.Utils;
 
 namespace Chronos.Server.Manager.Characters
 {
@@ -27,85 +28,95 @@ namespace Chronos.Server.Manager.Characters
         {
             return Database.Fetch<CharacterRecord>(CharacterRecordRelator.FetchQueryByName, name).Count() > 0;
         }
-        public ErrorEnum CreateCharacter(SimpleClient client, CreateCharacterMessage message)
+
+        public ErrorEnum CreateCharacter(SimpleClient client, CreateCharacterMessage message, int countCharacters)
         {
-            if(!m_nameCheckerRegex.IsMatch(message.name))
+            if (countCharacters > 2)
+                return ErrorEnum.ERR_NOCREATE;
+            if (!m_nameCheckerRegex.IsMatch(message.name))
             {
                 return ErrorEnum.ERR_NOCREATE;
             }
-            if(IsCharacterNameExist(message.name))
+
+            if (IsCharacterNameExist(message.name))
             {
                 return ErrorEnum.ERR_PLAYER_EXIST;
             }
+
             BreedRecord breed = BreedManager.Instance.GetBreedByJobId(message.job);
-            if(breed == null)
+            if (breed == null)
             {
                 return ErrorEnum.ERR_NOCREATE;
             }
-            CharacterRecord record = new CharacterRecord()
-            {
-                AccountId = client.Account.Id,
-                Name = message.name,
-                HD_MD5 = message.hd_md5,
-                SceneId = breed.StartMap,
-                Sex = message.sex == 1,
-                X = breed.StartX,
-                Y = breed.StartY,
-                Z = breed.StartZ,
-                Level = 1,
-                Experience = 60,
-                Job = breed.Job,
-                Money = (uint)breed.StartMoney,
-                HP = breed.StartHP,
-                DamageTaken = 0,
-                Strenght = breed.StartStrenght,
-                Stamina = breed.StartStamina,
-                Dexterity = breed.StartDexterity,
-                Intelligence = breed.StartIntelligence,
-                SPI = breed.StartSPI,
-                HairMesh = message.hair_mesh,
-                HairColor = (uint)message.hair_color,
-                HeadMesh = message.head_mesh,
-                City_Code = message.city_code,
-                Constellation = message.constellation,
-                Country = message.country,
-                SN_Card = message.sn_card,
-                Card_Type = message.card_type,
-                HD_SN = message.hd_sn,
-                Bin_Account = message.bin_account,
-                BlockTime = DateTime.MinValue,
-                DeletedDate = null
-            };
-            ClosetItemRecord[] closets = new ClosetItemRecord[5];
-            for(int i = 0; i < message.closets.Count(); i++)
-            {
-                closets[i] = new ClosetItemRecord();
-                closets[i].ClosetItemId = message.closets[i].id;
-                closets[i].OwnerId = record.Id;
-                closets[i].Equipped = true;
-                closets[i].Slot = i + 1;
 
-            }
             try
             {
+                CharacterRecord record = new CharacterRecord()
+                {
+                    AccountId = client.Account.Id,
+                    Slot = countCharacters,
+                    Name = message.name,
+                    HD_MD5 = message.hd_md5,
+                    SceneId = breed.StartMap,
+                    Sex = message.sex == 1,
+                    X = breed.StartX,
+                    Y = breed.StartY,
+                    Z = breed.StartZ,
+                    Level = 1,
+                    Experience = 60,
+                    Job = breed.Job,
+                    Money = (uint) breed.StartMoney,
+                    HP = breed.StartHP,
+                    DamageTaken = 0,
+                    Strenght = breed.StartStrenght,
+                    Stamina = breed.StartStamina,
+                    Dexterity = breed.StartDexterity,
+                    Intelligence = breed.StartIntelligence,
+                    SPI = breed.StartSPI,
+                    HairMesh = message.hair_mesh,
+                    HairColor = (uint) message.hair_color,
+                    HeadMesh = message.head_mesh,
+                    City_Code = message.city_code,
+                    Constellation = message.constellation,
+                    Country = message.country,
+                    SN_Card = message.sn_card,
+                    Card_Type = message.card_type,
+                    HD_SN = message.hd_sn,
+                    Bin_Account = message.bin_account,
+                    BlockTime = DateTime.MinValue,
+                    DeletedDate = null
+                };
                 Database.Insert(record);
-                foreach(var closet in closets)
+
+                ClosetItemRecord[] closets = new ClosetItemRecord[5];
+                for (int i = 0; i < message.closets.Count(); i++)
+                {
+                    closets[i] = new ClosetItemRecord();
+                    closets[i].ClosetItemId = message.closets[i].id;
+                    closets[i].OwnerId = record.Id;
+                    closets[i].Equipped = true;
+                    closets[i].Slot = i + 1;
+
+                }
+
+                foreach (var closet in closets)
                 {
                     Database.Insert(closet);
                 }
+                client.Character = new Character(record);
+                client.Character.Client = client;
+
+                client.Account.LoadRecord();
+
+                return ErrorEnum.ERR_SUCCESS;
             }
-            catch
+            catch (Exception exception)
             {
+                ConsoleUtils.WriteMessageDB(exception.Message);
                 return ErrorEnum.ERR_NOCREATE;
             }
-
-            client.Character = new Character(record);
-            client.Character.Client = client;
-
-            client.Account.LoadRecord();
-
-            return ErrorEnum.ERR_SUCCESS;
         }
+
         public void DeleteCharacter(SimpleClient client, int characterIdToDelete)
         {
             int index = client.Account.Characters.FindIndex(x => x.Id == characterIdToDelete);

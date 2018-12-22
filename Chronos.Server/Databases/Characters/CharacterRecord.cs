@@ -14,6 +14,7 @@ namespace Chronos.Server.Databases.Characters
         [PrimaryKey("Id")]
         public int Id { get; set; }
         public int AccountId { get; set; }
+        public int Slot { get; set; }
         public string Name { get; set; }
         public string HD_MD5 { get; set; }
         public int SceneId { get; set; }

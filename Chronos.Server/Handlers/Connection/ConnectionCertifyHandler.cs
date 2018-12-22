@@ -45,11 +45,11 @@ namespace Chronos.Server.Handlers.Connection
             client.Account.Characters.ForEach(x => x.Client = client);
 
             SendCertifyResultMessage(client);
-            CharacterHandler.SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0,
+            CharacterHandler.SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0, 0, 0, 
                 (byte)client.Account.Characters.Count, 0, 0, client.Account.Characters.Where(x => !x.DeletedDate.HasValue).ToArray(),
-                client.Account.Characters.Count(x => x.DeletedDate.HasValue), 0, 0, 0);
+                client.Account.Characters.Count(x => x.DeletedDate.HasValue), 1, 1, 0);
 
-            foreach(var character in client.Account.Characters.Where(x => !x.DeletedDate.HasValue))
+            foreach (var character in client.Account.Characters.Where(x => !x.DeletedDate.HasValue))
             {
                 CharacterHandler.SendCharacterSlotMessage(client, character, client.Account.Characters.Count(x => x.DeletedDate.HasValue));
             }

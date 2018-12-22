@@ -44,6 +44,13 @@ namespace Chronos.Server.Game.Actors.Context.Characters
             get { return Record.AccountId; }
             set { Record.AccountId = value; }
         }
+
+        public int Slot
+        {
+            get { return Record.Slot; }
+            set { Record.Slot = value; }
+        }
+
         public override string Name
         {
             get { return Record.Name; }
@@ -168,7 +175,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
         }
         public CharacterType GetNetwork()// Todo : Block time and IsBlocked + ClosetItems
         {
-            return new CharacterType(this.Client.Account.Characters.Where(x => !x.DeletedDate.HasValue).ToList().IndexOf(this), Name, Id, Record.SceneId, Sex ? (byte)1 : (byte)0,
+            return new CharacterType(this.Slot, Name, Id, Record.SceneId, Sex ? (byte)1 : (byte)0,
                 new PositionType(Record.X, Record.Y, Record.Z), Level, Job, Stats[DefineEnum.STR].Total, Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
                 Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, Inventory.Items.Count,
                 Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), Inventory.ClosetItems.Values.Select(x => x.GetNetwork()).ToArray());

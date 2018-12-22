@@ -18,6 +18,8 @@ namespace Chronos.Protocol.Messages
         public byte characters_count;
         public uint m_cbg_sell_player;
         public int cbg_ordersn;
+        public uint m_cbg_sign_player;
+        public int m_cbg_sign_time;
         public CharacterType[] characters;
         public int deletedCharactersCount;
         public int cityId;
@@ -26,14 +28,16 @@ namespace Chronos.Protocol.Messages
         public override ushort MessageId => (ushort)Header;
 
         public CharactersListMessage() { }
-        public CharactersListMessage(int server_time, byte aggrementAccepted, byte characters_count, uint m_cbg_sell_player,
-            int cbg_ordersn, CharacterType[] characters, int deletedCharactersCount, int cityId, int provinceId, sbyte m_realName)
+
+        public CharactersListMessage(int server_time, byte aggrementAccepted, byte characters_count, uint m_cbg_sell_player, int cbg_ordersn, uint m_cbg_sign_player, int m_cbg_sign_time, CharacterType[] characters, int deletedCharactersCount, int cityId, int provinceId, sbyte m_realName)
         {
             this.server_time = server_time;
             this.aggrementAccepted = aggrementAccepted;
             this.characters_count = characters_count;
             this.m_cbg_sell_player = m_cbg_sell_player;
             this.cbg_ordersn = cbg_ordersn;
+            this.m_cbg_sign_player = m_cbg_sign_player;
+            this.m_cbg_sign_time = m_cbg_sign_time;
             this.characters = characters;
             this.deletedCharactersCount = deletedCharactersCount;
             this.cityId = cityId;
@@ -53,7 +57,9 @@ namespace Chronos.Protocol.Messages
             writer.WriteByte(characters_count);
             writer.WriteUInt(m_cbg_sell_player);
             writer.WriteInt(cbg_ordersn);
-            for(int i = 0; i < characters_count; i++)
+            writer.WriteUInt(m_cbg_sign_player);
+            writer.WriteInt(m_cbg_sign_time);
+            for (int i = 0; i < characters_count; i++)
             {
                 characters[i].Serialize(writer);
             }

@@ -21,7 +21,7 @@ namespace Chronos.Server.Handlers.Characters
             else
                 SendDeleteCharacterResultMessage(client, ErrorEnum.ERR_PASSWORD, message.characterId, 0);
 
-            SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0,
+            SendCharactersListMessage(client, DateTime.UtcNow.GetUnixTimeStamp(), 0, 0, 0,
     (byte)client.Account.Characters.Count, 0, 0, client.Account.Characters.Where(x => !x.DeletedDate.HasValue).ToArray(),
     client.Account.Characters.Count(x => x.DeletedDate.HasValue), 0, 0, 0);
 
