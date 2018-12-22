@@ -130,23 +130,27 @@ namespace WindsoulDataFile
         {
             UInt32 _fileHash = fileName.Hash();
 
-            foreach (KeyValuePair<UInt32, FileEntry> entry in this.Files)
-            {
-                if (entry.Value.UniqueId == _fileHash)
-                {
-                    this.Reader.BaseStream.Seek(entry.Value.StartAdress, SeekOrigin.Begin);
-                    Byte[] _data = this.Reader.ReadBytes(entry.Value.FileSize);
-                    String _path = fileName.Split('\\').Last();
+            if (!Files.ContainsKey(_fileHash))
+                return false;
 
-                    FileStream _stream = new FileStream(destinationFolder + "\\" + _path, FileMode.Create);
-                    BinaryWriter _writer = new BinaryWriter(_stream, Encoding.Default);
-                    _writer.Write(_data);
-                    _writer.Close();
-                    _writer.Dispose();
-                    _stream.Close();
-                    _stream.Dispose();
-                    return true;
-                }
+            var entry = Files[_fileHash];
+
+            if (entry.UniqueId == _fileHash)
+            {
+                this.Reader.BaseStream.Seek(entry.StartAdress, SeekOrigin.Begin);
+                Byte[] _data = this.Reader.ReadBytes((int)(entry.FileSize + entry.ReservedSpace));
+                String _path = fileName.Split('\\').Last();
+
+               
+                FileStream _stream = new FileStream(destinationFolder + "\\" + _path, File.Exists(destinationFolder + "\\" + _path) ? FileMode.Open : FileMode.Create);
+                BinaryWriter _writer = new BinaryWriter(_stream, Encoding.Default);
+                _writer.Seek(0, SeekOrigin.End);
+                _writer.Write(_data);
+                _writer.Close();
+                _writer.Dispose();
+                _stream.Close();
+                _stream.Dispose();
+                return true;
             }
             return false;
         }

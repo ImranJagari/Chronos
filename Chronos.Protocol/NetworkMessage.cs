@@ -38,5 +38,10 @@ namespace Chronos.Protocol.Messages
         {
             Deserialize(reader);
         }
+
+        public override string ToString()
+        {
+            return base.ToString().Split('.').Last();
+        }
     }
 }

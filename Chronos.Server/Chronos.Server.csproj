@@ -77,6 +77,7 @@
     <Compile Include="Game\Actors\Context\Characters\Character.cs" />
     <Compile Include="Game\Account\GameAccount.cs" />
     <Compile Include="Game\Actors\Context\ContextActor.cs" />
+    <Compile Include="Game\Actors\Context\Monsters\Monster.cs" />
     <Compile Include="Game\Inventories\Inventory.cs" />
     <Compile Include="Game\Inventories\Items\ClosetItem.cs" />
     <Compile Include="Game\Inventories\Items\PlayerItem.cs" />
@@ -113,7 +114,6 @@
     <Compile Include="Manager\Items\ItemManager.cs" />
     <Compile Include="Manager\Maps\WorldManager.cs" />
     <Compile Include="Network\IPacketInterceptor.cs" />
-    <Compile Include="Network\MessagePart.cs" />
     <Compile Include="Network\SimpleClient.cs" />
     <Compile Include="Network\SimpleClientCollection.cs" />
     <Compile Include="Network\SimpleServer.cs" />

@@ -5,6 +5,7 @@ using Chronos.Protocol.Messages;
 using Chronos.Protocol.Messages.Snapshots;
 using Chronos.Protocol.Types;
 using Chronos.Protocol.Types.ObjectsType;
+using Chronos.Server.Game.Actors;
 using Chronos.Server.Game.Actors.Context.Characters;
 using Chronos.Server.Game.Stats;
 using Chronos.Server.Game.World;
@@ -45,10 +46,15 @@ namespace Chronos.Server.Handlers.Roleplay
             map.Enter(client.Character);
 
             SendJoinRightMessage(client, message.characterId, character.Position.Map.SceneId, character.Position.X, character.Position.Y, character.Position.Z, false, 0);//Send all players in the map
-
+            var stats = StatsFields.LoadInertieData();
             SendSnapshotMessage(client, new Snapshot[] { new SetStateVerSnapshot(1),
                 new UpdateServerTimeSnapshot(DateTime.UtcNow.GetUnixTimeStamp()),
-                new AddObjectSnapshot(client.Character.GetObjectType(true))
+                new AddObjectSnapshot(client.Character.GetObjectType(true)),
+                new AddObjectSnapshot(new MonsterObjectType(ObjectTypeEnum.OT_MOB, (uint)client.GetHashCode(),
+                20, 0xFFFFFFFF, 609, 300, 600, 0, 0, 100, "Nuan",
+                stats.Count, stats.Keys.Select(x => (ushort)x).ToArray(),
+                stats.Values.Select(x => x.Total).ToArray(), 0, new byte[0], new int[0], new int[0], 1,
+                true, 255, 0, 0, 0, 0, new uint[0],0,false, false, false, 0,0,2,-1,0))
             });
 
             List<Snapshot> spawnOtherObjects = new List<Snapshot>();

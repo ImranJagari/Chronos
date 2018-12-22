@@ -138,7 +138,6 @@ namespace Chronos.Server.Network
             this.InitManager.AddAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             this.InitManager.Initialize(InitializationPass.Database);
             InitManager.InitializeAll();
-
         }
         private void BeginAcceptCallBack(IAsyncResult result)
         {

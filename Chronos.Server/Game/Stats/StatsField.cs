@@ -81,5 +81,37 @@ namespace Chronos.Server.Game.Stats
             Fields.Add(DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200));
 
         }
+
+        public static Dictionary<DefineEnum, StatsData> LoadInertieData()
+        {
+            Dictionary<DefineEnum, StatsData> fields = new Dictionary<DefineEnum, StatsData>();
+
+            fields.Add(DefineEnum.HP, new StatsData(null, DefineEnum.HP, 100));
+            fields.Add(DefineEnum.MP, new StatsData(null, DefineEnum.MP, 200));
+            fields.Add(DefineEnum.GP, new StatsData(null, DefineEnum.GP, 2));
+            fields.Add(DefineEnum.LV, new StatsData(null, DefineEnum.LV, 1));
+            fields.Add(DefineEnum.VIT, new StatsData(null, DefineEnum.VIT, 290));
+            fields.Add(DefineEnum.FLV, new StatsData(null, DefineEnum.FLV, 1));
+            fields.Add(DefineEnum.FHP, new StatsData(null, DefineEnum.FHP, 450));
+            fields.Add(DefineEnum.FMP, new StatsData(null, DefineEnum.FMP, 290));
+
+            fields.Add(DefineEnum.MOVE_SPEED, new StatsData(null, DefineEnum.MOVE_SPEED, 7000));
+
+            fields.Add(DefineEnum.STR, new StatsData(null, DefineEnum.STR, 5));
+            fields.Add(DefineEnum.STA, new StatsData(null, DefineEnum.STA, 5));
+            fields.Add(DefineEnum.INT, new StatsData(null, DefineEnum.INT, 5));
+            fields.Add(DefineEnum.DEX, new StatsData(null, DefineEnum.DEX, 5));
+            fields.Add(DefineEnum.SPI, new StatsData(null, DefineEnum.SPI, 5));
+
+            fields.Add(DefineEnum.MONEY, new StatsData(null, DefineEnum.MONEY, (int)10));
+            fields.Add(DefineEnum.GOLD, new StatsData(null, DefineEnum.GOLD, (int)0));
+
+            fields.Add(DefineEnum.EP, new StatsData(null, DefineEnum.EP, 5000));
+            fields.Add(DefineEnum.EP2, new StatsData(null, DefineEnum.EP2, 5000));
+
+            fields.Add(DefineEnum.MAXHP, new StatsData(null, DefineEnum.MAXHP, 100));
+            fields.Add(DefineEnum.MAXMP, new StatsData(null, DefineEnum.MAXHP, 200));
+            return fields;
+        }
     }
 }

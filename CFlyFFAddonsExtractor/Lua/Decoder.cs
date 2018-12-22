@@ -52,6 +52,7 @@ namespace FFLua
             AddHeader(ref _data);
             File.WriteAllBytes(outputFile, _data);
             ExecuteLuadecProcess(outputFile);
+            File.Delete(inputFile);
         }
 
         /// <summary>

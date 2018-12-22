@@ -28,17 +28,10 @@ namespace Chronos.Protocol.Messages.Snapshots
         public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(objId);
-            //writer.WriteInt(1);
-            //writer.WriteInt(1);
-           // writer.WriteInt(1);
-            //writer.WriteByte(1);
-            writer.WriteBytes(new byte[] { 0x00, 0x0D, 0x00, 0x0F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF });
-            writer.WriteInt(x);
-            writer.WriteInt(y);
-            writer.WriteInt(z);
-            
-
-
+            writer.WriteBytes(new byte[] { 0x00, 0x0E, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF });
+            writer.WriteInt(x * 1000);
+            writer.WriteInt(y * 1000);
+            writer.WriteInt(z * 1000);
         }
     }
 }

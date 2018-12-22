@@ -25,12 +25,13 @@ namespace Chronos.Server.Game.World
 
         public float DistanceTo(ObjectPosition to)
         {
-            return Convert.ToSingle(Math.Abs(Math.Sqrt(Math.Pow(this.X - to.X, 2) + Math.Pow(this.Y - to.Y, 2) + Math.Pow(this.Z - to.Z, 2))));
+            return (float)(Math.Pow(this.X - to.X, 2) + Math.Pow(this.Y - to.Y, 2) + Math.Pow(this.Z - to.Z, 2));
         }
 
         public bool IsInRange(ObjectPosition to, int range)
         {
-            return DistanceTo(to) <= range;
+            float distance = DistanceTo(to);
+            return distance <= Math.Pow(range, 2);
         }
 
         public bool IsInCircle(ObjectPosition other, float radius)

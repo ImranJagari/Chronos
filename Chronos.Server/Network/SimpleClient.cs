@@ -113,8 +113,7 @@ namespace Chronos.Server.Network
             }
 
             Send(data);
-             Console.WriteLine(string.Format("[SND] {0} -> {1}", IP, message.ToString().Split('.').Last()));
-            //base.Send();
+             Console.WriteLine(string.Format("[SND] {0} -> {1}", IP, message));
         }
         public void Send(byte[] data)
         {
@@ -252,8 +251,6 @@ namespace Chronos.Server.Network
 
                     ThreatBuffer();
                     var messagePart = DataReceivedEventArgs.Data;
-                    //// this.currentMessage = null;
-                    //BigEndianReader Reader = new BigEndianReader(messagePart.Data);
                     NetworkMessage message = MessageReceiver.BuildMessage((HeaderEnum)messagePart.MessageId, buffer);
                     if (message == null)
                     {
@@ -261,7 +258,7 @@ namespace Chronos.Server.Network
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("[RCV] {0} -> {1}", this.IP, message.ToString().Split('.').Last()));
+                        Console.WriteLine(string.Format("[RCV] {0} -> {1}", this.IP, message));
                         PacketManager.ParseHandler(this, message);
                     }
                     client.BeginReceive(receiveBuffer, 0, bufferLength, SocketFlags.None, new AsyncCallback(ReceiveCallBack), client);

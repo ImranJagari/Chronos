@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,8 +25,8 @@ namespace CFlyFFAddonsExtractor
     {
         #region FIELDS
 
-        String[] FilesText { get; set; }
-        String[] Files { get; set; }
+        List<String> FilesText = new List<string>();
+        List<String> Files = new List<string>();
         Int32 FilesToExtract { get; set; }
 
         #endregion
@@ -44,23 +45,31 @@ namespace CFlyFFAddonsExtractor
         private void CONFIG_SELECT_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog _openFileDialog = new System.Windows.Forms.OpenFileDialog();
-
-            _openFileDialog.Filter = "Config | *.wdf";
+            
+            _openFileDialog.Filter = "WindSoul File|*.wdf;*.wd1;*.wd2";
+            
             if (_openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (_openFileDialog.SafeFileName.ToLower() == "config.wdf")
+                if (!_openFileDialog.FileName.EndsWith(".wdf") && !_openFileDialog.FileName.EndsWith(".wd2") && !_openFileDialog.FileName.EndsWith(".wd1"))
                 {
-                    this.CONFIG_PATH.Text = _openFileDialog.FileName;
-                    this.DESTINATION_SELECT.IsEnabled = true;
-                }
-                else
-                {
-                    this.CONFIG_PATH.Text = "Select the config.wdf";
+                    this.CONFIG_PATH.Text = "Select a .wdf file";
                     this.DESTINATION_SELECT.IsEnabled = false;
+                    return;
                 }
+
+                this.CONFIG_PATH.Text = _openFileDialog.FileName;
+                this.DESTINATION_SELECT.IsEnabled = true;
             }
         }
-
+        public void LISTER_FILE_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog _openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            if (_openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.CONFIG_PATH_Copy.Text = _openFileDialog.FileName;
+                this.DESTINATION_SELECT.IsEnabled = true;
+            }
+        }
         private void CONFIG_SELECT_Copy_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog _folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
@@ -76,22 +85,37 @@ namespace CFlyFFAddonsExtractor
         private void START_Click(object sender, RoutedEventArgs e)
         {
             WindsoulDataFile.WdfPackage _package = null;
-
+            Regex regex = new Regex("Model = \"\\S+\"");
             try
             {
                 _package = new WindsoulDataFile.WdfPackage(this.CONFIG_PATH.Text);
                 _package.Open();
 
+                //this.FilesText = File.ReadAllLines(this.CONFIG_PATH_Copy.Text).Where(x => x.Contains("Model")).ToList();
+                //foreach (var text in FilesText)
+                //{
+                //    var matches = regex.Matches(text);
+                //    foreach (Match match in matches)
+                //    {
+                //        Files.Add(match.Value.Replace("\"", "").Replace("Model = ", ""));
+                //        ++this.FilesToExtract;
+                //    }
+                //}
                 /* Extracting Configure file */
                 _package.Extract("addons\\Configure");
                 FFLua.Decoder.Decompile("Configure", this.DESTINATION_PATH.Text + "\\Configure.lua");
                 File.Delete("Configure");
 
-                this.FilesText = File.ReadAllLines(this.DESTINATION_PATH.Text + "\\Configure.lua");
-                this.Files = (from line in FilesText where line.Contains("DoFile(") select new string(line.Substring(line.IndexOf("DoFile(\"", StringComparison.Ordinal) + 8).TakeWhile(c => c != '\"').ToArray())).Aggregate("", (current, filename) => current + filename + "\r\n").Split(new Char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-               this.Files = Files.Concat(from line in FilesText where line.Contains("LoadFile(")
-                             select line.Split('\"')[1]).ToArray();
-                this.Files = Files.Concat(new string[] { "project\\MotionList", "project\\WndRes", "project\\WndCfg", "project\\MtrlExCfg" }).ToArray();
+                this.FilesText = File.ReadAllLines(this.DESTINATION_PATH.Text + "\\Configure.lua").ToList();
+                this.Files = (from line in FilesText
+                    where line.Contains("DoFile(") select new string(line.Substring(line.IndexOf("DoFile(\"", StringComparison.Ordinal) + 8)
+                        .TakeWhile(c => c != '\"').ToArray()))
+                    .Aggregate("", (current, filename) => current + filename + "\r\n")
+                    .Split(new Char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                this.Files = Files.Concat(from line in FilesText
+                                          where line.Contains("LoadFile(")
+                                          select line.Split('\"')[1]).ToList();
+                this.Files = Files.Concat(new string[] { "project\\MotionList", "project\\WndRes", "project\\WndCfg", "project\\MtrlExCfg" }).ToList();
                 this.FilesToExtract = 0;
                 foreach (String _file in Files)
                 {
@@ -157,11 +181,11 @@ namespace CFlyFFAddonsExtractor
                     FileInfo _info = new FileInfo(_destinationPath + "\\" + _newFile);
                     _info.Directory.Create();
 
-                    if ((package as WindsoulDataFile.WdfPackage).Extract(_newFile, _info.Directory.FullName) == true && _lua == true)
+                    if ((package as WindsoulDataFile.WdfPackage).Extract(_newFile, _info.Directory.FullName) == true && !_info.Name.EndsWith(".lua") && _lua == true)
                     {
                         FFLua.Decoder.Decompile(_info.FullName, _info.FullName + ".lua");
                     }
-                    _info.Delete();
+                    //_info.Delete();
                     ++_extracted;
 
                     /* Update progress bar value */

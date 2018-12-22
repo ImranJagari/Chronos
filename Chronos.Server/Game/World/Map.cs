@@ -1,4 +1,6 @@
 ﻿using Chronos.Protocol;
+using Chronos.Protocol.Enums;
+using Chronos.Protocol.Messages;
 using Chronos.Protocol.Messages.Snapshots;
 using Chronos.Protocol.Types;
 using Chronos.Server.Databases.Maps;
@@ -16,6 +18,7 @@ namespace Chronos.Server.Game.World
 {
     public class Map
     {
+
         public Map(MapRecord record)
         {
             Clients = new SimpleClientCollection();
@@ -67,7 +70,19 @@ namespace Chronos.Server.Game.World
         }
         public List<SimpleClient> GetClientsNear(Character character)
         {
-            return Clients.Where(x => x != character.Client /*&& character.Position.IsInRange(x.Character.Position, 50)*/).ToList();
+            return Clients.Where(x => x != character.Client && character.Position.IsInRange(x.Character.Position, (int)DefineEnum.MAXDISTANCE)).ToList();
+        }
+        public void SendMouvementMessageToNearestClients(Character character)
+        {
+            GetClientsNear(character).ForEach((SimpleClient x) => {
+                ContextRoleplayHandler.SendMoveObjectSnapshotMessage(x, character.GetHashCode(), (int)character.Position.X, (int)character.Position.Y, (int)character.Position.Z);
+            });
+        }
+        public void SendMessageToNearestClients(Character character, NetworkMessage message)
+        {
+            GetClientsNear(character).ForEach((SimpleClient x) => {
+                x.Send(message);
+            });
         }
     }
 }

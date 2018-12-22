@@ -19,7 +19,7 @@ using Chronos.Server.Manager;
 
 namespace Chronos.Server.Game.Actors.Context.Characters
 {
-    public class Character : ContextActor
+    public sealed class Character : ContextActor
     {
         public CharacterRecord Record { get; }
 
@@ -158,7 +158,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                 new FriendListType(FriendStateEnum.FRS_ONLINE, 0, 0, new int[0], 0, new FriendMemberType[0], 0, new FriendMemberType[0], 0, new FriendMemberType[0]),
                 new FactionType(0, 0, 0, 0, 0, "", new ProtegeType[0]), 0,
                 new MemorisedPositionType[0], 0, 0, 0, 0, 0, 135, 1,
-                new CreditCardType(CreditCardTypeEnum.CREDIT_CRAD_NORMAL, 0, 0, 0, 0, 0, 0, 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, -1, 0),
+                new CreditCardType(CreditCardTypeEnum.CREDIT_CARD_NORMAL, 0, 0, 0, 0, 0, 0, 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, -1, 0),
                 0, 0, 0, 0, 0, StatsFields.StoneStrenghtBoost, StatsFields.StoneDexterityBoost, StatsFields.StoneStaminaBoost, StatsFields.StoneSPIBoost,
                 StatsFields.StoneIntelligenceBoost, 0, new LoverType[0], 8, 1, this.Inventory.ClosetItems.Count,
                 this.Inventory.ClosetItems.Values.Select(x => x.GetFateClosetType()).ToArray(),

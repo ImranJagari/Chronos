@@ -1,7 +1,7 @@
 using Chronos.Core.Encryption;
 using Chronos.Core.IO;
 using System;
-namespace Chronos.Server.Network
+namespace Chronos.Protocol
 {
     public class MessagePart
     {
@@ -47,7 +47,7 @@ namespace Chronos.Server.Network
             }
         }
 
-        public bool Build(ref BigEndianReader reader, KeyPair keyPairDecryption)
+        public bool Build(ref BigEndianReader reader, KeyPair keyPairDecryption, bool decrypt = true)
         {
             if(reader.Data.Length < 1)
             {
@@ -55,7 +55,8 @@ namespace Chronos.Server.Network
             }
 
             byte[] data = reader.Data;
-            keyPairDecryption.Decrypt(ref data, 0, reader.Data.Length);
+            if(decrypt)
+                keyPairDecryption.Decrypt(ref data, 0, reader.Data.Length);
 
             CompleteData = data;
 

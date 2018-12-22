@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WorldEnum.cs" />
+    <Compile Include="Messages\MessagePart.cs" />
     <Compile Include="Messages\Snapshots\MoveObjectSnapshot.cs" />
     <Compile Include="Messages\Snapshots\RemoveObjectSnapshot.cs" />
     <Compile Include="Messages\Snapshots\SetValueObjectSnapshot.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Enums\PlayerFlagEnum.cs" />
     <Compile Include="Enums\ShortcutEnum.cs" />
     <Compile Include="Enums\SnapshotTypeEnum.cs" />
+    <Compile Include="Types\ObjectsType\MonsterObjectType.cs" />
     <Compile Include="Types\SpiritTatooType.cs" />
     <Compile Include="Enums\StateMessageEnum.cs" />
     <Compile Include="Enums\StateTypeEnum.cs" />

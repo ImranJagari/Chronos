@@ -11,6 +11,7 @@ namespace Chronos.Protocol.Enums
         MZONE = 1000,
         AZONE = 2000,
         SZONE = 3000,
+        MAXDISTANCE = 200,
         MAXZONE = 400,
         MAX_LEVEL = 120,
         MAX_FLY_LEVEL = 60,
