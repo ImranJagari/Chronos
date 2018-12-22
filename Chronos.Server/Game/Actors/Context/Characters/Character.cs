@@ -162,7 +162,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                 new TaskbarType(0, new ShortcutType[0], 0, new ShortcutType[0], 0,
                 new ShortcutType[0], 4, new Byte[] { 1, 2, 3, 4 }, 0), 0, new SkillType[0],
                 0, false,
-                new FriendListType(FriendStateEnum.FRS_ONLINE, 0, 0, new int[0], 0, new FriendMemberType[0], 0, new FriendMemberType[0], 0, new FriendMemberType[0]),
+                new FriendListType(FriendStateEnum.FRS_ONLINE, 0, 0, new int[0], 0, new FriendMemberType[0], 0, new BlacklistedFriendMemberType[0], 0, new FriendMemberType[0]),
                 new FactionType(0, 0, 0, 0, 0, "", new ProtegeType[0]), 0,
                 new MemorisedPositionType[0], 0, 0, 0, 0, 0, 135, 1,
                 new CreditCardType(CreditCardTypeEnum.CREDIT_CARD_NORMAL, 0, 0, 0, 0, 0, 0, 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, (uint)DateTime.Now.GetUnixTimeStamp(), 0, -1, 0),

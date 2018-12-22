@@ -49,7 +49,7 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(close_points);
             writer.WriteInt(close_points_total);
             writer.WriteInt(time);
-            writer.WriteInt(guide_quest_count);
+            writer.WriteByte(guide_quest_count);
             foreach(uint quest in questids)
                 writer.WriteUInt(quest);
             writer.WriteInt(last_logout_time);

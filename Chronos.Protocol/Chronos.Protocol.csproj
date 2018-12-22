@@ -65,6 +65,7 @@
     <Compile Include="Enums\PlayerFlagEnum.cs" />
     <Compile Include="Enums\ShortcutEnum.cs" />
     <Compile Include="Enums\SnapshotTypeEnum.cs" />
+    <Compile Include="Types\BlacklistedFriendMemberType.cs" />
     <Compile Include="Types\ObjectsType\MonsterObjectType.cs" />
     <Compile Include="Types\SpiritTatooType.cs" />
     <Compile Include="Enums\StateMessageEnum.cs" />

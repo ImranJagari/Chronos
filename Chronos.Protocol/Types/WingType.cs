@@ -25,8 +25,8 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(index);
             writer.WriteInt(rand_speed);
             writer.WriteInt(add_time);
-            foreach (int attr in attributes)
-                writer.WriteInt(attr);
+            for(int i = 0; i < 3; i++)
+                writer.WriteInt(attributes[i]);
         }
     }
 }

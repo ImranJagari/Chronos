@@ -56,7 +56,7 @@ namespace Chronos.Protocol.Types
             if (!enable)
                 return;
             writer.WriteByte(kind);
-            if (kind == 0)
+            if (kind <= 0)
                 return;
             if (kind >= 1)
             {

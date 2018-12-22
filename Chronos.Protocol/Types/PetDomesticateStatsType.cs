@@ -18,7 +18,11 @@ namespace Chronos.Protocol.Types
         public int count_attr;
         public int[] attr_id;
         public int[] attr_value;
-        public PetDomesticateStatsType(int id, int type, int level, int level_max, int exp, int[] factors, int count_attr, int[] attr_id, int[] attr_value)
+        public int skillCount;
+        public int[] skill_id;
+        public int[] skill_value;
+
+        public PetDomesticateStatsType(int id, int type, int level, int level_max, int exp, int[] factors, int count_attr, int[] attr_id, int[] attr_value, int skillCount, int[] skill_id, int[] skill_value)
         {
             this.id = id;
             this.type = type;
@@ -29,6 +33,9 @@ namespace Chronos.Protocol.Types
             this.count_attr = count_attr;
             this.attr_id = attr_id;
             this.attr_value = attr_value;
+            this.skillCount = skillCount;
+            this.skill_id = skill_id;
+            this.skill_value = skill_value;
         }
         public void Serialize(IDataWriter writer)
         {
@@ -37,13 +44,21 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(level);
             writer.WriteInt(level_max);
             writer.WriteInt(exp);
-            foreach (int factor in factors)
-                writer.WriteInt(factor);
+            for (int i = 0; i < 5; i++)
+            {
+                writer.WriteInt(factors[i]);
+            }
             writer.WriteInt(count_attr);
             for(int i = 0; i < count_attr; i++)
             {
                 writer.WriteInt(attr_id[i]);
                 writer.WriteInt(attr_value[i]);
+            }
+            writer.WriteInt(skillCount);
+            for (int i = 0; i < skillCount; i++)
+            {
+                writer.WriteInt(skill_id[i]);
+                writer.WriteInt(skill_value[i]);
             }
         }
     }
