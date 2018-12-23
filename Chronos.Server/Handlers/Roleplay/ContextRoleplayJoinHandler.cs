@@ -54,9 +54,15 @@ namespace Chronos.Server.Handlers.Roleplay
                 20, 0xFFFFFFFF, 609, 300, 600, 0, 0, 100, "Nuan",
                 stats.Count, stats.Keys.Select(x => (ushort)x).ToArray(),
                 stats.Values.Select(x => x.Total).ToArray(), 0, new byte[0], new int[0], new int[0], 1,
-                true, 255, 0, 0, 0, 0, new uint[0],0,false, false, false, 0,0,2,-1,0))
+                false, 255, 0, 0, 0, 0, new uint[0],0, true, true, false, 0,0,2,-1,0))
             });
-
+            foreach (var attribute in client.Character.Stats.Fields)
+            {
+                SendSnapshotMessage(client, new []
+                {
+                    new SetValueObjectSnapshot((uint)client.Character.GetHashCode(), (short)attribute.Key, attribute.Value.Total), 
+                });
+            }
             List<Snapshot> spawnOtherObjects = new List<Snapshot>();
             foreach(var @object in map.Objects.Where(x => x != character))
             {

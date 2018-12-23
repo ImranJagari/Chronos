@@ -17,6 +17,9 @@ namespace Chronos.Server.Handlers.States
         {
             var stateMessage = MessageReceiver.BuildStateMessage(message.stateType, message.data);
 
+            Console.WriteLine($"\t State message received : {message.stateMessage}");
+            Console.WriteLine($"\t\t State type received : {message.stateType}");
+
             if (stateMessage == null)
                 return;
 

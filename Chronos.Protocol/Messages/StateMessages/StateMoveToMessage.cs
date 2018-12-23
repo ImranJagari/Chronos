@@ -14,19 +14,19 @@ namespace Chronos.Protocol.Messages.StateMessages
 
         public override ushort MessageId => (ushort)TypeId;
 
-        public int angle;
-        public int x;
-        public int y;
-        public int z;
+        public int objId;
+        public int param1;
+        public int param2;
+        public int param3;
 
         public StateMoveToMessage() { }
 
         public override void Deserialize(IDataReader reader)
         {
-            angle = reader.ReadInt();
-            x = reader.ReadInt();
-            y = reader.ReadInt();
-            z = reader.ReadInt();
+            objId = reader.ReadInt();
+            param1 = reader.ReadInt();
+            param2 = reader.ReadInt();
+            param3 = reader.ReadInt();
         }
     }
 }

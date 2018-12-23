@@ -160,7 +160,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                 new InventoryType(Inventory.InventorySlots, 0, new ItemElementType[0], new short[0]),
                 new QuestInventoryType(Inventory.QuestSlots, 0, new ItemElementType[0], new short[0]), 0,
                 new TaskbarType(0, new ShortcutType[0], 0, new ShortcutType[0], 0,
-                new ShortcutType[0], 4, new Byte[] { 1, 2, 3, 4 }, 0), 0, new SkillType[0],
+                new ShortcutType[0], 4, new Byte[] { 1, 2, 3, 4 }, 0), 1, new SkillType[]{new SkillType(10100, 2000) },
                 0, false,
                 new FriendListType(FriendStateEnum.FRS_ONLINE, 0, 0, new int[0], 0, new FriendMemberType[0], 0, new BlacklistedFriendMemberType[0], 0, new FriendMemberType[0]),
                 new FactionType(0, 0, 0, 0, 0, "", new ProtegeType[0]), 0,

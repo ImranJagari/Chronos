@@ -14,15 +14,15 @@ namespace Chronos.Server.Game.Stats
     public class StatsFields
     {
         [Variable]
-        public static byte StoneIntelligenceBoost = 15;
+        public static byte StoneIntelligenceBoost = 0;
         [Variable]
-        public static byte StoneStrenghtBoost = 15;
+        public static byte StoneStrenghtBoost = 0;
         [Variable]
-        public static byte StoneStaminaBoost = 15;
+        public static byte StoneStaminaBoost = 0;
         [Variable]
-        public static byte StoneSPIBoost = 15;
+        public static byte StoneSPIBoost = 0;
         [Variable]
-        public static byte StoneDexterityBoost = 15;
+        public static byte StoneDexterityBoost = 0;
 
 
 
@@ -72,14 +72,14 @@ namespace Chronos.Server.Game.Stats
             Fields.Add(DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI));
 
             Fields.Add(DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int)record.Money));
-            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int)3000));
+            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int)0));
 
-            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, record.EP));
-            Fields.Add(DefineEnum.EP2, new StatsData(Owner, DefineEnum.EP2, 5000));
+            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, 0));
 
             Fields.Add(DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.MAXHP, record.HP));
             Fields.Add(DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200));
 
+            Fields.Add(DefineEnum.ATK_BASE, new StatsData(Owner, DefineEnum.ATK_BASE, 10));
         }
 
         public static Dictionary<DefineEnum, StatsData> LoadInertieData()

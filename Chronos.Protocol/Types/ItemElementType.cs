@@ -60,6 +60,7 @@ namespace Chronos.Protocol.Types
             this.payyb = payyb;
             this.freeyb = freeyb;
             this.serverId = serverId;
+            this.attributes = attributes;
         }
         public void Serialize(IDataWriter writer)
         {

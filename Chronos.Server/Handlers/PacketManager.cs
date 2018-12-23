@@ -79,12 +79,12 @@ namespace Chronos.Server.Handlers
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("Received non handled Packet : id = {0} -> {1}", message.MessageId, message));
+                        Console.WriteLine(string.Format("Received non handled state : id = {0} -> {1}", message.MessageId, message));
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Receive empty packet");
+                    Console.WriteLine("Receive empty state");
                     client.Disconnect();
                 }
             }
