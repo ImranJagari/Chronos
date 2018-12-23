@@ -25,7 +25,6 @@ App type : Console
 Client link version 2.1.408 : https://mega.nz/#!bRZURTzL!725ioT6ukKvQMVCxjRMk9qiJsm4ZeltY5YmcES34q1w
 
 
-I'll post install tutorial later :)
-
+tutorial : check the wiki for informations
 
 Discord : https://discord.gg/BUAazBG
