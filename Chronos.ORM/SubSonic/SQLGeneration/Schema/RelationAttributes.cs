@@ -111,7 +111,7 @@ namespace Chronos.ORM.SubSonic.SQLGeneration.Schema
 
             if (!prop.PropertyType.IsAssignableFrom(listGeneric))
             {
-                throw new InvalidOperationException("Expecting a collection type that is assignable from List<T> to use this propery as one to many collection");
+                throw new InvalidOperationException("Expecting a collection type that is assignable from List<T> to use this property as one to many collection");
             }
 
             return relationType;

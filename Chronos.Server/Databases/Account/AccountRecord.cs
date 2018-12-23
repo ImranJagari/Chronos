@@ -13,7 +13,9 @@ namespace Chronos.Server.Databases.Account
     {
         [PrimaryKey("Id")]
         public int Id { get; set; }
+        [NullString]
         public string Username { get; set; }
+        [Index]
         public byte Authority { get; set; }
         public string Password { get; set; }
         public string HDSN { get; set; }

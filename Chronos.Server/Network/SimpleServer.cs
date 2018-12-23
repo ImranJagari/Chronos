@@ -170,8 +170,7 @@ namespace Chronos.Server.Network
         public event ConnectionAcceptedDelegate ConnectionAccepted;
         private void OnConnectionAccepted(Socket client)
         {
-            if (ConnectionAccepted != null)
-                ConnectionAccepted(client);
+            ConnectionAccepted?.Invoke(client);
         }
 
         #endregion

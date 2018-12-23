@@ -11,6 +11,7 @@ namespace Chronos.Server.Manager.Breeds
     public class BreedManager : DatabaseManager<BreedManager>
     {
         Dictionary<byte, BreedRecord> m_breeds = new Dictionary<byte, BreedRecord>();
+
         [Initialization(InitializationPass.First)]
         public override void Initialize()
         {

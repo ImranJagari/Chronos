@@ -53,13 +53,7 @@ namespace Chronos.Server.Network
         {
             Init();
             Start(socket);
-            //BinaryWriter _writer = new BinaryWriter(new MemoryStream(8));
-            //_writer.Write((uint)8);
-            //_writer.Write(keyPairEncryption.Seed);
-
-            //Byte[] _keyPacket = ((MemoryStream)_writer.BaseStream).GetBuffer();
-            //this.Socket.Send(_keyPacket, 0, _keyPacket.Length, SocketFlags.None);
-             Send(new SessionKeyMessage(keyPairEncryption.Seed), false);
+            Send(new SessionKeyMessage(keyPairEncryption.Seed), false);
         }
 
         #endregion
@@ -305,32 +299,27 @@ namespace Chronos.Server.Network
         private void OnConnected(ConnectedEventArgs e)
         {
             ConsoleUtils.WriteSuccess(this.ToString() + " is connected !");
-            if (Connected != null)
-                Connected(this, e);
+            Connected?.Invoke(this, e);
         }
 
         private void OnDisconnected(DisconnectedEventArgs e)
         {
-            if (Disconnected != null)
-                Disconnected(this, e);
+            Disconnected?.Invoke(this, e);
         }
 
         private void OnDataReceived(DataReceivedEventArgs e)
         {
-            if (DataReceived != null)
-                DataReceived(this, e);
+            DataReceived?.Invoke(this, e);
         }
 
         private void OnDataSended(DataSendedEventArgs e)
         {
-            if (DataSended != null)
-                DataSended(this, e);
+            DataSended?.Invoke(this, e);
         }
 
         private void OnError(ErrorEventArgs e)
         {
-            if (Error != null)
-                Error(this, e);
+            Error?.Invoke(this, e);
         }
 
         #endregion
