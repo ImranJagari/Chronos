@@ -18,8 +18,7 @@ namespace Chronos.Server.Handlers.Connection
         [HeaderPacket(CertifyMessage.Header)]
         public static void HandleCertifyMessage(SimpleClient client, CertifyMessage message)
         {
-            GameAccount account;
-            if(!CredentialsManager.Instance.CheckAccountValidity(out account, message.username, message.password))
+            if(!CredentialsManager.Instance.CheckAccountValidity(out var account, message.username, message.password))
             {
                 SendCertifyResultMessage(client, ErrorEnum.ERR_CERT_BAD_PASSWORD, (ErrorEnum)(((int)ErrorEnum.CERT_CHARGE_CERTIFY_FAILED) << 16));
                 client.Disconnect();

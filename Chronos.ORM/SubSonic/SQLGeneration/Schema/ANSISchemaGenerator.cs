@@ -174,14 +174,15 @@ namespace Chronos.ORM.SubSonic.SQLGeneration.Schema
                 result = new DatabaseTable(tableName, provider);
                 foreach(DataRow dr in schema.Rows)
                 {
-                    IColumn col = new DatabaseColumn(dr["COLUMN_NAME"].ToString(), result);
-                    col.DataType = GetDbType(dr["DATA_TYPE"].ToString());
-                    col.IsNullable = dr["IS_NULLABLE"].ToString() == "YES";
+                    IColumn col = new DatabaseColumn(dr["COLUMN_NAME"].ToString(), result)
+                    {
+                        DataType = GetDbType(dr["DATA_TYPE"].ToString()),
+                        IsNullable = dr["IS_NULLABLE"].ToString() == "YES"
+                    };
 
                     string maxLength = dr["CHARACTER_MAXIMUM_LENGTH"].ToString();
 
-                    int iMax = 0;
-                    int.TryParse(maxLength, out iMax);
+                    int.TryParse(maxLength, out var iMax);
                     col.MaxLength = iMax;
                     result.Columns.Add(col);
                 }

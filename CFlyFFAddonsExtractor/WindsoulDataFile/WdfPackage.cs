@@ -71,11 +71,13 @@ namespace WindsoulDataFile
             this.Reader.BaseStream.Seek(this.StartAdress, SeekOrigin.Begin);
             for (Int32 i = 0; i < this.FileCount; ++i)
             {
-                FileEntry _entry = new FileEntry();
-                _entry.UniqueId = this.Reader.ReadUInt32();
-                _entry.StartAdress = this.Reader.ReadUInt32();
-                _entry.FileSize = this.Reader.ReadInt32();
-                _entry.ReservedSpace = this.Reader.ReadUInt32();
+                FileEntry _entry = new FileEntry
+                {
+                    UniqueId = this.Reader.ReadUInt32(),
+                    StartAdress = this.Reader.ReadUInt32(),
+                    FileSize = this.Reader.ReadInt32(),
+                    ReservedSpace = this.Reader.ReadUInt32()
+                };
                 this.Files.Add(_entry.UniqueId, _entry);
             }
         }

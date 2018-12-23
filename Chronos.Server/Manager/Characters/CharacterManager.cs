@@ -91,11 +91,12 @@ namespace Chronos.Server.Manager.Characters
                 ClosetItemRecord[] closets = new ClosetItemRecord[5];
                 for (int i = 0; i < message.closets.Count(); i++)
                 {
-                    closets[i] = new ClosetItemRecord();
-                    closets[i].ClosetItemId = message.closets[i].id;
-                    closets[i].OwnerId = record.Id;
-                    closets[i].Equipped = true;
-                    closets[i].Slot = i + 1;
+                    closets[i] = new ClosetItemRecord
+                    {
+                        ClosetItemId = message.closets[i].id,
+                        OwnerId = record.Id,
+                        Equipped = true, Slot = i + 1
+                    };
 
                 }
 
@@ -103,8 +104,8 @@ namespace Chronos.Server.Manager.Characters
                 {
                     Database.Insert(closet);
                 }
-                client.Character = new Character(record);
-                client.Character.Client = client;
+
+                client.Character = new Character(record) {Client = client};
 
                 client.Account.LoadRecord();
 

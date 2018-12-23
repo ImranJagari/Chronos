@@ -286,8 +286,8 @@ namespace Chronos.Core.Encryption
     }
     public class KeyPair : IDisposable
     {
-        private unsafe byte* encryptionKey;
-        private unsafe byte* decryptionKey;
+        private readonly unsafe byte* encryptionKey;
+        private readonly unsafe byte* decryptionKey;
         public readonly int Seed;
 
         public unsafe KeyPair(int seed)

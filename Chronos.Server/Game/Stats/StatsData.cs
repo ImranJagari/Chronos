@@ -146,8 +146,7 @@ namespace Chronos.Server.Game.Stats
 
         protected virtual void OnModified()
         {
-            var handler = Modified;
-            if (handler != null) handler(this, Total);
+            Modified?.Invoke(this, Total);
         }
 
         public static int operator +(int i1, StatsData s1)

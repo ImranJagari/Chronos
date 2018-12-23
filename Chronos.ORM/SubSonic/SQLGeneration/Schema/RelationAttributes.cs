@@ -30,7 +30,7 @@ namespace Chronos.ORM.SubSonic.SQLGeneration.Schema
     {
         public string JoinKeyName { get; set; }
 
-        private Qualifier _qualifier;
+        private readonly Qualifier _qualifier;
 
         protected AbstractSubSonicRelationAttribute(Qualifier qualifier)
         {

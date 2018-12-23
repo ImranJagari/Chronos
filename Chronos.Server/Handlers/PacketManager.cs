@@ -42,16 +42,15 @@ namespace Chronos.Server.Handlers
         {
             try
             {
-                Action<object, SimpleClient, NetworkMessage> methodToInvok;
                 if (message != null)
                 {
-                    if (MethodHandlers.TryGetValue((HeaderEnum)message.MessageId, out methodToInvok))
+                    if (MethodHandlers.TryGetValue((HeaderEnum)message.MessageId, out var methodToInvok))
                     {
                         methodToInvok.Invoke(null, client, message);
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("Received non handled Packet : id = {0} -> {1}", message.MessageId, message));
+                        Console.WriteLine($"Received non handled Packet : id = {message.MessageId} -> {message}");
                     }
                 }
                 else
@@ -70,16 +69,15 @@ namespace Chronos.Server.Handlers
         {
             try
             {
-                Action<object, SimpleClient, StateDataMessage> methodToInvok;
                 if (message != null)
                 {
-                    if (StateMethodHandlers.TryGetValue((StateTypeEnum)message.MessageId, out methodToInvok))
+                    if (StateMethodHandlers.TryGetValue((StateTypeEnum)message.MessageId, out var methodToInvok))
                     {
                         methodToInvok.Invoke(null, client, message);
                     }
                     else
                     {
-                        Console.WriteLine(string.Format("Received non handled state : id = {0} -> {1}", message.MessageId, message));
+                        Console.WriteLine($"Received non handled state : id = {message.MessageId} -> {message}");
                     }
                 }
                 else

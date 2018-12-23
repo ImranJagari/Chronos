@@ -32,7 +32,7 @@ namespace Chronos.Protocol.Types
             this.name = name;
             this.class_name = class_name;
         }
-        public void Serialize(IDataWriter writer)
+        public virtual void Serialize(IDataWriter writer)
         {
             writer.WriteInt(playerId);
             writer.WriteByte(sex);

@@ -35,8 +35,7 @@ namespace Chronos.Server.Game.Stats
         {
             get
             {
-                StatsData value;
-                return Fields.TryGetValue(name, out value) ? value : null;
+                return Fields.TryGetValue(name, out var value) ? value : null;
             }
         }
         public StatsFields(IStatsOwner owner)
@@ -52,65 +51,57 @@ namespace Chronos.Server.Game.Stats
         }
         public void Initialize(CharacterRecord record)
         {
-            Fields = new Dictionary<DefineEnum, StatsData>();
-
-            Fields.Add(DefineEnum.HP, new StatsData(Owner, DefineEnum.HP, record.HP));
-            Fields.Add(DefineEnum.MP, new StatsData(Owner, DefineEnum.MP, 200));
-            Fields.Add(DefineEnum.GP, new StatsData(Owner, DefineEnum.GP, 2));
-            Fields.Add(DefineEnum.LV, new StatsData(Owner, DefineEnum.LV, record.Level));
-            Fields.Add(DefineEnum.VIT, new StatsData(Owner, DefineEnum.VIT, 290));
-            Fields.Add(DefineEnum.FLV, new StatsData(Owner, DefineEnum.FLV, 1));
-            Fields.Add(DefineEnum.FHP, new StatsData(Owner, DefineEnum.FHP, 450));
-            Fields.Add(DefineEnum.FMP, new StatsData(Owner, DefineEnum.FMP, 290));
-
-            Fields.Add(DefineEnum.MOVE_SPEED, new StatsData(Owner, DefineEnum.MOVE_SPEED, 6000));
-
-            Fields.Add(DefineEnum.STR, new StatsData(Owner, DefineEnum.STR, record.Strenght));
-            Fields.Add(DefineEnum.STA, new StatsData(Owner, DefineEnum.STA, record.Stamina));
-            Fields.Add(DefineEnum.INT, new StatsData(Owner, DefineEnum.INT, record.Intelligence));
-            Fields.Add(DefineEnum.DEX, new StatsData(Owner, DefineEnum.DEX, record.Dexterity));
-            Fields.Add(DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI));
-
-            Fields.Add(DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int)record.Money));
-            Fields.Add(DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int)0));
-
-            Fields.Add(DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, 0));
-
-            Fields.Add(DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.MAXHP, record.HP));
-            Fields.Add(DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200));
-
-            Fields.Add(DefineEnum.ATK_BASE, new StatsData(Owner, DefineEnum.ATK_BASE, 10));
+            Fields = new Dictionary<DefineEnum, StatsData>
+            {
+                {DefineEnum.HP, new StatsData(Owner, DefineEnum.HP, record.HP)},
+                {DefineEnum.MP, new StatsData(Owner, DefineEnum.MP, 200)},
+                {DefineEnum.GP, new StatsData(Owner, DefineEnum.GP, 2)},
+                {DefineEnum.LV, new StatsData(Owner, DefineEnum.LV, record.Level)},
+                {DefineEnum.VIT, new StatsData(Owner, DefineEnum.VIT, 290)},
+                {DefineEnum.FLV, new StatsData(Owner, DefineEnum.FLV, 1)},
+                {DefineEnum.FHP, new StatsData(Owner, DefineEnum.FHP, 450)},
+                {DefineEnum.FMP, new StatsData(Owner, DefineEnum.FMP, 290)},
+                {DefineEnum.MOVE_SPEED, new StatsData(Owner, DefineEnum.MOVE_SPEED, 6000)},
+                {DefineEnum.STR, new StatsData(Owner, DefineEnum.STR, record.Strenght)},
+                {DefineEnum.STA, new StatsData(Owner, DefineEnum.STA, record.Stamina)},
+                {DefineEnum.INT, new StatsData(Owner, DefineEnum.INT, record.Intelligence)},
+                {DefineEnum.DEX, new StatsData(Owner, DefineEnum.DEX, record.Dexterity)},
+                {DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI)},
+                {DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int) record.Money)},
+                {DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int) 0)},
+                {DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, 0)},
+                {DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.MAXHP, record.HP)},
+                {DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200)},
+                {DefineEnum.ATK_BASE, new StatsData(Owner, DefineEnum.ATK_BASE, 10)}
+            };
         }
 
         public static Dictionary<DefineEnum, StatsData> LoadInertieData()
         {
-            Dictionary<DefineEnum, StatsData> fields = new Dictionary<DefineEnum, StatsData>();
+            var fields = new Dictionary<DefineEnum, StatsData>
+            {
+                {DefineEnum.HP, new StatsData(null, DefineEnum.HP, 100)},
+                {DefineEnum.MP, new StatsData(null, DefineEnum.MP, 200)},
+                {DefineEnum.GP, new StatsData(null, DefineEnum.GP, 2)},
+                {DefineEnum.LV, new StatsData(null, DefineEnum.LV, 1)},
+                {DefineEnum.VIT, new StatsData(null, DefineEnum.VIT, 290)},
+                {DefineEnum.FLV, new StatsData(null, DefineEnum.FLV, 1)},
+                {DefineEnum.FHP, new StatsData(null, DefineEnum.FHP, 450)},
+                {DefineEnum.FMP, new StatsData(null, DefineEnum.FMP, 290)},
+                {DefineEnum.MOVE_SPEED, new StatsData(null, DefineEnum.MOVE_SPEED, 7000)},
+                {DefineEnum.STR, new StatsData(null, DefineEnum.STR, 5)},
+                {DefineEnum.STA, new StatsData(null, DefineEnum.STA, 5)},
+                {DefineEnum.INT, new StatsData(null, DefineEnum.INT, 5)},
+                {DefineEnum.DEX, new StatsData(null, DefineEnum.DEX, 5)},
+                {DefineEnum.SPI, new StatsData(null, DefineEnum.SPI, 5)},
+                {DefineEnum.MONEY, new StatsData(null, DefineEnum.MONEY, (int) 10)},
+                {DefineEnum.GOLD, new StatsData(null, DefineEnum.GOLD, (int) 0)},
+                {DefineEnum.EP, new StatsData(null, DefineEnum.EP, 5000)},
+                {DefineEnum.EP2, new StatsData(null, DefineEnum.EP2, 5000)},
+                {DefineEnum.MAXHP, new StatsData(null, DefineEnum.MAXHP, 100)},
+                {DefineEnum.MAXMP, new StatsData(null, DefineEnum.MAXHP, 200)}
+            };
 
-            fields.Add(DefineEnum.HP, new StatsData(null, DefineEnum.HP, 100));
-            fields.Add(DefineEnum.MP, new StatsData(null, DefineEnum.MP, 200));
-            fields.Add(DefineEnum.GP, new StatsData(null, DefineEnum.GP, 2));
-            fields.Add(DefineEnum.LV, new StatsData(null, DefineEnum.LV, 1));
-            fields.Add(DefineEnum.VIT, new StatsData(null, DefineEnum.VIT, 290));
-            fields.Add(DefineEnum.FLV, new StatsData(null, DefineEnum.FLV, 1));
-            fields.Add(DefineEnum.FHP, new StatsData(null, DefineEnum.FHP, 450));
-            fields.Add(DefineEnum.FMP, new StatsData(null, DefineEnum.FMP, 290));
-
-            fields.Add(DefineEnum.MOVE_SPEED, new StatsData(null, DefineEnum.MOVE_SPEED, 7000));
-
-            fields.Add(DefineEnum.STR, new StatsData(null, DefineEnum.STR, 5));
-            fields.Add(DefineEnum.STA, new StatsData(null, DefineEnum.STA, 5));
-            fields.Add(DefineEnum.INT, new StatsData(null, DefineEnum.INT, 5));
-            fields.Add(DefineEnum.DEX, new StatsData(null, DefineEnum.DEX, 5));
-            fields.Add(DefineEnum.SPI, new StatsData(null, DefineEnum.SPI, 5));
-
-            fields.Add(DefineEnum.MONEY, new StatsData(null, DefineEnum.MONEY, (int)10));
-            fields.Add(DefineEnum.GOLD, new StatsData(null, DefineEnum.GOLD, (int)0));
-
-            fields.Add(DefineEnum.EP, new StatsData(null, DefineEnum.EP, 5000));
-            fields.Add(DefineEnum.EP2, new StatsData(null, DefineEnum.EP2, 5000));
-
-            fields.Add(DefineEnum.MAXHP, new StatsData(null, DefineEnum.MAXHP, 100));
-            fields.Add(DefineEnum.MAXMP, new StatsData(null, DefineEnum.MAXHP, 200));
             return fields;
         }
     }

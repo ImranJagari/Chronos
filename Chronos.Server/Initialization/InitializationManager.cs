@@ -15,12 +15,8 @@ namespace Chronos.Server.Initialization
 		public event Action<string> ProcessInitialization;
 		private void OnProcessInitialization(string text)
 		{
-			Action<string> processInitialization = this.ProcessInitialization;
-			if (processInitialization != null)
-			{
-				processInitialization(text);
-			}
-		}
+            this.ProcessInitialization?.Invoke(text);
+        }
 		private InitializationManager()
 		{
 			foreach (InitializationPass key in Enum.GetValues(typeof(InitializationPass)))

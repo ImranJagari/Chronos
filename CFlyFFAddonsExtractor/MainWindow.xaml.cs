@@ -44,10 +44,12 @@ namespace CFlyFFAddonsExtractor
 
         private void CONFIG_SELECT_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog _openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            
-            _openFileDialog.Filter = "WindSoul File|*.wdf;*.wd1;*.wd2";
-            
+            System.Windows.Forms.OpenFileDialog _openFileDialog = new System.Windows.Forms.OpenFileDialog
+            {
+                Filter = "WindSoul File|*.wdf;*.wd1;*.wd2"
+            };
+
+
             if (_openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (!_openFileDialog.FileName.EndsWith(".wdf") && !_openFileDialog.FileName.EndsWith(".wd2") && !_openFileDialog.FileName.EndsWith(".wd1"))

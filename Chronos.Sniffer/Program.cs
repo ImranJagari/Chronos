@@ -73,8 +73,7 @@ namespace FFProxy
 			File.AppendAllText(path, lala);
 		}
 
-		private static int _received;
-		private static int _currentSize;
+	    private static int _currentSize;
 
 		private static void DumpInfo(byte[] data)
 		{

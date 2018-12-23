@@ -19,7 +19,7 @@ namespace Chronos.Protocol.Types
             this.playerName = playerName;
         }
 
-        public void Serialize(IDataWriter writer)
+        public override void Serialize(IDataWriter writer)
         {
             writer.WriteInt(blackListedPlayerId);
             writer.WriteUTF(playerName);

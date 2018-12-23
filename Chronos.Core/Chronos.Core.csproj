@@ -49,6 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\VariableAttribute.cs" />
+    <Compile Include="Collections\BlockingQueue.cs" />
+    <Compile Include="Collections\ConcurrentList.cs" />
+    <Compile Include="Collections\LimitedOccurenceCounter.cs" />
+    <Compile Include="Collections\LimitedStack.cs" />
+    <Compile Include="Collections\LockFreeQueue.cs" />
+    <Compile Include="Collections\Pair.cs" />
+    <Compile Include="Collections\PriorityQueueB.cs" />
+    <Compile Include="Collections\SerializableDictionary.cs" />
+    <Compile Include="Collections\TimedStack.cs" />
     <Compile Include="Encryption\FlyffEncryption.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\FileSizeFormatProvider.cs" />
@@ -67,6 +76,16 @@
     <Compile Include="Reflection\DynamicExtension.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Reflection\Singleton.cs" />
+    <Compile Include="Threading\AsyncRandom.cs" />
+    <Compile Include="Threading\ConditionWaiter.cs" />
+    <Compile Include="Threading\IContextHandler.cs" />
+    <Compile Include="Threading\Messages.cs" />
+    <Compile Include="Threading\SelfRunningTaskPool.cs" />
+    <Compile Include="Threading\TaskCompletionSourceExtensions.cs" />
+    <Compile Include="Threading\TaskExtensions.cs" />
+    <Compile Include="Threading\TaskFactoryExtensions.cs" />
+    <Compile Include="Threading\TaskSchedulerExtensions.cs" />
+    <Compile Include="Timers\TimedTimerEntry.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
     <Compile Include="Xml\Config\XmlConfig.cs" />
     <Compile Include="Xml\Config\XmlConfigNode.cs" />
