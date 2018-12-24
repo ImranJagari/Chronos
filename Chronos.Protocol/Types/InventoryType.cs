@@ -32,7 +32,7 @@ namespace Chronos.Protocol.Types
             writer.WriteUShort((ushort)index_num);
             foreach (short itemId in itemIds)
             {
-                writer.WriteUShort((ushort)itemId);
+                writer.WriteShort(itemId);
             }
             writer.WriteInt((byte)itemElement_count);
             for(int i = 0; i < itemElement_count; i++)

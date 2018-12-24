@@ -51,7 +51,7 @@ namespace Chronos.Protocol.Types.ObjectsType
             writer.WriteBytes(new Byte[] { 0x76, 0x31, 0x24, 0x32, 0x34, 0x2C, 0x24, 0x24, 0x24 });
 
             writer.WriteInt(count_data);
-            for(int i = 0; i < count_data; i++)
+            for (int i = 0; i < count_data; i++)
             {
                 writer.WriteUShort((ushort)rIndexes_data[i]);
                 writer.WriteX(values_data[i]);

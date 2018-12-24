@@ -176,9 +176,11 @@ namespace Chronos.Protocol.Types
             writer.WriteUInt(domesticate_skill_time);
 
             writer.WriteInt((int)PlayerFlagEnum.flag_skill);
-            writer.WriteByte(0);//Setted to false by default to avoid to do this system now -> variable => questChangeflag
+            writer.WriteByte(1);//Setted to false by default to avoid to do this system now -> variable => questChangeflag
             //add here the questchangeSerialize
-
+            writer.WriteUInt(0);
+            writer.WriteUInt(0);
+            writer.WriteShort(0);
             writer.WriteInt((int)PlayerFlagEnum.flag_quest);
             friendList.Serialize(writer);
 

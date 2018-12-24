@@ -142,18 +142,18 @@ namespace Chronos.Protocol.Types.ObjectsType
         {
             base.SerializeAlwaysChange(writer);
             writer.WriteUInt((uint)items_count);
-            foreach(ItemType item in items)
+            foreach (ItemType item in items)
             {
                 item.Serialize(writer);
             }
             writer.WriteByte(ext_param_count);
-            for (int i = 0; i < ext_param_count; i++) 
+            for (int i = 0; i < ext_param_count; i++)
             {
                 writer.WriteByte(index[i]);
                 writer.WriteX(value[i]);
             }
             writer.WriteUInt((uint)title_count);
-            foreach(int title in titles)
+            foreach (int title in titles)
             {
                 writer.WriteInt(title);
             }
@@ -175,7 +175,7 @@ namespace Chronos.Protocol.Types.ObjectsType
             writer.WriteUInt((uint)vessel_refine_lv);
             writer.WriteUInt((uint)vessel_equip_index);
             writer.WriteBoolean(vessel_is_equip);
-            writer.WriteByte(flag_data ? (byte) 1 : (byte)0);
+            writer.WriteByte(flag_data ? (byte)1 : (byte)0);
             if (flag_data)
                 flagsData.Serialize(writer);
         }

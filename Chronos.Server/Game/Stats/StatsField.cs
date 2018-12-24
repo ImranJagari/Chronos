@@ -69,7 +69,8 @@ namespace Chronos.Server.Game.Stats
                 {DefineEnum.SPI, new StatsData(Owner, DefineEnum.SPI, record.SPI)},
                 {DefineEnum.MONEY, new StatsData(Owner, DefineEnum.MONEY, (int) record.Money)},
                 {DefineEnum.GOLD, new StatsData(Owner, DefineEnum.GOLD, (int) 0)},
-                {DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, 0)},
+                {DefineEnum.EP, new StatsData(Owner, DefineEnum.EP, (int)record.Experience << 31 >> 31)},
+                {DefineEnum.EP2, new StatsData(Owner, DefineEnum.EP, 1500000 << 31 >> 31)},
                 {DefineEnum.MAXHP, new StatsData(Owner, DefineEnum.MAXHP, record.HP)},
                 {DefineEnum.MAXMP, new StatsData(Owner, DefineEnum.MAXHP, 200)},
                 {DefineEnum.ATK_BASE, new StatsData(Owner, DefineEnum.ATK_BASE, 10)}
@@ -96,8 +97,8 @@ namespace Chronos.Server.Game.Stats
                 {DefineEnum.SPI, new StatsData(null, DefineEnum.SPI, 5)},
                 {DefineEnum.MONEY, new StatsData(null, DefineEnum.MONEY, (int) 10)},
                 {DefineEnum.GOLD, new StatsData(null, DefineEnum.GOLD, (int) 0)},
-                {DefineEnum.EP, new StatsData(null, DefineEnum.EP, 5000)},
-                {DefineEnum.EP2, new StatsData(null, DefineEnum.EP2, 5000)},
+                {DefineEnum.EP, new StatsData(null, DefineEnum.EP, 5000 << 31 >> 31)},
+                {DefineEnum.EP2, new StatsData(null, DefineEnum.EP2, 5000 >> 31)},
                 {DefineEnum.MAXHP, new StatsData(null, DefineEnum.MAXHP, 100)},
                 {DefineEnum.MAXMP, new StatsData(null, DefineEnum.MAXHP, 200)}
             };
