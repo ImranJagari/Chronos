@@ -34,12 +34,6 @@ namespace Chronos.Protocol.Types
             {
                 writer.WriteUShort((ushort)itemId);
             }
-            //writer.WriteShort((byte)item_max);
-            //writer.WriteShort((byte)index_num);
-            //foreach(short itemId in itemIds)
-            //{
-            //    writer.WriteShort((byte)itemId);
-            //}
             writer.WriteInt((byte)itemElement_count);
             for(int i = 0; i < itemElement_count; i++)
             {

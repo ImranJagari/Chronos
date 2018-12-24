@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\BagsEnum.cs" />
     <Compile Include="Enums\WorldEnum.cs" />
     <Compile Include="Messages\MessagePart.cs" />
+    <Compile Include="Messages\Snapshots\CreateItemSnapshot.cs" />
     <Compile Include="Messages\Snapshots\MoveObjectSnapshot.cs" />
     <Compile Include="Messages\Snapshots\RemoveObjectSnapshot.cs" />
     <Compile Include="Messages\Snapshots\SetValueObjectSnapshot.cs" />

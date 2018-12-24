@@ -54,7 +54,7 @@ namespace Chronos.Server.Handlers.Roleplay
                 20, 0xFFFFFFFF, 609, 300, 600, 0, 0, 100, "Nuan",
                 stats.Count, stats.Keys.Select(x => (ushort)x).ToArray(),
                 stats.Values.Select(x => x.Total).ToArray(), 0, new byte[0], new int[0], new int[0], 1,
-                false, 255, 0, 0, 0, 0, new uint[0],0, true, true, false, 0,0,2,-1,0))
+                false, 255, 0, 0, 0, 0, new uint[0],0, true, true, false, 0,0,2,-1,0)) 
             });
             foreach (var attribute in client.Character.Stats.Fields)
             {

@@ -30,7 +30,7 @@ namespace Chronos.Protocol.Types
         }
         public virtual void Serialize(IDataWriter writer)
         {
-            writer.WriteShort(slot);
+            writer.WriteByte(slot);
             writer.WriteUInt(itemId);
             writer.WriteUInt(m_word);
             writer.WriteInt(m_option);

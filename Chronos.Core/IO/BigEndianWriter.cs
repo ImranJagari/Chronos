@@ -158,40 +158,60 @@ namespace Chronos.Core.IO
         {
             this.m_writer.Write(data);
         }
+        //public void WriteX(int value)
+        //{
+        //    if (value == 0)
+        //    {
+        //        WriteUShort(1);
+
+        //        return;
+        //    }
+
+        //    BitArray bits;
+
+        //    var temp = new BitArray(new[] { value });
+
+        //    temp = BitWriter.TrimZero(temp, false);
+
+        //    if (temp.Count <= 13)
+        //    {
+        //        bits = BitWriter.TrimZero(BitWriter.AddFront(temp, 2), true);
+
+        //        bits[0] = true;
+        //    }
+        //    else
+        //    {
+        //        bits = BitWriter.TrimZero(BitWriter.AddFront(temp, 8), true);
+
+        //        bits[1] = true;
+        //    }
+
+        //    var bytes = BitWriter.GetBytes(BitWriter.TrimZero(bits, true));
+
+        //    if (bytes.Length == 4)
+        //        bytes = BitWriter.GetBytes(BitWriter.AddBack(BitWriter.TrimZero(bits, true), 8));
+
+        //    WriteBytes(bytes);
+        //}
+
         public void WriteX(int value)
         {
-            if (value == 0)
+            if ((value & 0xFFFFFFC0) != 0)
             {
-                WriteUShort(1);
-
-                return;
-            }
-
-            BitArray bits;
-
-            var temp = new BitArray(new[] { value });
-
-            temp = BitWriter.TrimZero(temp, false);
-
-            if (temp.Count <= 13)
-            {
-                bits = BitWriter.TrimZero(BitWriter.AddFront(temp, 2), true);
-
-                bits[0] = true;
+                if ((value & 0xFFFFC000) != 0)
+                {
+                    WriteByte(2);
+                    WriteUInt((uint)value);
+                }
+                else
+                {
+                    WriteShort((short)(4 * value | 1));
+                }
             }
             else
             {
-                bits = BitWriter.TrimZero(BitWriter.AddFront(temp, 8), true);
-
-                bits[1] = true;
+                WriteByte((byte)(4 * value));
             }
-
-            var bytes = BitWriter.GetBytes(BitWriter.TrimZero(bits, true));
-
-            if (bytes.Length == 4)
-                bytes = BitWriter.GetBytes(BitWriter.AddBack(BitWriter.TrimZero(bits, true), 8));
-
-            WriteBytes(bytes);
         }
 
         public void WriteFormat(string format, params object[] values)
