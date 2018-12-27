@@ -13,6 +13,7 @@ using Chronos.Server.Game.Account;
 using Chronos.Server.Game.World;
 using Chronos.Protocol.Types.ObjectsType;
 using Chronos.Core.Extensions;
+using Chronos.Core.Threading;
 using Chronos.Server.Manager.Maps;
 using Chronos.Core.Utils;
 using Chronos.Server.Manager;
@@ -216,8 +217,9 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                     1,
                     0),
                 new MarriageType(0),
-                this.Inventory.ClosetItems.Count,
-                this.Inventory.ClosetItems.Select(x => x.Value.ClosetItemId).ToArray(),
+                0/*this.Inventory.ClosetItems.Count*/,
+                new int[0] 
+                /*this.Inventory.ClosetItems.Select(x => x.Value.ClosetItemId).ToArray()*/,
                 1,
                 0, 
                 false,
@@ -233,10 +235,10 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                     0, 
                     new int[0],
                     new int[0],
-                    new InventoryType(Inventory.InventorySlots, 
-                        0,
-                        new ItemElementType[0], 
-                        new short[0]),
+                    new InventoryType((short)DefineEnum.MAX_INVENTORY + (short)DefineEnum.MAX_HUMAN_PARTS, 1, Inventory.InventorySlots, 
+                        1,
+                        new ItemElementType[]{new ItemElementType(1, 950059, 0,1,100,100,0,0,10,0,0,0,0,0,1,0,0,0,10,11,12,SimpleServer.ServerId,new short[0]), }, /*GenerateItemElementType(42).ToArray()*/
+                        new short[1]{1}),//GenerateObjectIds(42).ToArray()),
                     new QuestInventoryType(Inventory.QuestSlots,
                         0, 
                         new ItemElementType[0],
@@ -252,7 +254,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                         new Byte[] { 1, 2, 3, 4 },
                         0),
                     1,
-                    new SkillType[]{ new SkillType(10100, 2000) },
+                    new SkillType[]{ new SkillType(10101, 2000) },
                     0,
                     false,
                     new FriendListType(FriendStateEnum.FRS_ONLINE,
@@ -334,6 +336,30 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                     0,
                     0, 
                     0));
+        }
+
+        public IEnumerable<ItemElementType> GenerateItemElementType(int count)
+        {
+            AsyncRandom random = new AsyncRandom();
+            for (int i = 0; i < count; i++)
+            {
+
+                    yield return new ItemElementType((ushort)i, 950059, (uint)random.Next(0, 100), i, random.Next(0, 100),
+                        random.Next(0, 100), (uint)random.Next(0, 100), (byte)random.Next(0, 100), (byte)random.Next(0, 100),
+                        (byte)random.Next(0, 100), random.Next(0, 100), (byte)random.Next(0, 100), random.Next(0, 100),
+                        (byte)random.Next(0, 100), (byte)random.Next(0, 100), (sbyte)random.Next(0, 100), random.Next(0, 100),
+                        random.Next(0, 100), random.Next(0, 100), random.Next(0, 100), random.Next(0, 100),
+                        random.Next(0, 100), new short[0]);
+            }
+        }
+        public IEnumerable<short> GenerateObjectIds(int count)
+        {
+            AsyncRandom random = new AsyncRandom();
+            for (int i = 0; i < count; i++)
+            {
+
+                yield return (short)i;
+            }
         }
         public CharacterType GetNetwork()// Todo : Block time and IsBlocked + ClosetItems
         {

@@ -10,7 +10,7 @@ namespace Chronos.Protocol.Enums
     {
         flag_base = 0x77777777,
         flag_extend = 0x11111111,
-        flag_inventory = 572662306,
+        flag_inventory = 0x22222222,
         flag_taskbar = 0x33333333,
         flag_quest = 0x44444444,
         flag_messenger = 0x55555555,

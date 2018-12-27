@@ -43,6 +43,8 @@ namespace Chronos.Core.IO
 
         void WriteBytes(byte[] data);
 
+        void WriteLittleX(int value);
+
         void WriteX(int value);
 
         void Clear();

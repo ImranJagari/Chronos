@@ -150,7 +150,7 @@ namespace Chronos.Protocol.Types.ObjectsType
             for (int i = 0; i < ext_param_count; i++)
             {
                 writer.WriteByte(index[i]);
-                writer.WriteX(value[i]);
+                writer.WriteLittleX(value[i]);
             }
             writer.WriteUInt((uint)title_count);
             foreach (int title in titles)

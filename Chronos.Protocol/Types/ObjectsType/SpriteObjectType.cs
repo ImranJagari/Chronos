@@ -54,7 +54,7 @@ namespace Chronos.Protocol.Types.ObjectsType
             for (int i = 0; i < count_data; i++)
             {
                 writer.WriteUShort((ushort)rIndexes_data[i]);
-                writer.WriteX(values_data[i]);
+                writer.WriteLittleX(values_data[i]);
             }
             writer.WriteByte(count_buff);
             for (int i = 0; i < count_buff; i++)

@@ -193,7 +193,27 @@ namespace Chronos.Core.IO
 
         //    WriteBytes(bytes);
         //}
-
+        public void WriteLittleX(int value)
+        {
+            if ((value & 0x80000000) != 0L )
+                value = -value;
+            if ((value & 0xFFFFFFE0) != 0)
+            {
+                if ((value & 0xFFFFE000) != 0)
+                {
+                    WriteByte(2);
+                    WriteUInt((uint)value);
+                }
+                else
+                {
+                    WriteShort((short)(4 * value | 1));
+                }
+            }
+            else
+            {
+                WriteByte((byte)(4 * value));
+            }
+        }
         public void WriteX(int value)
         {
             if ((value & 0xFFFFFFC0) != 0)

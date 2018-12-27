@@ -12,12 +12,12 @@ namespace Chronos.Protocol.Types
     {
         public short item_max;
         public short index_num;
-        public short[] itemIds;
+        public ushort[] itemIds;
         public int itemElement_count;
         public ItemElementType[] item_elements;
         public short[] objectIds;
 
-        public QuestInventoryType(short[] itemIds, int itemElement_count, ItemElementType[] item_elements, short[] objectIds)
+        public QuestInventoryType(ushort[] itemIds, int itemElement_count, ItemElementType[] item_elements, short[] objectIds)
         {
             item_max = (short)DefineEnum.MAX_INVENTORY;
             index_num = (short)DefineEnum.MAX_INVENTORY;
@@ -30,7 +30,7 @@ namespace Chronos.Protocol.Types
         {
             writer.WriteUShort((ushort)item_max);
             writer.WriteUShort((ushort)index_num);
-            foreach (short itemId in itemIds)
+            foreach (ushort itemId in itemIds)
             {
                 writer.WriteUShort((ushort)itemId);
             }
