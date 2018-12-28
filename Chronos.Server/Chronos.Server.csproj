@@ -72,7 +72,8 @@
     <Compile Include="Databases\Breeds\BreedRecord.cs" />
     <Compile Include="Databases\Characters\CharacterRecord.cs" />
     <Compile Include="Databases\Items\ClosetItemRecord.cs" />
-    <Compile Include="Databases\Items\ItemRecord.cs" />
+    <Compile Include="Databases\Items\BagItemRecord.cs" />
+    <Compile Include="Databases\Items\ItemStorage.cs" />
     <Compile Include="Databases\Maps\MapRecord.cs" />
     <Compile Include="Game\Actors\Context\Characters\Character.cs" />
     <Compile Include="Game\Account\GameAccount.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Game\Actors\Context\Monsters\Monster.cs" />
     <Compile Include="Game\Inventories\Inventory.cs" />
     <Compile Include="Game\Inventories\Items\ClosetItem.cs" />
-    <Compile Include="Game\Inventories\Items\PlayerItem.cs" />
+    <Compile Include="Game\Inventories\Items\BagItem.cs" />
     <Compile Include="Game\Actors\WorldObject.cs" />
     <Compile Include="Game\Stats\IStatsOwner.cs" />
     <Compile Include="Game\Stats\StatsData.cs" />

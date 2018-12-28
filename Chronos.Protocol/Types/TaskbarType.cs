@@ -34,18 +34,26 @@ namespace Chronos.Protocol.Types
         }
         public void Serialize(IDataWriter writer)
         {
-            writer.WriteInt(count_left);
-            foreach (ShortcutType shortcut in left_shortcut)
-                shortcut.Serialize(writer);
+            writer.WriteInt((short)count_left);
+            for (int i = 0; i < count_left; i++)
+            {
+                left_shortcut[i].Serialize(writer);
+            }
             writer.WriteInt(count_right);
-            foreach (ShortcutType shortcut in right_shortcut)
-                shortcut.Serialize(writer);
+            for (int i = 0; i < count_right; i++)
+            {
+                right_shortcut[i].Serialize(writer);
+            }
             writer.WriteInt(count_sub);
-            foreach (ShortcutType shortcut in sub_shortcut)
-                shortcut.Serialize(writer);
+            for (int i = 0; i < count_sub; i++)
+            {
+                sub_shortcut[i].Serialize(writer);
+            }
             writer.WriteInt(count_show);
-            foreach (byte show in show_data)
-                writer.WriteByte(show);
+            for (int i = 0; i < count_show; i++)
+            {
+                writer.WriteByte(show_data[i]);
+            }
             writer.WriteInt(lock_check);
         }
     }

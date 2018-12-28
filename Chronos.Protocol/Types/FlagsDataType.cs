@@ -250,7 +250,7 @@ namespace Chronos.Protocol.Types
         }
     }
 }
-/*system to do lately
+/*system to do later
     if quest_change_flag == 1 then
       self.m_quest_list = {}
       self.m_complete_quest = {}

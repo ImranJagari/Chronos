@@ -88,7 +88,7 @@ namespace Chronos.Protocol.Types
             writer.WriteInt(serverId);
             writer.WriteByte((byte)attributes.Length);
             foreach (short attribute in attributes)
-                writer.WriteShort(attribute);
+                writer.WriteByte((byte)attribute);
         }
     }
 }

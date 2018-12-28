@@ -30,7 +30,7 @@ namespace Chronos.Server.Game.Inventories.Items
             get { return Record.Slot; }
             set { Record.Slot = value; }
         }
-        public ClosetItemType GetNetwork()
+        public ClosetItemType GetClosetItemType()
         {
             return new ClosetItemType(ClosetItemId);
         }

@@ -10,9 +10,9 @@ namespace Chronos.Server.Manager.Items
 {
     public class ItemManager : DatabaseManager<ItemManager>
     {
-        public Dictionary<uint, PlayerItem> GetItemsByOwnerId(int ownerId)
+        public Dictionary<uint, BagItem> GetItemsByOwnerId(int ownerId)
         {
-            return Database.Fetch<ItemRecord>(string.Format(ItemRecordRelator.FetchQueryByOwnerId, ownerId)).Select(x => new PlayerItem(x)).ToDictionary(x => x.ItemId);
+            return Database.Fetch<BagItemRecord>(string.Format(ItemRecordRelator.FetchQueryByOwnerId, ownerId)).Select(x => new BagItem(x)).ToDictionary(x => x.ItemId);
         }
         public Dictionary<int, ClosetItem> GetClosetItemsByOwnerId(int ownerId)
         {

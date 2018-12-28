@@ -26,15 +26,15 @@ namespace Chronos.Server.Game.Inventories
                                                        0x24, 0x25, 0x26, 0x27, 0x28, 0x29
                                                    };
 
-        public Dictionary<uint, PlayerItem> Items;
+        public Dictionary<uint, BagItem> Items;
         public Dictionary<int, ClosetItem> ClosetItems;
 
         public Inventory()
         {
-            Items = new Dictionary<uint, PlayerItem>();
+            Items = new Dictionary<uint, BagItem>();
         }
 
-        public PlayerItem GetItemById(uint itemId) => Items[itemId];
+        public BagItem GetItemById(uint itemId) => Items[itemId];
         public ClosetItem GetClosetItemById(int closetItemId) => ClosetItems[closetItemId];
 
         public void LoadData(int ownerId)

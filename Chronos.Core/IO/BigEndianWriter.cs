@@ -216,21 +216,21 @@ namespace Chronos.Core.IO
         }
         public void WriteX(int value)
         {
-            if ((value & 0xFFFFFFC0) != 0)
+            if ((value & 0xFFFFFFC0) != 0x0)
             {
-                if ((value & 0xFFFFC000) != 0)
+                if ((value & 0xFFFFC000) != 0x0)
                 {
-                    WriteByte(2);
+                    WriteByte(0x2);
                     WriteUInt((uint)value);
                 }
                 else
                 {
-                    WriteShort((short)(4 * value | 1));
+                    WriteShort((short)(0x4 * value | 0x1));
                 }
             }
             else
             {
-                WriteByte((byte)(4 * value));
+                WriteByte((byte)(0x4 * value));
             }
         }
 

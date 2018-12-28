@@ -1,34 +1,28 @@
-﻿using Chronos.Server.Databases.Characters;
-using Chronos.Server.Game.Inventories;
-using Chronos.Server.Game.Stats;
-using Chronos.Server.Network;
+﻿using System;
+using System.Linq;
+using Chronos.Core.Extensions;
+using Chronos.Core.Utils;
 using Chronos.Protocol.Enums;
 using Chronos.Protocol.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chronos.Server.Game.Account;
-using Chronos.Server.Game.World;
 using Chronos.Protocol.Types.ObjectsType;
-using Chronos.Core.Extensions;
-using Chronos.Core.Threading;
-using Chronos.Server.Manager.Maps;
-using Chronos.Core.Utils;
+using Chronos.Server.Databases.Characters;
+using Chronos.Server.Game.Account;
+using Chronos.Server.Game.Inventories;
+using Chronos.Server.Game.Stats;
 using Chronos.Server.Manager;
+using Chronos.Server.Network;
 
 namespace Chronos.Server.Game.Actors.Context.Characters
 {
     public sealed class Character : ContextActor
     {
-        public CharacterRecord Record { get; }
-
         public Character(CharacterRecord record)
         {
             Record = record;
             LoadRecord();
         }
+
+        public CharacterRecord Record { get; }
         public SimpleClient Client { get; set; }
 
         public GameAccount Account => Client.Account;
@@ -37,69 +31,76 @@ namespace Chronos.Server.Game.Actors.Context.Characters
 
         public override int Id
         {
-            get { return Record.Id; }
-            protected set { Record.Id = value; }
+            get => Record.Id;
+            protected set => Record.Id = value;
         }
+
         public int AccountId
         {
-            get { return Record.AccountId; }
-            set { Record.AccountId = value; }
+            get => Record.AccountId;
+            set => Record.AccountId = value;
         }
 
         public int Slot
         {
-            get { return Record.Slot; }
-            set { Record.Slot = value; }
+            get => Record.Slot;
+            set => Record.Slot = value;
         }
 
         public override string Name
         {
-            get { return Record.Name; }
-            set { Record.Name = value; }
+            get => Record.Name;
+            set => Record.Name = value;
         }
-        
+
         public bool Sex
         {
-            get { return Record.Sex; }
-            set { Record.Sex = value; }
+            get => Record.Sex;
+            set => Record.Sex = value;
         }
+
         public int Level
         {
-            get { return Record.Level; }
-            set { Record.Level = value; }
+            get => Record.Level;
+            set => Record.Level = value;
         }
+
         public int Job
         {
-            get { return Record.Job; }
-            set { Record.Job = value; }
+            get => Record.Job;
+            set => Record.Job = value;
         }
 
         public int HairMesh
         {
-            get { return Record.HairMesh; }
-            set { Record.HairMesh = value; }
+            get => Record.HairMesh;
+            set => Record.HairMesh = value;
         }
+
         public uint HairColor
         {
-            get { return Record.HairColor; }
-            set { Record.HairColor = value; }
+            get => Record.HairColor;
+            set => Record.HairColor = value;
         }
+
         public int HeadMesh
         {
-            get { return Record.HeadMesh; }
-            set { Record.HeadMesh = value; }
+            get => Record.HeadMesh;
+            set => Record.HeadMesh = value;
         }
 
         public bool IsBlocked => BlockTime != null && BlockTime > DateTime.Now;
+
         public DateTime BlockTime
         {
-            get { return Record.BlockTime; }
-            set { Record.BlockTime = value; }
+            get => Record.BlockTime;
+            set => Record.BlockTime = value;
         }
+
         public DateTime? DeletedDate
         {
-            get { return Record.DeletedDate; }
-            set { Record.DeletedDate = value; }
+            get => Record.DeletedDate;
+            set => Record.DeletedDate = value;
         }
 
         public override StatsFields Stats { get; protected set; }
@@ -112,7 +113,7 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                 SaveNow();
                 Map.Leave(this);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ConsoleUtils.WriteError(e.ToString());
             }
@@ -129,12 +130,13 @@ namespace Chronos.Server.Game.Actors.Context.Characters
             Record.Intelligence = Stats.Fields[DefineEnum.INT].Base;
             Record.EP = Stats.Fields[DefineEnum.EP].Base;
             Record.SPI = Stats.Fields[DefineEnum.SPI].Base;
-            Record.Money = (uint)Stats.Fields[DefineEnum.MONEY].Base;
+            Record.Money = (uint) Stats.Fields[DefineEnum.MONEY].Base;
             Record.HP = Stats.Fields[DefineEnum.HP].Base;
             Record.DamageTaken = Stats.Fields[DefineEnum.HP].Base - Stats[DefineEnum.HP].Total;
 
             DatabaseManager.DefaultDatabase.Update(Record);
         }
+
         public void LoadRecord()
         {
             Stats = new StatsFields(this);
@@ -142,46 +144,46 @@ namespace Chronos.Server.Game.Actors.Context.Characters
 
             Inventory = new Inventory();
             Inventory.LoadData(Id);
-
         }
+
         public override ObjectType GetObjectType(bool me = false)
         {
             return new CharacterObjectType(
-                ObjectType, 
-                (uint)this.GetHashCode(),
-                this.Sex ? (uint)12 : 11,
-                (uint)0xFFFFFFFF,
-                this.Position.X,
-                this.Position.Y,
-                this.Position.Z, 
+                ObjectType,
+                (uint) GetHashCode(),
+                Sex ? (uint) 12 : 11,
+                0xFFFFFFFF,
+                Position.X,
+                Position.Y,
+                Position.Z,
                 0,
                 0,
                 DEFAULT_SCALE,
-                this.Name,
-                this.Stats.Fields.Count,
-                this.Stats.Fields.Keys.Select(x => (ushort)x).ToArray(),
-                this.Stats.Fields.Values.Select(x => x.Total).ToArray(),
+                Name,
+                Stats.Fields.Count,
+                Stats.Fields.Keys.Select(x => (ushort) x).ToArray(),
+                Stats.Fields.Values.Select(x => x.Total).ToArray(),
                 0,
-                new byte[0], 
+                new byte[0],
                 new int[0],
                 new int[0],
-                (uint)this.Id,
-                this.Sex ? (byte)1 : (byte)0,
-                this.Job,
-                (int)Account.Authority,
-                SimpleServer.ServerId, 
-                "", 
-                (short)this.Record.Constellation,
-                (short)this.Record.City_Code,
-                (byte)this.HairMesh,
-                this.HairColor,
-                (byte)this.HeadMesh,
-                (uint)0x7FFFFFFF /*Todo : option*/,
+                (uint) Id,
+                Sex ? (byte) 1 : (byte) 0,
+                Job,
+                (int) Account.Authority,
+                SimpleServer.ServerId,
+                "",
+                (short) Record.Constellation,
+                (short) Record.City_Code,
+                (byte) HairMesh,
+                HairColor,
+                (byte) HeadMesh,
+                0x7FFFFFFF /*Todo : option*/,
                 0,
                 "",
                 0,
-                0, 
-                0x64/*Todo : fame*/,
+                0,
+                0x64 /*Todo : fame*/,
                 0,
                 0,
                 0,
@@ -189,76 +191,78 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                 0,
                 0,
                 new ItemType[0],
-                0, 
+                0,
                 new byte[0],
                 new int[0],
-                0, 
+                0,
                 new int[0],
                 8,
                 0,
                 new int[0],
                 new int[0],
-                new KingdomType((byte)0,
-                    (byte)0, 
-                    0, 
-                    $"", 
-                    (byte)0,
-                    0, 
+                new KingdomType(0,
                     0,
-                    0, 
-                    0, 
-                    0, 
-                    0, 
-                    $""),
-                new MasterType("", 
+                    0,
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    ""),
+                new MasterType("",
                     "",
                     "",
-                    0, 
+                    0,
                     1,
                     0),
                 new MarriageType(0),
-                0/*this.Inventory.ClosetItems.Count*/,
-                new int[0] 
+                0 /*this.Inventory.ClosetItems.Count*/,
+                new int[0]
                 /*this.Inventory.ClosetItems.Select(x => x.Value.ClosetItemId).ToArray()*/,
                 1,
-                0, 
+                0,
                 false,
                 me,
                 new FlagsDataType(0,
-                    1, 
+                    1,
                     DateTime.Now.GetUnixTimeStamp(),
                     0,
                     0,
                     new int[0],
-                    2, 
-                    new int[]{24000,26000},
-                    0, 
+                    2,
+                    new[] {24000, 26000},
+                    0,
                     new int[0],
                     new int[0],
-                    new InventoryType((short)DefineEnum.MAX_INVENTORY + (short)DefineEnum.MAX_HUMAN_PARTS, 1, Inventory.InventorySlots, 
-                        1,
-                        new ItemElementType[]{new ItemElementType(1, 950059, 0,1,100,100,0,0,10,0,0,0,0,0,1,0,0,0,10,11,12,SimpleServer.ServerId,new short[0]), }, /*GenerateItemElementType(42).ToArray()*/
-                        new short[1]{1}),//GenerateObjectIds(42).ToArray()),
+                    new InventoryType((short) DefineEnum.MAX_INVENTORY + (short) DefineEnum.MAX_HUMAN_PARTS, (short)this.Inventory.Items.Count,
+                        Inventory.InventorySlots,
+                        (short)this.Inventory.Items.Count,
+                        this.Inventory.Items.Values.Select(x => x.GetItemElementType()).ToArray(),
+                        this.Inventory.Items.Values.Select(x => (short)x.Slot).ToArray()),
                     new QuestInventoryType(Inventory.QuestSlots,
-                        0, 
+                        0,
                         new ItemElementType[0],
                         new short[0]),
                     0,
-                    new TaskbarType(0,
-                        new ShortcutType[0],
+                    new TaskbarType(
+                        0,
+                        new ShortcutType[1] {new ShortcutType(1, 1, ShortcutEnum.SKILL, 10101, 1, 10101, Id, 1, "")},
+                        0,
+                        new ShortcutType[1] {new ShortcutType(0, 0, ShortcutEnum.ITEM, 1, 1, 1, Id, 1, "")},
                         0,
                         new ShortcutType[0],
                         0,
-                        new ShortcutType[0],
-                        4,
-                        new Byte[] { 1, 2, 3, 4 },
+                        new byte[] {1, 2, 3, 4},
                         0),
                     1,
-                    new SkillType[]{ new SkillType(10101, 2000) },
+                    new[] {new SkillType(10101, 2000)},
                     0,
                     false,
                     new FriendListType(FriendStateEnum.FRS_ONLINE,
-                        0, 
+                        0,
                         0,
                         new int[0],
                         0,
@@ -268,40 +272,40 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                         0,
                         new FriendMemberType[0]),
                     new FactionType(0,
-                        0, 
                         0,
-                        0, 
-                        0, 
-                        "", 
+                        0,
+                        0,
+                        0,
+                        "",
                         new ProtegeType[0]),
                     0,
                     new MemorisedPositionType[0],
                     0,
-                    0, 
                     0,
-                    0, 
                     0,
-                    135, 
+                    0,
+                    0,
+                    135,
                     1,
                     new CreditCardType(CreditCardTypeEnum.CREDIT_CARD_NORMAL,
                         0,
                         0,
                         0,
-                        0, 
                         0,
-                        0, 
                         0,
-                        (uint)DateTime.Now.GetUnixTimeStamp(),
-                        0, 
-                        (uint)DateTime.Now.GetUnixTimeStamp(),
-                        0, 
-                        -1, 
+                        0,
+                        0,
+                        (uint) DateTime.Now.GetUnixTimeStamp(),
+                        0,
+                        (uint) DateTime.Now.GetUnixTimeStamp(),
+                        0,
+                        -1,
                         0),
                     0,
                     0,
-                    0, 
-                    0, 
-                    0, 
+                    0,
+                    0,
+                    0,
                     StatsFields.StoneStrenghtBoost,
                     StatsFields.StoneDexterityBoost,
                     StatsFields.StoneStaminaBoost,
@@ -309,64 +313,44 @@ namespace Chronos.Server.Game.Actors.Context.Characters
                     StatsFields.StoneIntelligenceBoost,
                     0,
                     new LoverType[0],
-                    8, 
+                    8,
                     1,
-                    this.Inventory.ClosetItems.Count,
-                    this.Inventory.ClosetItems.Values.Select(x => x.GetFateClosetType()).ToArray(),
+                    Inventory.ClosetItems.Count,
+                    Inventory.ClosetItems.Values.Select(x => x.GetFateClosetType()).ToArray(),
                     new VesselType(1,
                         0,
                         0,
                         0,
-                        0, 
+                        0,
                         new int[0],
                         new WingType[0]),
                     new HotkeyType(new HotkeyEnum[47],
                         new HotkeyEnum[47]),
-                    new SpiritTatooType("1,10,2,0,1,10,3,0,1,10,2,0,1,10,1,0,1,10,4,0,1,10,4,0,"), 
+                    new SpiritTatooType("1,10,2,0,1,10,3,0,1,10,2,0,1,10,1,0,1,10,4,0,1,10,4,0,"),
                     new AdventType(1, 0, 1, 0, "1=0;2=0;3=0;4=0;5=0;6=0;7=0;8=0;"),
                     new PetDomesticateType(0,
                         0,
                         new PetDomesticateStatsType[0]),
                     new ExpeditionType(1,
                         0,
-                        0, 
                         0,
-                        "", 
+                        0,
+                        "",
                         2004318103),
                     0,
-                    0, 
+                    0,
                     0));
         }
 
-        public IEnumerable<ItemElementType> GenerateItemElementType(int count)
+        public CharacterType GetNetwork() // Todo : Block time and IsBlocked + ClosetItems
         {
-            AsyncRandom random = new AsyncRandom();
-            for (int i = 0; i < count; i++)
-            {
-
-                    yield return new ItemElementType((ushort)i, 950059, (uint)random.Next(0, 100), i, random.Next(0, 100),
-                        random.Next(0, 100), (uint)random.Next(0, 100), (byte)random.Next(0, 100), (byte)random.Next(0, 100),
-                        (byte)random.Next(0, 100), random.Next(0, 100), (byte)random.Next(0, 100), random.Next(0, 100),
-                        (byte)random.Next(0, 100), (byte)random.Next(0, 100), (sbyte)random.Next(0, 100), random.Next(0, 100),
-                        random.Next(0, 100), random.Next(0, 100), random.Next(0, 100), random.Next(0, 100),
-                        random.Next(0, 100), new short[0]);
-            }
-        }
-        public IEnumerable<short> GenerateObjectIds(int count)
-        {
-            AsyncRandom random = new AsyncRandom();
-            for (int i = 0; i < count; i++)
-            {
-
-                yield return (short)i;
-            }
-        }
-        public CharacterType GetNetwork()// Todo : Block time and IsBlocked + ClosetItems
-        {
-            return new CharacterType(this.Slot, Name, Id, Record.SceneId, Sex ? (byte)1 : (byte)0,
-                new PositionType(Record.X, Record.Y, Record.Z), Level, Job, Stats[DefineEnum.STR].Total, Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
-                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0, Inventory.Items.Count,
-                Inventory.Items.Values.Select(x => x.GetNetwork()).ToArray(), Inventory.ClosetItems.Values.Select(x => x.GetNetwork()).ToArray());
+            return new CharacterType(Slot, Name, Id, Record.SceneId, Sex ? (byte) 1 : (byte) 0,
+                new PositionType(Record.X, Record.Y, Record.Z), Level, Job, Stats[DefineEnum.STR].Total,
+                Stats[DefineEnum.STA].Total, Stats[DefineEnum.DEX].Total,
+                Stats[DefineEnum.INT].Total, Stats[DefineEnum.SPI].Total, HairMesh, HairColor, HeadMesh, 0, 0,
+                Inventory.Items.Count,
+                Inventory.Items.Values.Select(x => x.GetItemType()).ToArray(),
+                Inventory.ClosetItems.Values.Select(x => x.GetClosetItemType()).ToArray());
         }
     }
 }
