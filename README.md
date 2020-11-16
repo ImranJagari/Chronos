@@ -22,7 +22,7 @@ Framework : .Net 4.6.2
 
 App type : Console
 
-Client link version 2.1.408 : https://mega.nz/#!bRZURTzL!725ioT6ukKvQMVCxjRMk9qiJsm4ZeltY5YmcES34q1w
+Client link version 2.1.499 : https://mega.nz/file/rcBVHIwC#OZ0eBUy0B-yapgd1rFAEqbSasv9X-btiQcuwhHF_qZU
 
 
 tutorial : check the wiki for informations
