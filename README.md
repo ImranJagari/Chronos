@@ -11,12 +11,18 @@ Credits for Chronos :
 - Eternion (developer)
 - Eastrall (developer)
 
+Prerequisites:
+-------
+Connector Mysql/.NET : https://dev.mysql.com/downloads/connector/net/
+Visual Studio 2017 or 2019.
+Mysql server like Laragon or Wamp server. 
+
 Informations:
 -------
 
 Chronos is developed in C# with Visual Studio 2017.
 
-Database : MySQL
+Database : Mysql
 
 Framework : .Net 4.6.2
 
